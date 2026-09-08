@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La Boîte à Outils — Prototype</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--soft:#eef0f3}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+header{padding:22px 6%;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:800;font-size:20px}.badge{font-size:12px;background:#fff;border:1px solid var(--line);padding:7px 10px;border-radius:999px;color:var(--muted)}
+main{max-width:1120px;margin:auto;padding:48px 6% 80px}.hero{text-align:center;padding:35px 0 45px}.hero h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:0 auto 18px;letter-spacing:-2.5px;max-width:800px}.hero p{font-size:18px;color:var(--muted);margin:0 auto 28px}.search{max-width:700px;margin:auto;display:flex;background:#fff;border:1px solid var(--line);border-radius:16px;padding:7px;box-shadow:0 12px 35px #0000000b}.search input{flex:1;border:0;outline:0;padding:14px;font-size:16px}.search button{border:0;background:var(--accent);color:white;border-radius:11px;padding:0 20px;font-weight:700;cursor:pointer}
+h2{font-size:22px;margin:35px 0 16px}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.cat,.tool{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;transition:.15s}.cat:hover,.tool:hover{transform:translateY(-2px);box-shadow:0 10px 25px #0000000b}.cat b{display:block;margin-top:10px}.cat span{font-size:25px}.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.tool .ico{font-size:25px}.tool h3{margin:13px 0 7px;font-size:16px}.tool p{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
+.panel{display:none;margin-top:35px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px}.panel.active{display:block}.panel h2{margin-top:0}.back{border:0;background:var(--soft);padding:9px 13px;border-radius:9px;cursor:pointer}.field{margin:15px 0}.field label{display:block;font-weight:700;font-size:14px;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}.primary{border:0;background:#111827;color:white;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}.result{margin-top:18px;background:#f8fafc;border-radius:12px;padding:16px;display:none;line-height:1.55}.result.show{display:block}
+@media(max-width:800px){.grid,.tools{grid-template-columns:repeat(2,1fr)}main{padding-top:20px}.hero{padding-top:25px}.search button{padding:0 13px}.tools .tool:last-child{grid-column:span 2}}
+@media(max-width:500px){.grid{grid-template-columns:repeat(2,1fr)}header{padding:18px 5%}.badge{display:none}.hero h1{letter-spacing:-1.8px}}
+</style>
+</head>
+<body>
+<header><div class="brand">🧰 La Boîte à Outils</div><div class="badge">Prototype V0.1</div></header>
+<main>
+<section class="hero">
+<h1>Un problème du quotidien ?<br>Trouvez l’outil.</h1>
+<p>Des outils simples pour comprendre, comparer, calculer et organiser.</p>
+<div class="search"><input id="search" placeholder="Ex. « Je déménage », « cette voiture vaut-elle le coup ? »"><button onclick="searchTools()">Chercher</button></div>
+</section>
+
+<section id="home">
+<h2>Explorer par besoin</h2>
+<div class="grid">
+<div class="cat" onclick="openCarCategory()"><span>🚗</span><b>Ma voiture</b></div><div class="cat"><span>🏠</span><b>Mon logement</b></div><div class="cat"><span>💰</span><b>Mon argent</b></div><div class="cat"><span>💼</span><b>Mon travail</b></div><div class="cat"><span>📚</span><b>Mes études</b></div><div class="cat"><span>✈️</span><b>Mes voyages</b></div><div class="cat"><span>🛒</span><b>Mes achats</b></div><div class="cat"><span>📄</span><b>Mes documents</b></div><div class="cat"><span>🎉</span><b>Mes événements</b></div><div class="cat"><span>🧠</span><b>Mon organisation</b></div>
+</div>
+<h2>Outils populaires</h2>
+<div class="tools">
+<div class="tool" onclick="openTool('document')"><div class="ico">📄</div><h3>Comprendre un document</h3><p>Obtenir une explication claire et les actions importantes.</p></div>
+<div class="tool" onclick="openTool('achat')"><div class="ico">🛒</div><h3>Analyser un achat</h3><p>Identifier les points forts, risques et questions à poser.</p></div>
+<div class="tool" onclick="openTool('checklist')"><div class="ico">✅</div><h3>Créer une checklist</h3><p>Transformer un projet en liste d’actions.</p></div>
+<div class="tool" onclick="openTool('cout')"><div class="ico">💰</div><h3>Calculer le coût réel</h3><p>Estimer le coût mensuel d’un projet ou achat.</p></div>
+<div class="tool" onclick="openTool('compare')"><div class="ico">⚖️</div><h3>Comparer deux options</h3><p>Mettre deux choix face à face.</p></div>
+</div>
+</section>
+
+
+<section id="carPanel" class="panel">
+<button class="back" onclick="closeCarCategory()">← Retour</button>
+<div style="margin-top:18px">
+<h2>🚗 Ma voiture</h2>
+<p style="color:#6b7280">Les premiers outils pour acheter, comparer et mieux gérer une voiture.</p>
+<div class="tools" style="margin-top:22px">
+<div class="tool" onclick="openCarTool()"><div class="ico">🔎</div><h3>Analyser une annonce</h3><p>Colle une annonce ou sa description et prépare-toi avant de contacter le vendeur.</p></div>
+<div class="tool"><div class="ico">💰</div><h3>Coût réel</h3><p>Bientôt disponible : estime le coût mensuel de ta voiture.</p></div>
+<div class="tool"><div class="ico">⚖️</div><h3>Comparer deux voitures</h3><p>Bientôt disponible : mets deux véhicules face à face.</p></div>
+<div class="tool"><div class="ico">🛠️</div><h3>Checklist avant achat</h3><p>Bientôt disponible : les vérifications à faire avant la visite.</p></div>
+<div class="tool"><div class="ico">📅</div><h3>Entretien</h3><p>Bientôt disponible : organise les entretiens à prévoir.</p></div>
+</div>
+</div>
+</section>
+
+<section id="panel" class="panel">
+<button class="back" onclick="closeTool()">← Retour</button>
+<div id="toolContent"></div>
+</section>
+</main>
+
+<script>
+const carAnalyzer = `<h2>🔎 Analyser une annonce voiture</h2>
+<p style="color:#6b7280">Colle le texte d'une annonce. Cette première version simule déjà le parcours ; la prochaine étape sera de brancher une vraie analyse IA.</p>
+<div class="field"><label>Annonce / description</label><textarea id="carAd" rows="10" placeholder="Ex. Renault Clio V 1.5 Blue dCi 100, 2023, 52 000 km, 12 900 €, 1ère main..."></textarea></div>
+<div class="field"><label>Prix demandé (€)</label><input id="carPrice" type="number" placeholder="12900"></div>
+<div class="field"><label>Kilométrage</label><input id="carKm" type="number" placeholder="52000"></div>
+<div class="field"><label>Année</label><input id="carYear" type="number" placeholder="2023"></div>
+<button class="primary" onclick="analyzeCar()">🔍 Analyser l'annonce</button>
+<div id="carResult" class="result"></div>`;
+const content={
+document:`<h2>📄 Comprendre un document</h2><p>Prototype : colle ici un texte de document et obtiens une lecture structurée.</p><div class="field"><label>Texte du document</label><textarea id="doc" rows="7" placeholder="Colle un contrat, courrier, devis…"></textarea></div><button class="primary" onclick="demoDoc()">Analyser</button><div id="result" class="result"></div>`,
+achat:`<h2>🛒 Analyser un achat</h2><div class="field"><label>Qu’achètes-tu ?</label><input id="product" placeholder="Ex. voiture, téléphone, canapé…"></div><div class="field"><label>Prix</label><input id="price" type="number" placeholder="8900"></div><div class="field"><label>Description / annonce</label><textarea id="desc" rows="5" placeholder="Colle l’annonce ou les informations disponibles…"></textarea></div><button class="primary" onclick="demoBuy()">Lancer l’analyse</button><div id="result" class="result"></div>`,
+checklist:`<h2>✅ Créer une checklist</h2><div class="field"><label>Que dois-tu préparer ?</label><input id="project" placeholder="Ex. déménagement, voyage, mariage…"></div><button class="primary" onclick="demoCheck()">Créer ma checklist</button><div id="result" class="result"></div>`,
+cout:`<h2>💰 Calculer un coût réel</h2><div class="field"><label>Prix / mensualité</label><input id="base" type="number" placeholder="300"></div><div class="field"><label>Autres coûts mensuels</label><input id="extra" type="number" placeholder="120"></div><button class="primary" onclick="demoCost()">Calculer</button><div id="result" class="result"></div>`,
+compare:`<h2>⚖️ Comparer deux options</h2><div class="field"><label>Option A</label><input id="a" placeholder="Ex. Clio"></div><div class="field"><label>Option B</label><input id="b" placeholder="Ex. Peugeot 208"></div><button class="primary" onclick="demoCompare()">Comparer</button><div id="result" class="result"></div>`
+};
+function openTool(t){home.style.display='none';panel.classList.add('active');toolContent.innerHTML=content[t];window.scrollTo({top:0,behavior:'smooth'})}
+function closeTool(){panel.classList.remove('active');home.style.display='block'}
+function show(msg){const r=document.getElementById('result');r.innerHTML=msg;r.classList.add('show')}
+function demoDoc(){show('🧠 <b>Démo :</b> dans la vraie version, l’IA identifiera le type de document, les dates, obligations, points d’attention et actions à effectuer.')}
+function demoBuy(){show('🔎 <b>Démo :</b> l’analyse finale donnera les points positifs, points de vigilance, questions à poser et une conclusion structurée.')}
+function demoCheck(){let p=document.getElementById('project').value||'ton projet';show('📋 <b>Checklist pour '+p+':</b><br><br>☐ Définir les étapes importantes<br>☐ Préparer le budget<br>☐ Vérifier les dates<br>☐ Rassembler les documents<br>☐ Faire une dernière vérification')}
+function demoCost(){let a=+document.getElementById('base').value||0,b=+document.getElementById('extra').value||0;show('💶 <b>Coût mensuel estimé : '+(a+b).toFixed(2)+' €</b><br>Base : '+a.toFixed(2)+' €<br>Autres coûts : '+b.toFixed(2)+' €')}
+function demoCompare(){let a=document.getElementById('a').value||'Option A',b=document.getElementById('b').value||'Option B';show('⚖️ <b>Démo de comparaison</b><br><br>Option A : '+a+'<br>Option B : '+b+'<br><br>La vraie version analysera automatiquement les critères et fera ressortir les différences importantes.')}
+
+function openCarCategory(){home.style.display='none';panel.classList.remove('active');carPanel.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function closeCarCategory(){carPanel.classList.remove('active');home.style.display='block'}
+function openCarTool(){carPanel.classList.remove('active');panel.classList.add('active');toolContent.innerHTML=carAnalyzer;window.scrollTo({top:0,behavior:'smooth'})}
+function analyzeCar(){
+  const ad=document.getElementById('carAd').value.trim(), price=+document.getElementById('carPrice').value||0, km=+document.getElementById('carKm').value||0, year=+document.getElementById('carYear').value||0;
+  let points=[];
+  if(!ad) points.push("Ajoute le texte de l'annonce pour une analyse plus précise.");
+  if(!price) points.push("Le prix demandé manque.");
+  if(!km) points.push("Le kilométrage manque.");
+  if(!year) points.push("L'année manque.");
+  if(price && year && year>=2022 && price<8000) points.push("Prix particulièrement bas pour une voiture récente : vérifie l'historique et les éventuels frais.");
+  if(km && year && km>30000*(new Date().getFullYear()-year+1)) points.push("Le kilométrage semble élevé par rapport à l'âge : demande l'historique d'entretien.");
+  if(!points.length) points.push("Les informations de base sont présentes. Dans la vraie version, l'IA croisera le modèle, la motorisation, le prix, le kilométrage et les éléments de l'annonce.");
+  document.getElementById('carResult').innerHTML='<b>🟡 Première analyse</b><br><br>'+points.map(x=>'• '+x).join('<br>')+'<br><br><b>À vérifier avant de se déplacer :</b><br>☐ Historique d’entretien<br>☐ Factures / justificatifs<br>☐ Contrôle technique<br>☐ Nombre de propriétaires<br>☐ État pneus / freins<br>☐ Essai routier<br><br><span style="color:#6b7280">⚠️ Prototype : ceci ne remplace pas une inspection mécanique professionnelle.</span>';
+  document.getElementById('carResult').classList.add('show');
+}
+function searchTools(){const q=document.getElementById('search').value.toLowerCase();if(q.includes('voiture')||q.includes('auto')||q.includes('clio')||q.includes('voiture')){openCarCategory();}else if(q.includes('document')||q.includes('contrat')||q.includes('devis'))openTool('document');else if(q.includes('achat')||q.includes('voiture')||q.includes('prix'))openTool('achat');else if(q.includes('démén')||q.includes('check')||q.includes('liste'))openTool('checklist');else if(q.includes('coût')||q.includes('cout')||q.includes('combien'))openTool('cout');else openTool('compare')}
+</script>
+</body></html>
