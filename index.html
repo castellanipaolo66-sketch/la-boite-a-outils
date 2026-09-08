@@ -1,40 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#2563eb">
-<title>La Boîte à Outils du Quotidien — V4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1020">
+<title>La Boîte à Outils du Quotidien</title>
 
 <style>
 :root{
   --bg:#f5f7fb;
-  --card:#fff;
-  --text:#101828;
+  --surface:#ffffff;
+  --surface2:#eef2f7;
+  --text:#111827;
   --muted:#667085;
-  --line:#e5e7eb;
-  --primary:#2563eb;
-  --primary2:#1d4ed8;
-  --soft:#eff6ff;
-  --good:#15803d;
-  --warn:#b45309;
-  --bad:#b91c1c;
-  --shadow:0 12px 35px #10182812;
+  --border:#e4e7ec;
+  --primary:#635bff;
+  --primary2:#4f46e5;
+  --success:#12b76a;
+  --warning:#f79009;
+  --danger:#f04438;
+  --shadow:0 12px 35px rgba(16,24,40,.08);
+  --radius:22px;
 }
 
 [data-theme="dark"]{
-  --bg:#0b1020;
-  --card:#111827;
-  --text:#f8fafc;
+  --bg:#080b14;
+  --surface:#111625;
+  --surface2:#192033;
+  --text:#f3f4f6;
   --muted:#98a2b3;
-  --line:#273244;
-  --primary:#60a5fa;
-  --primary2:#3b82f6;
-  --soft:#172554;
-  --good:#4ade80;
-  --warn:#fbbf24;
-  --bad:#f87171;
-  --shadow:0 15px 40px #00000040;
+  --border:#293247;
+  --primary:#8178ff;
+  --primary2:#6d63ff;
+  --shadow:0 15px 40px rgba(0,0,0,.35);
 }
 
 *{box-sizing:border-box}
@@ -45,13 +43,13 @@ html{
 
 body{
   margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  transition:.25s;
+  transition:.2s;
 }
 
-button,input,textarea,select{
+button,input,select,textarea{
   font:inherit;
 }
 
@@ -65,21 +63,23 @@ a{
 }
 
 .container{
-  width:min(1180px,calc(100% - 32px));
+  width:min(1180px,92%);
   margin:auto;
 }
+
+/* HEADER */
 
 header{
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:50;
   backdrop-filter:blur(18px);
-  background:color-mix(in srgb,var(--bg) 88%,transparent);
-  border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  border-bottom:1px solid var(--border);
 }
 
 .nav{
-  height:70px;
+  min-height:70px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -91,37 +91,38 @@ header{
   align-items:center;
   gap:10px;
   font-weight:900;
-  font-size:17px;
+  letter-spacing:-.5px;
 }
 
-.logoIcon{
-  width:38px;
-  height:38px;
+.logo-icon{
+  width:40px;
+  height:40px;
+  border-radius:13px;
   display:grid;
   place-items:center;
-  border-radius:12px;
-  background:var(--primary);
+  background:linear-gradient(135deg,var(--primary),#8b5cf6);
   color:white;
-  box-shadow:0 8px 20px #2563eb35;
+  box-shadow:0 8px 20px rgba(99,91,255,.25);
 }
 
-.navActions{
+.nav-actions{
   display:flex;
   gap:8px;
-  align-items:center;
 }
 
-.iconBtn{
+.icon-btn{
   width:42px;
   height:42px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:var(--card);
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:var(--surface);
   color:var(--text);
 }
 
+/* HERO */
+
 .hero{
-  padding:65px 0 35px;
+  padding:70px 0 45px;
   text-align:center;
 }
 
@@ -129,21 +130,21 @@ header{
   display:inline-flex;
   align-items:center;
   gap:7px;
-  background:var(--soft);
-  color:var(--primary);
-  border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);
   padding:8px 13px;
+  border:1px solid var(--border);
   border-radius:999px;
+  background:var(--surface);
+  color:var(--muted);
   font-size:13px;
-  font-weight:800;
+  font-weight:700;
 }
 
 .hero h1{
-  font-size:clamp(36px,6vw,68px);
-  line-height:1.02;
-  letter-spacing:-2.5px;
-  margin:18px auto;
   max-width:850px;
+  margin:20px auto 14px;
+  font-size:clamp(38px,7vw,72px);
+  line-height:.98;
+  letter-spacing:-3px;
 }
 
 .hero h1 span{
@@ -151,57 +152,70 @@ header{
 }
 
 .hero p{
+  max-width:680px;
+  margin:auto;
   color:var(--muted);
   font-size:18px;
-  max-width:650px;
-  margin:0 auto 25px;
   line-height:1.6;
 }
 
-.search{
-  width:min(720px,100%);
-  margin:auto;
+/* SEARCH */
+
+.search-wrap{
+  max-width:760px;
+  margin:30px auto 0;
   position:relative;
 }
 
-.search input{
+.search{
   width:100%;
-  padding:18px 22px 18px 52px;
-  border-radius:17px;
-  border:1px solid var(--line);
-  background:var(--card);
+  padding:19px 22px;
+  padding-right:60px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  background:var(--surface);
   color:var(--text);
   outline:none;
   box-shadow:var(--shadow);
 }
 
-.searchIcon{
-  position:absolute;
-  left:18px;
-  top:17px;
+.search:focus{
+  border-color:var(--primary);
 }
 
-.section{
+.search-icon{
+  position:absolute;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+/* SECTION */
+
+section{
   padding:35px 0;
 }
 
-.sectionHead{
+.section-title{
   display:flex;
-  align-items:end;
   justify-content:space-between;
-  gap:15px;
+  align-items:end;
+  gap:20px;
   margin-bottom:18px;
 }
 
-.sectionHead h2{
+.section-title h2{
   margin:0;
-  font-size:25px;
+  font-size:28px;
+  letter-spacing:-1px;
 }
 
-.sectionHead p{
+.section-title p{
   margin:5px 0 0;
   color:var(--muted);
 }
+
+/* GRID */
 
 .grid{
   display:grid;
@@ -209,244 +223,378 @@ header{
   gap:15px;
 }
 
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
 .card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
   padding:20px;
   box-shadow:var(--shadow);
 }
 
-.category{
+.category-card{
   min-height:150px;
   transition:.2s;
+  cursor:pointer;
 }
 
-.category:hover{
+.category-card:hover,
+.tool-card:hover{
   transform:translateY(-3px);
-  border-color:var(--primary);
+  border-color:color-mix(in srgb,var(--primary) 50%,var(--border));
 }
 
-.categoryIcon{
-  font-size:30px;
-  margin-bottom:15px;
+.category-icon{
+  font-size:32px;
+  margin-bottom:20px;
 }
 
-.category h3{
+.category-card h3,
+.tool-card h3{
   margin:0 0 7px;
 }
 
-.category p{
-  margin:0;
+.category-card p,
+.tool-card p{
   color:var(--muted);
-  line-height:1.45;
+  margin:0;
+  line-height:1.5;
   font-size:14px;
 }
 
-.tool{
-  display:flex;
-  flex-direction:column;
-  min-height:210px;
+.tool-card{
+  cursor:pointer;
+  transition:.2s;
 }
 
-.toolTop{
+.tool-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
 }
 
-.toolIcon{
-  font-size:29px;
+.tool-icon{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:var(--surface2);
+  font-size:24px;
 }
 
-.favorite{
+.star{
   border:0;
   background:none;
+  font-size:22px;
   color:var(--muted);
-  font-size:20px;
 }
 
-.favorite.active{
+.star.active{
   color:#f59e0b;
 }
 
-.tool h3{
-  margin:18px 0 8px;
-}
+/* BUTTONS */
 
-.tool p{
-  color:var(--muted);
-  line-height:1.5;
-  margin:0 0 18px;
-  flex:1;
-}
-
-.primary{
+.btn{
   border:0;
-  background:var(--primary);
-  color:white;
-  border-radius:12px;
+  border-radius:13px;
   padding:12px 16px;
   font-weight:800;
+  transition:.2s;
 }
 
-.primary:hover{
+.btn-primary{
+  color:white;
+  background:var(--primary);
+}
+
+.btn-primary:hover{
   background:var(--primary2);
 }
 
-.secondary{
-  border:1px solid var(--line);
-  background:var(--card);
+.btn-secondary{
   color:var(--text);
-  border-radius:12px;
-  padding:11px 15px;
-  font-weight:700;
+  background:var(--surface2);
+  border:1px solid var(--border);
 }
 
-.actions{
+.btn-danger{
+  background:#fee4e2;
+  color:#b42318;
+}
+
+.btn-row{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
 }
 
-.form{
-  display:grid;
-  gap:14px;
-}
+/* APP VIEW */
 
-.formGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-label{
-  display:grid;
-  gap:7px;
-  font-weight:700;
-  font-size:14px;
-}
-
-input,textarea,select{
-  width:100%;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--text);
-  border-radius:12px;
-  padding:12px 13px;
-  outline:none;
-}
-
-textarea{
-  min-height:130px;
-  resize:vertical;
-}
-
-input:focus,textarea:focus,select:focus{
-  border-color:var(--primary);
-}
-
-.result{
-  margin-top:18px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:18px;
-  background:color-mix(in srgb,var(--soft) 50%,var(--card));
-}
-
-.score{
-  font-size:42px;
-  font-weight:900;
-}
-
-.good{color:var(--good)}
-.warn{color:var(--warn)}
-.bad{color:var(--bad)}
-
-.result h3{
-  margin-top:0;
-}
-
-.result ul{
-  line-height:1.8;
-}
-
-.pill{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  background:var(--soft);
-  color:var(--primary);
-}
-
-.hidden{
-  display:none!important;
+#app{
+  display:none;
+  padding-bottom:70px;
 }
 
 .view{
-  padding:35px 0 70px;
+  display:none;
+}
+
+.view.active{
+  display:block;
 }
 
 .back{
+  margin:25px 0;
+}
+
+/* TOOL */
+
+.tool-header{
+  padding:30px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:28px;
+  box-shadow:var(--shadow);
   margin-bottom:18px;
 }
 
-.project{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.tool-header h1{
+  margin:0 0 8px;
+  font-size:clamp(28px,5vw,45px);
+  letter-spacing:-1.5px;
+}
+
+.tool-header p{
+  color:var(--muted);
+  margin:0;
+  line-height:1.6;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   gap:15px;
 }
 
-.project + .project{
-  margin-top:12px;
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-weight:800;
+  font-size:14px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:13px 14px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  outline:none;
+}
+
+.field textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--primary);
+}
+
+/* RESULT */
+
+.result{
+  margin-top:18px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+
+.result h2{
+  margin-top:0;
+}
+
+.result-section{
+  margin-top:20px;
+}
+
+.result-section h3{
+  margin-bottom:9px;
+}
+
+.result ul{
+  padding-left:20px;
+  line-height:1.7;
+}
+
+.verdict{
+  display:inline-flex;
+  padding:9px 13px;
+  border-radius:999px;
+  font-weight:900;
+  margin-bottom:12px;
+}
+
+.good{
+  background:#d1fadf;
+  color:#027a48;
+}
+
+.medium{
+  background:#fef0c7;
+  color:#b54708;
+}
+
+.bad{
+  background:#fee4e2;
+  color:#b42318;
+}
+
+.score{
+  font-size:48px;
+  font-weight:950;
+  letter-spacing:-3px;
+}
+
+/* PROJECTS */
+
+.project{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.project-info h3{
+  margin:0 0 5px;
+}
+
+.project-info p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* HOME */
+
+#home{
+  display:block;
+}
+
+/* MOBILE NAV */
+
+.mobile-nav{
+  display:none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:100;
+  background:color-mix(in srgb,var(--surface) 92%,transparent);
+  backdrop-filter:blur(18px);
+  border-top:1px solid var(--border);
+  padding:8px;
+}
+
+.mobile-nav-inner{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+
+.mobile-nav button{
+  border:0;
+  background:none;
+  color:var(--muted);
+  padding:7px 3px;
+  font-size:11px;
+}
+
+.mobile-nav button span{
+  display:block;
+  font-size:21px;
+  margin-bottom:2px;
+}
+
+/* EMPTY */
 
 .empty{
   text-align:center;
-  padding:45px 20px;
+  padding:50px 20px;
   color:var(--muted);
 }
 
-footer{
-  border-top:1px solid var(--line);
-  padding:35px 0;
-  color:var(--muted);
-  text-align:center;
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,30px);
+  background:#111827;
+  color:white;
+  padding:13px 18px;
+  border-radius:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:200;
+  font-weight:700;
 }
 
-.small{
-  font-size:13px;
-  color:var(--muted);
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
 }
+
+/* RESPONSIVE */
 
 @media(max-width:900px){
   .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-3{
     grid-template-columns:repeat(2,1fr);
   }
 }
 
 @media(max-width:650px){
   .container{
-    width:min(100% - 22px,1180px);
+    width:min(94%,600px);
   }
 
-  .nav{
-    height:62px;
-  }
-
-  .logo span{
-    display:none;
+  header{
+    position:relative;
   }
 
   .hero{
-    padding:42px 0 25px;
+    padding:45px 0 25px;
   }
 
   .hero h1{
-    letter-spacing:-1.5px;
+    letter-spacing:-2px;
   }
 
   .hero p{
@@ -454,16 +602,34 @@ footer{
   }
 
   .grid,
-  .formGrid{
+  .grid-3,
+  .form-grid{
     grid-template-columns:1fr;
   }
 
-  .section{
-    padding:25px 0;
+  .field.full{
+    grid-column:auto;
   }
 
   .card{
-    border-radius:17px;
+    padding:17px;
+  }
+
+  .tool-header{
+    padding:22px;
+  }
+
+  .mobile-nav{
+    display:block;
+  }
+
+  body{
+    padding-bottom:65px;
+  }
+
+  .project{
+    align-items:flex-start;
+    flex-direction:column;
   }
 }
 </style>
@@ -473,2578 +639,3438 @@ footer{
 
 <header>
   <div class="container nav">
-    <a class="logo" href="#" onclick="showHome();return false;">
-      <span class="logoIcon">🧰</span>
-      <span>La Boîte à Outils</span>
-    </a>
+    <div class="logo" onclick="goHome()" style="cursor:pointer">
+      <div class="logo-icon">🧰</div>
+      <div>La Boîte à Outils</div>
+    </div>
 
-    <div class="navActions">
-      <button class="iconBtn" onclick="showView('projects')" title="Mon dossier">🗂️</button>
-      <button class="iconBtn" onclick="showView('favorites')" title="Favoris">⭐</button>
-      <button class="iconBtn" onclick="toggleTheme()" id="themeBtn" title="Mode nuit">🌙</button>
+    <div class="nav-actions">
+      <button class="icon-btn" onclick="toggleTheme()" title="Mode nuit">🌙</button>
+      <button class="icon-btn" onclick="showView('favorites')" title="Favoris">⭐</button>
+      <button class="icon-btn" onclick="showView('projects')" title="Mon dossier">📁</button>
     </div>
   </div>
 </header>
 
-<main id="app">
+<main id="home">
 
-<section id="homeView">
+  <div class="container hero">
 
-  <div class="hero">
-    <div class="badge">✨ Des outils pensés pour les vrais problèmes du quotidien</div>
+    <div class="badge">✨ Des outils pour les vrais problèmes du quotidien</div>
 
     <h1>
-      Un problème du quotidien ?
+      Un problème ?
       <span>Trouvez l'outil.</span>
     </h1>
 
     <p>
-      La Boîte à Outils vous aide à comprendre, comparer, calculer,
-      organiser et décider — sans avoir besoin de savoir quoi demander à une IA.
+      Analysez, comparez, calculez, préparez et organisez vos projets
+      simplement, avec des outils conçus pour votre situation.
     </p>
 
-    <div class="search">
-      <span class="searchIcon">🔎</span>
+    <div class="search-wrap">
       <input
-        id="globalSearch"
-        placeholder="Ex : préparer mes vacances, analyser une annonce, gérer mon budget..."
-        oninput="globalSearch(this.value)"
+        id="search"
+        class="search"
+        placeholder="Ex : préparer un voyage, acheter une voiture, gérer mon budget..."
+        oninput="searchTools()"
       >
+      <div class="search-icon">🔎</div>
     </div>
+
   </div>
 
-  <section class="section">
+  <section>
     <div class="container">
 
-      <div class="sectionHead">
+      <div class="section-title">
         <div>
-          <h2>Que voulez-vous faire ?</h2>
-          <p>Choisissez simplement votre besoin.</p>
+          <h2>Mes outils</h2>
+          <p>Tout ce qu'il vous faut au même endroit.</p>
         </div>
       </div>
 
-      <div class="grid">
+      <div class="grid" id="categoryGrid"></div>
 
-        <a class="card category" href="#" onclick="showView('cars');return false;">
-          <div class="categoryIcon">🚗</div>
-          <h3>Ma voiture</h3>
-          <p>Analyser une annonce, calculer le coût ou préparer une visite.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('housing');return false;">
-          <div class="categoryIcon">🏠</div>
-          <h3>Mon logement</h3>
-          <p>Loyer, déménagement, budget et organisation.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('money');return false;">
-          <div class="categoryIcon">💰</div>
-          <h3>Mon argent</h3>
-          <p>Budget, dépenses, réductions et décisions financières.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('work');return false;">
-          <div class="categoryIcon">💼</div>
-          <h3>Mon travail</h3>
-          <p>Offres d'emploi, entretien, CV et organisation.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('study');return false;">
-          <div class="categoryIcon">📚</div>
-          <h3>Mes études</h3>
-          <p>Planning, révisions, objectifs et organisation.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('travel');return false;">
-          <div class="categoryIcon">✈️</div>
-          <h3>Mes voyages</h3>
-          <p>Budget, préparation et checklists personnalisées.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('shopping');return false;">
-          <div class="categoryIcon">🛒</div>
-          <h3>Mes achats</h3>
-          <p>Comparer, analyser une annonce et éviter les mauvaises affaires.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('documents');return false;">
-          <div class="categoryIcon">📄</div>
-          <h3>Mes documents</h3>
-          <p>Comprendre un courrier, un contrat ou une information importante.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('events');return false;">
-          <div class="categoryIcon">🎉</div>
-          <h3>Mes événements</h3>
-          <p>Budget, organisation et listes de préparation.</p>
-        </a>
-
-        <a class="card category" href="#" onclick="showView('organization');return false;">
-          <div class="categoryIcon">🧠</div>
-          <h3>Mon organisation</h3>
-          <p>Transformer un projet compliqué en étapes simples.</p>
-        </a>
-
-      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section>
     <div class="container">
 
-      <div class="sectionHead">
+      <div class="section-title">
         <div>
-          <h2>Les outils les plus utiles</h2>
-          <p>Pas besoin de savoir formuler un prompt.</p>
+          <h2>Les outils populaires</h2>
+          <p>Les plus utiles pour commencer.</p>
         </div>
       </div>
 
-      <div class="grid">
+      <div class="grid-3" id="popularGrid"></div>
 
-        <div class="card tool">
-          <div class="toolTop">
-            <div class="toolIcon">🧳</div>
-            <button class="favorite" onclick="toggleFavorite('travelChecklist',this)">☆</button>
-          </div>
-          <h3>Ma checklist de voyage</h3>
-          <p>Une liste adaptée à la destination, aux dates, à la météo, à la durée, aux personnes et aux activités.</p>
-          <button class="primary" onclick="openTool('travelChecklist')">Préparer mon voyage</button>
-        </div>
-
-        <div class="card tool">
-          <div class="toolTop">
-            <div class="toolIcon">🛒</div>
-            <button class="favorite" onclick="toggleFavorite('purchase',this)">☆</button>
-          </div>
-          <h3>Analyser un achat</h3>
-          <p>Prix, état, garantie, vendeur, risques et questions à poser avant de payer.</p>
-          <button class="primary" onclick="openTool('purchase')">Analyser</button>
-        </div>
-
-        <div class="card tool">
-          <div class="toolTop">
-            <div class="toolIcon">📄</div>
-            <button class="favorite" onclick="toggleFavorite('document',this)">☆</button>
-          </div>
-          <h3>Comprendre un document</h3>
-          <p>Transformer un document compliqué en informations simples et actions concrètes.</p>
-          <button class="primary" onclick="openTool('document')">Comprendre</button>
-        </div>
-
-        <div class="card tool">
-          <div class="toolTop">
-            <div class="toolIcon">⚖️</div>
-            <button class="favorite" onclick="toggleFavorite('compare',this)">☆</button>
-          </div>
-          <h3>Comparer deux options</h3>
-          <p>Comparer objectivement deux choix selon vos propres critères.</p>
-          <button class="primary" onclick="openTool('compare')">Comparer</button>
-        </div>
-
-      </div>
     </div>
   </section>
-
-</section>
-
-
-<!-- PROJECTS -->
-
-<section id="projectsView" class="view hidden">
-  <div class="container">
-
-    <button class="secondary back" onclick="showHome()">← Accueil</button>
-
-    <div class="sectionHead">
-      <div>
-        <h2>🗂️ Mon dossier</h2>
-        <p>Gardez vos projets importants au même endroit.</p>
-      </div>
-      <button class="primary" onclick="createProject()">+ Nouveau projet</button>
-    </div>
-
-    <div id="projectsList"></div>
-
-  </div>
-</section>
-
-
-<!-- FAVORITES -->
-
-<section id="favoritesView" class="view hidden">
-  <div class="container">
-
-    <button class="secondary back" onclick="showHome()">← Accueil</button>
-
-    <div class="sectionHead">
-      <div>
-        <h2>⭐ Mes favoris</h2>
-        <p>Vos outils préférés.</p>
-      </div>
-    </div>
-
-    <div id="favoritesList" class="grid"></div>
-
-  </div>
-</section>
-
-
-<!-- CARS -->
-
-<section id="carsView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>🚗 Ma voiture</h2>
-<p>Tout ce qu'il faut pour acheter, utiliser ou organiser sa voiture.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">🔎</div>
-<h3>Analyser une annonce</h3>
-<p>Obtenez un premier niveau d'analyse à partir des informations de l'annonce.</p>
-<button class="primary" onclick="openTool('carAnalysis')">Analyser</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">💶</div>
-<h3>Coût réel d'une voiture</h3>
-<p>Carburant, assurance, entretien et autres dépenses.</p>
-<button class="primary" onclick="openTool('carCost')">Calculer</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">⚖️</div>
-<h3>Comparer des voitures</h3>
-<p>Comparez plusieurs véhicules selon vos critères.</p>
-<button class="primary" onclick="openTool('compare')">Comparer</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">📝</div>
-<h3>Checklist avant achat</h3>
-<p>Les éléments à contrôler avant de vous décider.</p>
-<button class="primary" onclick="openTool('carChecklist')">Créer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- HOUSING -->
-
-<section id="housingView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>🏠 Mon logement</h2>
-<p>Préparer un logement ou un déménagement sans rien oublier.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">🏠</div>
-<h3>Analyser un loyer</h3>
-<p>Calculez le poids du logement dans votre budget.</p>
-<button class="primary" onclick="openTool('rent')">Analyser</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">📦</div>
-<h3>Déménagement</h3>
-<p>Estimez le budget et les tâches à prévoir.</p>
-<button class="primary" onclick="openTool('move')">Préparer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- MONEY -->
-
-<section id="moneyView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>💰 Mon argent</h2>
-<p>Comprendre où va votre argent et prendre de meilleures décisions.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">📊</div>
-<h3>Analyser mon budget</h3>
-<p>Calculez ce qu'il vous reste et identifiez les postes importants.</p>
-<button class="primary" onclick="openTool('budget')">Analyser</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">🏷️</div>
-<h3>Calculer une réduction</h3>
-<p>Prix initial, pourcentage de réduction et prix final.</p>
-<button class="primary" onclick="openTool('discount')">Calculer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- WORK -->
-
-<section id="workView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>💼 Mon travail</h2>
-<p>Préparer une candidature et mieux comprendre une offre.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">📋</div>
-<h3>Analyser une offre</h3>
-<p>Repérez les informations importantes et les points à préparer.</p>
-<button class="primary" onclick="openTool('job')">Analyser</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">🎤</div>
-<h3>Préparer un entretien</h3>
-<p>Générez une préparation adaptée au poste.</p>
-<button class="primary" onclick="openTool('interview')">Préparer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- STUDY -->
-
-<section id="studyView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>📚 Mes études</h2>
-<p>Organiser vos révisions selon votre temps disponible.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">🗓️</div>
-<h3>Créer un planning</h3>
-<p>Construisez un planning en fonction de la date d'examen et de votre disponibilité.</p>
-<button class="primary" onclick="openTool('studyPlanner')">Créer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- TRAVEL -->
-
-<section id="travelView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>✈️ Mes voyages</h2>
-<p>Préparer un voyage adapté à votre situation réelle.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">🧳</div>
-<h3>Checklist personnalisée</h3>
-<p>Destination, saison, durée, activités, transport, personnes et contraintes.</p>
-<button class="primary" onclick="openTool('travelChecklist')">Préparer</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">💶</div>
-<h3>Budget voyage</h3>
-<p>Estimez le coût global de votre séjour.</p>
-<button class="primary" onclick="openTool('travelBudget')">Calculer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- SHOPPING -->
-
-<section id="shoppingView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>🛒 Mes achats</h2>
-<p>Comparer avant d'acheter.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">🧠</div>
-<h3>Analyser un achat</h3>
-<p>Déterminez les points positifs, les risques et les questions à poser.</p>
-<button class="primary" onclick="openTool('purchase')">Analyser</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">⚖️</div>
-<h3>Comparer</h3>
-<p>Comparez deux options selon vos priorités.</p>
-<button class="primary" onclick="openTool('compare')">Comparer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- DOCUMENTS -->
-
-<section id="documentsView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>📄 Mes documents</h2>
-<p>Rendre les informations complexes plus faciles à comprendre.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">📄</div>
-<h3>Comprendre un document</h3>
-<p>Collez le texte d'un courrier, contrat ou document.</p>
-<button class="primary" onclick="openTool('document')">Analyser</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">☑️</div>
-<h3>Créer une checklist</h3>
-<p>Transformez une situation en liste d'actions.</p>
-<button class="primary" onclick="openTool('checklist')">Créer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- EVENTS -->
-
-<section id="eventsView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>🎉 Mes événements</h2>
-<p>Organiser une soirée, un anniversaire ou un événement.</p>
-</div>
-</div>
-
-<div class="grid">
-
-<div class="card tool">
-<div class="toolIcon">💶</div>
-<h3>Budget événement</h3>
-<p>Calculez le budget en fonction du nombre d'invités.</p>
-<button class="primary" onclick="openTool('eventBudget')">Calculer</button>
-</div>
-
-<div class="card tool">
-<div class="toolIcon">☑️</div>
-<h3>Checklist événement</h3>
-<p>Ne rien oublier avant le jour J.</p>
-<button class="primary" onclick="openTool('checklist')">Créer</button>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- ORGANIZATION -->
-
-<section id="organizationView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="showHome()">← Accueil</button>
-
-<div class="sectionHead">
-<div>
-<h2>🧠 Mon organisation</h2>
-<p>Un projet compliqué devient une suite d'étapes simples.</p>
-</div>
-</div>
-
-<div class="card">
-<h3>Créer une checklist personnalisée</h3>
-<p class="small">
-Décrivez votre situation et ce que vous devez faire.
-</p>
-
-<textarea id="organizationText" placeholder="Ex : Je déménage dans 3 semaines et je dois organiser mon appartement..."></textarea>
-
-<br><br>
-
-<button class="primary" onclick="generateGenericChecklist()">Créer ma checklist</button>
-
-<div id="organizationResult"></div>
-</div>
-
-</div>
-</section>
-
-
-<!-- TOOL VIEW -->
-
-<section id="toolView" class="view hidden">
-<div class="container">
-
-<button class="secondary back" onclick="goBack()">← Retour</button>
-
-<div id="toolContent"></div>
-
-</div>
-</section>
 
 </main>
 
+<main id="app">
 
-<footer>
-<div class="container">
-<strong>🧰 La Boîte à Outils du Quotidien</strong>
-<p>Des outils simples pour des problèmes qui ne le sont pas toujours.</p>
-<div class="small">V4 — prototype évolutif</div>
+  <div class="container">
+
+    <!-- HOME CATEGORY VIEW -->
+
+    <div id="categoryView" class="view">
+      <button class="btn btn-secondary back" onclick="goHome()">← Accueil</button>
+
+      <div class="tool-header">
+        <h1 id="categoryTitle"></h1>
+        <p id="categoryDescription"></p>
+      </div>
+
+      <div class="grid-3" id="categoryTools"></div>
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <div id="projects" class="view">
+
+      <button class="btn btn-secondary back" onclick="goHome()">← Accueil</button>
+
+      <div class="tool-header">
+        <h1>📁 Mon dossier</h1>
+        <p>
+          Gardez vos projets, vos décisions et vos résultats au même endroit.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Nouveau projet</h2>
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>Nom du projet</label>
+            <input id="projectName" placeholder="Ex : Achat voiture">
+          </div>
+
+          <div class="field">
+            <label>Type</label>
+            <select id="projectType">
+              <option>Achat</option>
+              <option>Voyage</option>
+              <option>Logement</option>
+              <option>Travail</option>
+              <option>Études</option>
+              <option>Budget</option>
+              <option>Autre</option>
+            </select>
+          </div>
+
+        </div>
+
+        <br>
+
+        <button class="btn btn-primary" onclick="createProject()">
+          + Créer le projet
+        </button>
+      </div>
+
+      <br>
+
+      <div id="projectList"></div>
+
+    </div>
+
+
+    <!-- FAVORITES -->
+
+    <div id="favorites" class="view">
+
+      <button class="btn btn-secondary back" onclick="goHome()">← Accueil</button>
+
+      <div class="tool-header">
+        <h1>⭐ Mes favoris</h1>
+        <p>Retrouvez rapidement les outils que vous utilisez le plus.</p>
+      </div>
+
+      <div class="grid-3" id="favoriteGrid"></div>
+
+    </div>
+
+
+    <!-- TOOL VIEW -->
+
+    <div id="toolView" class="view">
+
+      <button class="btn btn-secondary back" onclick="backFromTool()">← Retour</button>
+
+      <div id="toolContent"></div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+
+    <button onclick="goHome()">
+      <span>🏠</span>
+      Accueil
+    </button>
+
+    <button onclick="showView('projects')">
+      <span>📁</span>
+      Dossier
+    </button>
+
+    <button onclick="showView('favorites')">
+      <span>⭐</span>
+      Favoris
+    </button>
+
+    <button onclick="toggleTheme()">
+      <span>🌙</span>
+      Thème
+    </button>
+
+  </div>
 </div>
-</footer>
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
-const tools = {
+/* =========================================================
+   DATA
+========================================================= */
 
-travelChecklist:{
-title:"🧳 Checklist de voyage personnalisée",
-description:"Plus vous donnez de contexte, plus la checklist sera adaptée.",
-html:`
-<div class="card">
-<h2>Préparons votre voyage</h2>
-<p class="small">
-La checklist tient compte de la période, de la durée, de la destination,
-du transport, des personnes et des activités.
-</p>
+const categories = [
 
-<div class="form">
+  {
+    id:"car",
+    icon:"🚗",
+    title:"Ma voiture",
+    description:"Acheter, comparer, calculer et préparer l'entretien."
+  },
 
-<div class="formGrid">
+  {
+    id:"housing",
+    icon:"🏠",
+    title:"Mon logement",
+    description:"Loyer, déménagement, budget et installation."
+  },
 
-<label>Destination
-<input id="travelDestination" placeholder="Ex : Espagne, Lisbonne, New York...">
-</label>
+  {
+    id:"money",
+    icon:"💰",
+    title:"Mon argent",
+    description:"Budget, dépenses, économies et décisions financières."
+  },
 
-<label>Type de voyage
-<select id="travelType">
-<option>Vacances</option>
-<option>Week-end</option>
-<option>Voyage professionnel</option>
-<option>Road trip</option>
-<option>Camping</option>
-<option>Plage</option>
-<option>Montagne</option>
-</select>
-</label>
+  {
+    id:"work",
+    icon:"💼",
+    title:"Mon travail",
+    description:"Offres, entretiens, salaire et organisation."
+  },
 
-<label>Date de départ
-<input id="travelStart" type="date">
-</label>
+  {
+    id:"study",
+    icon:"📚",
+    title:"Mes études",
+    description:"Planning, révisions, organisation et objectifs."
+  },
 
-<label>Date de retour
-<input id="travelEnd" type="date">
-</label>
+  {
+    id:"travel",
+    icon:"✈️",
+    title:"Mes voyages",
+    description:"Préparer un voyage réellement adapté à votre situation."
+  },
 
-<label>Nombre de voyageurs
-<input id="travelPeople" type="number" min="1" value="2">
-</label>
+  {
+    id:"shopping",
+    icon:"🛒",
+    title:"Mes achats",
+    description:"Comparer, analyser et éviter les mauvaises affaires."
+  },
 
-<label>Transport principal
-<select id="travelTransport">
-<option>Voiture</option>
-<option>Avion</option>
-<option>Train</option>
-<option>Bus</option>
-<option>Camping-car</option>
-</select>
-</label>
+  {
+    id:"documents",
+    icon:"📄",
+    title:"Mes documents",
+    description:"Comprendre un document et identifier ce qu'il faut faire."
+  },
 
-<label>Hébergement
-<select id="travelHousing">
-<option>Hôtel</option>
-<option>Appartement</option>
-<option>Camping</option>
-<option>Chez des proches</option>
-<option>Autre</option>
-</select>
-</label>
+  {
+    id:"events",
+    icon:"🎉",
+    title:"Mes événements",
+    description:"Budget, organisation et listes personnalisées."
+  },
 
-<label>Activités prévues
-<input id="travelActivities" placeholder="Plage, randonnée, soirées, visites...">
-</label>
+  {
+    id:"organization",
+    icon:"🧠",
+    title:"Mon organisation",
+    description:"Transformer un projet compliqué en actions simples."
+  }
 
-</div>
+];
 
-<label>Contraintes particulières
-<textarea id="travelConstraints" placeholder="Ex : bagage cabine uniquement, enfant, matériel sportif, médicaments, mariage pendant le séjour..."></textarea>
-</label>
 
-<button class="primary" onclick="generateTravelChecklist()">
-✨ Générer ma checklist
-</button>
+const tools = [
 
-<div id="travelResult"></div>
+/* ---------- VOYAGE ---------- */
 
-</div>
-</div>
-`
+{
+ id:"travelChecklist",
+ category:"travel",
+ icon:"✈️",
+ title:"Checklist voyage personnalisée",
+ description:"Une liste adaptée à votre destination, vos dates, votre transport, votre logement et vos activités."
 },
 
-purchase:{
-title:"🛒 Analyse d'achat",
-description:"Évaluez une opportunité avant de sortir votre carte bancaire.",
-html:`
-<div class="card">
-<h2>Analyser un achat</h2>
-
-<div class="form">
-
-<label>Produit
-<input id="purchaseProduct" placeholder="Ex : iPhone 15 Pro 128 Go">
-</label>
-
-<div class="formGrid">
-
-<label>Prix demandé (€)
-<input id="purchasePrice" type="number">
-</label>
-
-<label>État
-<select id="purchaseCondition">
-<option>Neuf</option>
-<option>Comme neuf</option>
-<option>Très bon état</option>
-<option>Bon état</option>
-<option>État moyen</option>
-</select>
-</label>
-
-<label>Type de vendeur
-<select id="purchaseSeller">
-<option>Professionnel</option>
-<option>Particulier</option>
-<option>Marketplace</option>
-</select>
-</label>
-
-<label>Garantie
-<select id="purchaseWarranty">
-<option>Oui</option>
-<option>Non</option>
-<option>Je ne sais pas</option>
-</select>
-</label>
-
-</div>
-
-<label>Informations / annonce
-<textarea id="purchaseInfo" placeholder="Collez ici l'annonce ou décrivez le produit..."></textarea>
-</label>
-
-<button class="primary" onclick="analyzePurchase()">Analyser l'achat</button>
-
-<div id="purchaseResult"></div>
-
-</div>
-</div>
-`
+{
+ id:"travelBudget",
+ category:"travel",
+ icon:"💶",
+ title:"Budget voyage",
+ description:"Estimez le coût réel de votre voyage."
 },
 
-document:{
-title:"📄 Comprendre un document",
-description:"Transformez un texte compliqué en informations simples.",
-html:`
-<div class="card">
-<h2>Comprendre mon document</h2>
+/* ---------- SHOPPING ---------- */
 
-<p class="small">
-Collez le texte du document ci-dessous.
-</p>
-
-<textarea id="documentText" style="min-height:260px"
-placeholder="Collez ici votre courrier, contrat, règlement, mail..."></textarea>
-
-<br><br>
-
-<button class="primary" onclick="analyzeDocument()">Analyser</button>
-
-<div id="documentResult"></div>
-
-</div>
-`
+{
+ id:"purchase",
+ category:"shopping",
+ icon:"🛒",
+ title:"Analyse d'achat",
+ description:"Déterminez si une annonce ou un achat semble intéressant."
 },
 
-compare:{
-title:"⚖️ Comparer deux options",
-description:"Comparez deux choix selon ce qui compte vraiment pour vous.",
-html:`
-<div class="card">
-
-<h2>Comparer deux options</h2>
-
-<div class="form">
-
-<div class="formGrid">
-
-<label>Option A
-<input id="optionA" placeholder="Ex : Appartement A">
-</label>
-
-<label>Option B
-<input id="optionB" placeholder="Ex : Appartement B">
-</label>
-
-</div>
-
-<label>Critères importants
-<textarea id="compareCriteria"
-placeholder="Ex : prix, qualité, distance, fiabilité, confort, durée, risque..."></textarea>
-</label>
-
-<label>Informations sur A
-<textarea id="compareAInfo"></textarea>
-</label>
-
-<label>Informations sur B
-<textarea id="compareBInfo"></textarea>
-</label>
-
-<button class="primary" onclick="compareOptions()">Comparer</button>
-
-<div id="compareResult"></div>
-
-</div>
-</div>
-`
+{
+ id:"compare",
+ category:"shopping",
+ icon:"⚖️",
+ title:"Comparer deux options",
+ description:"Comparez deux produits ou deux offres selon vos priorités."
 },
 
-carAnalysis:{
-title:"🚗 Analyse d'annonce voiture",
-description:"Un premier niveau d'analyse avant de contacter le vendeur.",
-html:`
-<div class="card">
-
-<h2>Analyser une annonce</h2>
-
-<div class="form">
-
-<label>Annonce
-<textarea id="carAd" style="min-height:250px"
-placeholder="Collez ici le texte de l'annonce..."></textarea>
-</label>
-
-<div class="formGrid">
-
-<label>Prix (€)
-<input id="carPrice" type="number">
-</label>
-
-<label>Kilométrage
-<input id="carKm" type="number">
-</label>
-
-<label>Année
-<input id="carYear" type="number">
-</label>
-
-<label>Carburant
-<select id="carFuel">
-<option>Diesel</option>
-<option>Essence</option>
-<option>Hybride</option>
-<option>Électrique</option>
-<option>Je ne sais pas</option>
-</select>
-</label>
-
-</div>
-
-<button class="primary" onclick="analyzeCar()">Analyser</button>
-
-<div id="carResult"></div>
-
-</div>
-</div>
-`
+{
+ id:"discount",
+ category:"shopping",
+ icon:"🏷️",
+ title:"Calculateur de réduction",
+ description:"Calculez rapidement le prix après réduction."
 },
 
-carCost:{
-title:"💶 Coût réel d'une voiture",
-description:"Estimez le coût mensuel global.",
-html:`
-<div class="card">
+/* ---------- DOCUMENTS ---------- */
 
-<h2>Coût réel mensuel</h2>
-
-<div class="formGrid">
-
-<label>Carburant / recharge (€)
-<input id="costFuel" type="number" value="120">
-</label>
-
-<label>Assurance (€)
-<input id="costInsurance" type="number" value="100">
-</label>
-
-<label>Entretien moyen (€)
-<input id="costMaintenance" type="number" value="50">
-</label>
-
-<label>Autres frais (€)
-<input id="costOther" type="number" value="30">
-</label>
-
-</div>
-
-<button class="primary" onclick="calculateCarCost()">Calculer</button>
-
-<div id="carCostResult"></div>
-
-</div>
-`
+{
+ id:"document",
+ category:"documents",
+ icon:"📄",
+ title:"Analyse de document",
+ description:"Identifiez les dates, montants, obligations et actions importantes."
 },
 
-carChecklist:{
-title:"📝 Checklist avant achat voiture",
-description:"Préparez votre visite.",
-html:`
-<div class="card">
-
-<h2>Checklist avant achat</h2>
-
-<p class="small">
-Checklist générale à adapter au véhicule.
-</p>
-
-<button class="primary" onclick="generateCarChecklist()">Générer</button>
-
-<div id="carChecklistResult"></div>
-
-</div>
-`
+{
+ id:"documentChecklist",
+ category:"documents",
+ icon:"📋",
+ title:"Checklist administrative",
+ description:"Transformez une démarche en liste d'actions."
 },
 
-rent:{
-title:"🏠 Analyse du loyer",
-description:"Mesurez le poids du logement dans votre budget.",
-html:`
-<div class="card">
+/* ---------- ARGENT ---------- */
 
-<h2>Analyser mon loyer</h2>
-
-<div class="formGrid">
-
-<label>Revenus mensuels nets (€)
-<input id="rentIncome" type="number">
-</label>
-
-<label>Loyer (€)
-<input id="rentValue" type="number">
-</label>
-
-<label>Charges (€)
-<input id="rentCharges" type="number" value="0">
-</label>
-
-</div>
-
-<button class="primary" onclick="analyzeRent()">Analyser</button>
-
-<div id="rentResult"></div>
-
-</div>
-`
+{
+ id:"budget",
+ category:"money",
+ icon:"💰",
+ title:"Analyse de budget",
+ description:"Comprenez votre situation financière et votre marge disponible."
 },
 
-move:{
-title:"📦 Budget déménagement",
-description:"Estimez les principaux coûts.",
-html:`
-<div class="card">
+/* ---------- LOGEMENT ---------- */
 
-<h2>Budget déménagement</h2>
-
-<div class="formGrid">
-
-<label>Transport (€)
-<input id="moveTransport" type="number" value="150">
-</label>
-
-<label>Cartons / matériel (€)
-<input id="moveBoxes" type="number" value="50">
-</label>
-
-<label>Dépôt / frais (€)
-<input id="moveDeposit" type="number" value="0">
-</label>
-
-<label>Autres (€)
-<input id="moveOther" type="number" value="0">
-</label>
-
-</div>
-
-<button class="primary" onclick="calculateMove()">Calculer</button>
-
-<div id="moveResult"></div>
-
-</div>
-`
+{
+ id:"rent",
+ category:"housing",
+ icon:"🏠",
+ title:"Analyse de loyer",
+ description:"Évaluez un loyer par rapport à vos revenus."
 },
 
-budget:{
-title:"📊 Analyse de budget",
-description:"Voyez ce qu'il vous reste après vos dépenses.",
-html:`
-<div class="card">
-
-<h2>Analyser mon budget</h2>
-
-<div class="formGrid">
-
-<label>Revenus (€)
-<input id="budgetIncome" type="number">
-</label>
-
-<label>Logement (€)
-<input id="budgetHousing" type="number">
-</label>
-
-<label>Alimentation (€)
-<input id="budgetFood" type="number">
-</label>
-
-<label>Transport (€)
-<input id="budgetTransport" type="number">
-</label>
-
-<label>Loisirs (€)
-<input id="budgetLeisure" type="number">
-</label>
-
-<label>Autres dépenses (€)
-<input id="budgetOther" type="number">
-</label>
-
-</div>
-
-<button class="primary" onclick="analyzeBudget()">Analyser</button>
-
-<div id="budgetResult"></div>
-
-</div>
-`
+{
+ id:"move",
+ category:"housing",
+ icon:"📦",
+ title:"Budget déménagement",
+ description:"Estimez le coût d'un déménagement."
 },
 
-discount:{
-title:"🏷️ Calcul de réduction",
-description:"Calculez rapidement le prix final.",
-html:`
-<div class="card">
+/* ---------- TRAVAIL ---------- */
 
-<h2>Calcul de réduction</h2>
-
-<div class="formGrid">
-
-<label>Prix initial (€)
-<input id="discountPrice" type="number">
-</label>
-
-<label>Réduction (%)
-<input id="discountPercent" type="number">
-</label>
-
-</div>
-
-<button class="primary" onclick="calculateDiscount()">Calculer</button>
-
-<div id="discountResult"></div>
-
-</div>
-`
+{
+ id:"job",
+ category:"work",
+ icon:"💼",
+ title:"Analyse d'offre d'emploi",
+ description:"Repérez les éléments importants d'une offre."
 },
 
-job:{
-title:"💼 Analyse d'offre d'emploi",
-description:"Repérez les informations importantes.",
-html:`
-<div class="card">
-
-<h2>Analyser une offre d'emploi</h2>
-
-<textarea id="jobText" style="min-height:260px"
-placeholder="Collez ici l'offre d'emploi..."></textarea>
-
-<br><br>
-
-<button class="primary" onclick="analyzeJob()">Analyser</button>
-
-<div id="jobResult"></div>
-
-</div>
-`
+{
+ id:"interview",
+ category:"work",
+ icon:"🎤",
+ title:"Préparation entretien",
+ description:"Préparez vos réponses et vos questions."
 },
 
-interview:{
-title:"🎤 Préparer un entretien",
-description:"Préparez vos réponses.",
-html:`
-<div class="card">
+/* ---------- ETUDES ---------- */
 
-<h2>Préparer mon entretien</h2>
-
-<div class="formGrid">
-
-<label>Poste
-<input id="interviewJob" placeholder="Ex : infirmier, vendeur...">
-</label>
-
-<label>Expérience
-<input id="interviewExperience" placeholder="Ex : débutant, 2 ans...">
-</label>
-
-</div>
-
-<label>Informations sur le poste
-<textarea id="interviewInfo"></textarea>
-</label>
-
-<button class="primary" onclick="prepareInterview()">Préparer</button>
-
-<div id="interviewResult"></div>
-
-</div>
-`
+{
+ id:"studyPlanner",
+ category:"study",
+ icon:"📚",
+ title:"Planning de révision",
+ description:"Construisez un planning selon votre temps et vos objectifs."
 },
 
-studyPlanner:{
-title:"📚 Planning de révisions",
-description:"Organisez vos révisions selon votre temps.",
-html:`
-<div class="card">
+/* ---------- EVENEMENTS ---------- */
 
-<h2>Créer mon planning</h2>
-
-<div class="formGrid">
-
-<label>Matière
-<input id="studySubject">
-</label>
-
-<label>Date d'examen
-<input id="studyExam" type="date">
-</label>
-
-<label>Heures disponibles par jour
-<input id="studyHours" type="number" value="2">
-</label>
-
-<label>Jours disponibles par semaine
-<input id="studyDays" type="number" value="5">
-</label>
-
-</div>
-
-<label>Chapitres / thèmes
-<textarea id="studyTopics"
-placeholder="Ex : pharmacologie, psychiatrie, calculs de doses..."></textarea>
-</label>
-
-<button class="primary" onclick="createStudyPlan()">Créer</button>
-
-<div id="studyResult"></div>
-
-</div>
-`
+{
+ id:"eventBudget",
+ category:"events",
+ icon:"🎉",
+ title:"Budget événement",
+ description:"Calculez le budget d'un événement."
 },
 
-travelBudget:{
-title:"💶 Budget voyage",
-description:"Estimez votre budget global.",
-html:`
-<div class="card">
+/* ---------- ORGANISATION ---------- */
 
-<h2>Budget voyage</h2>
-
-<div class="formGrid">
-
-<label>Transport (€)
-<input id="tbTransport" type="number">
-</label>
-
-<label>Hébergement (€)
-<input id="tbHousing" type="number">
-</label>
-
-<label>Nourriture (€)
-<input id="tbFood" type="number">
-</label>
-
-<label>Activités (€)
-<input id="tbActivities" type="number">
-</label>
-
-<label>Shopping (€)
-<input id="tbShopping" type="number">
-</label>
-
-<label>Imprévus (€)
-<input id="tbUnexpected" type="number">
-</label>
-
-</div>
-
-<button class="primary" onclick="calculateTravelBudget()">Calculer</button>
-
-<div id="tbResult"></div>
-
-</div>
-`
+{
+ id:"checklist",
+ category:"organization",
+ icon:"✅",
+ title:"Générateur de checklist",
+ description:"Transformez votre projet en étapes concrètes."
 },
 
-eventBudget:{
-title:"🎉 Budget événement",
-description:"Estimez le coût d'un événement.",
-html:`
-<div class="card">
+/* ---------- VOITURE ---------- */
 
-<h2>Budget événement</h2>
-
-<div class="formGrid">
-
-<label>Nombre d'invités
-<input id="eventPeople" type="number" value="10">
-</label>
-
-<label>Budget nourriture par personne (€)
-<input id="eventFood" type="number" value="15">
-</label>
-
-<label>Boissons (€)
-<input id="eventDrinks" type="number" value="50">
-</label>
-
-<label>Décoration (€)
-<input id="eventDecoration" type="number" value="40">
-</label>
-
-<label>Lieu (€)
-<input id="eventPlace" type="number" value="0">
-</label>
-
-<label>Autres (€)
-<input id="eventOther" type="number" value="0">
-</label>
-
-</div>
-
-<button class="primary" onclick="calculateEventBudget()">Calculer</button>
-
-<div id="eventResult"></div>
-
-</div>
-`
+{
+ id:"carAnalysis",
+ category:"car",
+ icon:"🚗",
+ title:"Analyse d'annonce voiture",
+ description:"Analysez prix, kilométrage, année, risques et questions à poser."
 },
 
-checklist:{
-title:"☑️ Générateur de checklist",
-description:"Transformez une situation en liste d'actions.",
-html:`
-<div class="card">
+{
+ id:"carCost",
+ category:"car",
+ icon:"⛽",
+ title:"Coût réel d'une voiture",
+ description:"Estimez le coût mensuel réel de votre voiture."
+},
 
-<h2>Créer une checklist</h2>
+{
+ id:"carCompare",
+ category:"car",
+ icon:"⚖️",
+ title:"Comparer deux voitures",
+ description:"Comparez deux véhicules selon vos critères."
+},
 
-<label>
-Votre situation
-<textarea id="checklistSituation"
-placeholder="Ex : Je prépare mon mariage, je pars en vacances, je déménage..."></textarea>
-</label>
-
-<br>
-
-<button class="primary" onclick="generateChecklist()">Créer</button>
-
-<div id="checklistResult"></div>
-
-</div>
-`
+{
+ id:"carChecklist",
+ category:"car",
+ icon:"🔧",
+ title:"Checklist visite voiture",
+ description:"La liste des points à vérifier avant d'acheter."
 }
 
-};
+];
 
 
-let currentView="home";
-let previousView="home";
+/* =========================================================
+   STORAGE
+========================================================= */
+
+let favorites =
+  JSON.parse(localStorage.getItem("boiteFavorites") || "[]");
+
+let projects =
+  JSON.parse(localStorage.getItem("boiteProjects") || "[]");
+
+let currentCategory = null;
+let currentTool = null;
 
 
-function hideAllViews(){
-
-document.querySelectorAll(".view").forEach(v=>{
-v.classList.add("hidden");
-});
-
-document.getElementById("homeView").classList.add("hidden");
-
-}
-
-
-function showHome(){
-
-hideAllViews();
-
-document.getElementById("homeView").classList.remove("hidden");
-
-currentView="home";
-
-window.scrollTo({top:0,behavior:"smooth"});
-
-}
-
-
-function showView(name){
-
-hideAllViews();
-
-const el=document.getElementById(name+"View");
-
-if(el){
-el.classList.remove("hidden");
-currentView=name;
-}
-
-if(name==="projects") renderProjects();
-if(name==="favorites") renderFavorites();
-
-window.scrollTo({top:0,behavior:"smooth"});
-
-}
-
-
-function openTool(id){
-
-if(!tools[id]) return;
-
-previousView=currentView;
-
-hideAllViews();
-
-document.getElementById("toolView").classList.remove("hidden");
-
-document.getElementById("toolContent").innerHTML=`
-
-<div class="sectionHead">
-
-<div>
-<h2>${tools[id].title}</h2>
-<p>${tools[id].description}</p>
-</div>
-
-</div>
-
-${tools[id].html}
-
-`;
-
-currentView="tool";
-
-window.scrollTo({top:0,behavior:"smooth"});
-
-}
-
-
-function goBack(){
-
-if(previousView==="home"){
-showHome();
-}else{
-showView(previousView);
-}
-
-}
-
+/* =========================================================
+   THEME
+========================================================= */
 
 function toggleTheme(){
 
-const current=document.documentElement.getAttribute("data-theme");
+  const current =
+    document.documentElement.getAttribute("data-theme");
 
-const next=current==="dark"?"light":"dark";
+  const next =
+    current === "dark" ? "light" : "dark";
 
-document.documentElement.setAttribute("data-theme",next);
+  document.documentElement.setAttribute("data-theme",next);
 
-localStorage.setItem("theme",next);
-
-document.getElementById("themeBtn").textContent=next==="dark"?"☀️":"🌙";
-
+  localStorage.setItem("boiteTheme",next);
 }
-
 
 (function(){
 
-const theme=localStorage.getItem("theme")||"light";
+  const theme =
+    localStorage.getItem("boiteTheme");
 
-document.documentElement.setAttribute("data-theme",theme);
-
-const btn=document.getElementById("themeBtn");
-
-if(btn) btn.textContent=theme==="dark"?"☀️":"🌙";
+  if(theme){
+    document.documentElement.setAttribute("data-theme",theme);
+  }
 
 })();
 
 
-function euro(n){
+/* =========================================================
+   UI
+========================================================= */
 
-return Number(n||0).toLocaleString("fr-FR",{
-style:"currency",
-currency:"EUR"
-});
+function toast(message){
+
+  const el=document.getElementById("toast");
+
+  el.textContent=message;
+  el.classList.add("show");
+
+  setTimeout(()=>{
+    el.classList.remove("show");
+  },2200);
+}
+
+
+function goHome(){
+
+  document.getElementById("home").style.display="block";
+  document.getElementById("app").style.display="none";
+
+  document.querySelectorAll(".view")
+    .forEach(v=>v.classList.remove("active"));
+
+  window.scrollTo(0,0);
+}
+
+
+function showView(id){
+
+  document.getElementById("home").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  document.querySelectorAll(".view")
+    .forEach(v=>v.classList.remove("active"));
+
+  const el=document.getElementById(id);
+
+  if(el){
+    el.classList.add("active");
+  }
+
+  if(id==="projects") renderProjects();
+  if(id==="favorites") renderFavorites();
+
+  window.scrollTo(0,0);
+}
+
+
+function backFromTool(){
+
+  if(currentCategory){
+    openCategory(currentCategory);
+  }else{
+    goHome();
+  }
+}
+
+
+/* =========================================================
+   CATEGORY RENDER
+========================================================= */
+
+function renderCategories(){
+
+  const grid=document.getElementById("categoryGrid");
+
+  grid.innerHTML=categories.map(cat=>`
+
+    <div class="card category-card"
+         onclick="openCategory('${cat.id}')">
+
+      <div class="category-icon">${cat.icon}</div>
+
+      <h3>${cat.title}</h3>
+
+      <p>${cat.description}</p>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+function renderPopular(){
+
+  const grid=document.getElementById("popularGrid");
+
+  const popular=[
+    "travelChecklist",
+    "purchase",
+    "document",
+    "budget",
+    "checklist",
+    "carAnalysis"
+  ];
+
+  grid.innerHTML=popular
+    .map(id=>tools.find(t=>t.id===id))
+    .map(tool=>toolCard(tool))
+    .join("");
+
+}
+
+
+function toolCard(tool){
+
+  const fav=favorites.includes(tool.id);
+
+  return `
+
+    <div class="card tool-card"
+         onclick="openTool('${tool.id}')">
+
+      <div class="tool-top">
+
+        <div class="tool-icon">${tool.icon}</div>
+
+        <button
+          class="star ${fav?'active':''}"
+          onclick="event.stopPropagation();toggleFavorite('${tool.id}')">
+
+          ${fav?"★":"☆"}
+
+        </button>
+
+      </div>
+
+      <h3>${tool.title}</h3>
+
+      <p>${tool.description}</p>
+
+    </div>
+
+  `;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function openCategory(id){
+
+  currentCategory=id;
+
+  const cat=categories.find(c=>c.id===id);
+
+  document.getElementById("categoryTitle").textContent =
+    `${cat.icon} ${cat.title}`;
+
+  document.getElementById("categoryDescription").textContent =
+    cat.description;
+
+  const list=tools.filter(t=>t.category===id);
+
+  document.getElementById("categoryTools").innerHTML =
+    list.map(tool=>toolCard(tool)).join("");
+
+  showView("categoryView");
+}
+
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+function toggleFavorite(id){
+
+  if(favorites.includes(id)){
+    favorites=favorites.filter(x=>x!==id);
+    toast("Retiré des favoris");
+  }else{
+    favorites.push(id);
+    toast("Ajouté aux favoris ⭐");
+  }
+
+  localStorage.setItem(
+    "boiteFavorites",
+    JSON.stringify(favorites)
+  );
+
+  renderPopular();
+
+  if(currentCategory){
+    const list=tools.filter(t=>t.category===currentCategory);
+
+    document.getElementById("categoryTools").innerHTML =
+      list.map(tool=>toolCard(tool)).join("");
+  }
+
+  renderFavorites();
+}
+
+
+function renderFavorites(){
+
+  const grid=document.getElementById("favoriteGrid");
+
+  const list=tools.filter(t=>favorites.includes(t.id));
+
+  if(!list.length){
+
+    grid.innerHTML=`
+      <div class="card empty">
+        <h2>Aucun favori</h2>
+        <p>Ajoutez des outils avec ⭐ pour les retrouver ici.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  grid.innerHTML=list.map(tool=>toolCard(tool)).join("");
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchTools(){
+
+  const q=document.getElementById("search")
+    .value
+    .toLowerCase()
+    .trim();
+
+  if(!q){
+
+    renderPopular();
+    return;
+  }
+
+  const results=tools.filter(tool=>
+    `${tool.title} ${tool.description}`
+      .toLowerCase()
+      .includes(q)
+  );
+
+  document.getElementById("popularGrid").innerHTML =
+    results.length
+      ? results.map(tool=>toolCard(tool)).join("")
+      : `<div class="card empty">
+          <h2>Aucun outil trouvé</h2>
+          <p>Essayez avec d'autres mots.</p>
+        </div>`;
+}
+
+
+/* =========================================================
+   TOOL ENGINE
+========================================================= */
+
+function openTool(id){
+
+  currentTool=id;
+
+  const tool=tools.find(t=>t.id===id);
+
+  let html="";
+
+  switch(id){
+
+    case "travelChecklist":
+      html=travelChecklistForm();
+      break;
+
+    case "travelBudget":
+      html=travelBudgetForm();
+      break;
+
+    case "purchase":
+      html=purchaseForm();
+      break;
+
+    case "compare":
+      html=compareForm();
+      break;
+
+    case "discount":
+      html=discountForm();
+      break;
+
+    case "document":
+      html=documentForm();
+      break;
+
+    case "documentChecklist":
+      html=documentChecklistForm();
+      break;
+
+    case "budget":
+      html=budgetForm();
+      break;
+
+    case "rent":
+      html=rentForm();
+      break;
+
+    case "move":
+      html=moveForm();
+      break;
+
+    case "job":
+      html=jobForm();
+      break;
+
+    case "interview":
+      html=interviewForm();
+      break;
+
+    case "studyPlanner":
+      html=studyForm();
+      break;
+
+    case "eventBudget":
+      html=eventForm();
+      break;
+
+    case "checklist":
+      html=genericChecklistForm();
+      break;
+
+    case "carAnalysis":
+      html=carAnalysisForm();
+      break;
+
+    case "carCost":
+      html=carCostForm();
+      break;
+
+    case "carCompare":
+      html=carCompareForm();
+      break;
+
+    case "carChecklist":
+      html=carChecklistForm();
+      break;
+
+    default:
+      html=`<div class="card">Outil indisponible.</div>`;
+  }
+
+  document.getElementById("toolContent").innerHTML=html;
+
+  showView("toolView");
+}
+
+
+/* =========================================================
+   TRAVEL — ULTRA PERSONALIZED
+========================================================= */
+
+function travelChecklistForm(){
+
+  return `
+
+    <div class="tool-header">
+
+      <h1>✈️ Checklist voyage personnalisée</h1>
+
+      <p>
+        Plus vous donnez de contexte, plus la checklist sera adaptée.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Destination</label>
+          <input id="travelDestination"
+                 placeholder="Ex : Lisbonne, New York, Espagne...">
+        </div>
+
+        <div class="field">
+          <label>Type de voyage</label>
+          <select id="travelType">
+            <option>Vacances</option>
+            <option>Week-end</option>
+            <option>Road trip</option>
+            <option>Voyage professionnel</option>
+            <option>Visite familiale</option>
+            <option>Festival / événement</option>
+            <option>Études</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Date de départ</label>
+          <input type="date" id="travelStart">
+        </div>
+
+        <div class="field">
+          <label>Date de retour</label>
+          <input type="date" id="travelEnd">
+        </div>
+
+        <div class="field">
+          <label>Nombre de voyageurs</label>
+          <input type="number" id="travelPeople" value="2" min="1">
+        </div>
+
+        <div class="field">
+          <label>Enfants ?</label>
+          <select id="travelChildren">
+            <option>Non</option>
+            <option>Oui, avec bébé</option>
+            <option>Oui, enfants</option>
+            <option>Oui, adolescents</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Transport principal</label>
+          <select id="travelTransport">
+            <option>Avion</option>
+            <option>Voiture</option>
+            <option>Train</option>
+            <option>Bus</option>
+            <option>Bateau</option>
+            <option>Plusieurs transports</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Hébergement</label>
+          <select id="travelHousing">
+            <option>Hôtel</option>
+            <option>Airbnb / appartement</option>
+            <option>Camping</option>
+            <option>Chez des proches</option>
+            <option>Non défini</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Activités prévues</label>
+          <input id="travelActivities"
+                 placeholder="Plage, randonnée, soirées, visites...">
+        </div>
+
+        <div class="field">
+          <label>Bagages</label>
+          <select id="travelLuggage">
+            <option>Petit sac</option>
+            <option>Bagage cabine</option>
+            <option>Valise en soute</option>
+            <option>Plusieurs valises</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Contraintes particulières</label>
+          <input id="travelConstraints"
+                 placeholder="Budget limité, sport, matériel, animaux...">
+        </div>
+
+        <div class="field">
+          <label>Budget approximatif</label>
+          <input type="number" id="travelBudgetLimit"
+                 placeholder="€">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="generateTravelChecklist()">
+        Générer ma checklist
+      </button>
+
+    </div>
+
+    <div id="travelResult"></div>
+  `;
+}
+
+
+function daysBetween(start,end){
+
+  if(!start || !end) return 1;
+
+  const a=new Date(start);
+  const b=new Date(end);
+
+  const diff=b-a;
+
+  return Math.max(1,
+    Math.ceil(diff/(1000*60*60*24))
+  );
+}
+
+
+function generateTravelChecklist(){
+
+  const destination =
+    document.getElementById("travelDestination").value || "votre destination";
+
+  const type =
+    document.getElementById("travelType").value;
+
+  const start =
+    document.getElementById("travelStart").value;
+
+  const end =
+    document.getElementById("travelEnd").value;
+
+  const people =
+    Number(document.getElementById("travelPeople").value)||1;
+
+  const children =
+    document.getElementById("travelChildren").value;
+
+  const transport =
+    document.getElementById("travelTransport").value;
+
+  const housing =
+    document.getElementById("travelHousing").value;
+
+  const activities =
+    document.getElementById("travelActivities").value;
+
+  const luggage =
+    document.getElementById("travelLuggage").value;
+
+  const constraints =
+    document.getElementById("travelConstraints").value;
+
+  const budget =
+    Number(document.getElementById("travelBudgetLimit").value)||0;
+
+  const days=daysBetween(start,end);
+
+  let items=[];
+
+  /* DOCUMENTS */
+
+  items.push(
+    "Vérifier la validité de la carte d'identité ou du passeport",
+    "Vérifier les conditions d'entrée dans le pays",
+    "Vérifier les éventuels documents ou autorisations nécessaires",
+    "Prévoir une copie numérique des documents importants",
+    "Vérifier l'assurance voyage / assistance"
+  );
+
+  /* MONEY */
+
+  items.push(
+    "Prévoir un moyen de paiement principal",
+    "Prévoir un moyen de paiement de secours",
+    "Vérifier les frais bancaires à l'étranger",
+    "Prévoir un peu d'argent disponible pour les imprévus"
+  );
+
+  /* TRANSPORT */
+
+  if(transport==="Avion"){
+    items.push(
+      "Vérifier les dimensions et le poids des bagages",
+      "Faire l'enregistrement en ligne si nécessaire",
+      "Vérifier l'heure limite d'embarquement",
+      "Prévoir les documents accessibles pendant le trajet"
+    );
+  }
+
+  if(transport==="Voiture"){
+    items.push(
+      "Vérifier les niveaux et la pression des pneus",
+      "Vérifier assurance et assistance",
+      "Préparer les documents du véhicule",
+      "Prévoir chargeur téléphone",
+      "Prévoir eau et nécessaire pour le trajet",
+      "Prévoir une pause régulière sur les longs trajets"
+    );
+  }
+
+  if(transport==="Train" || transport==="Bus"){
+    items.push(
+      "Télécharger les billets hors ligne",
+      "Vérifier la gare et l'heure de départ",
+      "Prévoir batterie externe / chargeur"
+    );
+  }
+
+  /* HOUSING */
+
+  if(housing==="Hôtel"){
+    items.push(
+      "Vérifier les horaires de check-in et check-out",
+      "Vérifier ce qui est inclus dans la réservation",
+      "Conserver les coordonnées de l'hébergement"
+    );
+  }
+
+  if(housing==="Airbnb / appartement"){
+    items.push(
+      "Vérifier l'adresse exacte",
+      "Vérifier les instructions d'arrivée",
+      "Vérifier les équipements disponibles",
+      "Vérifier les conditions de départ"
+    );
+  }
+
+  if(housing==="Camping"){
+    items.push(
+      "Préparer tente / matériel de couchage si nécessaire",
+      "Prévoir lampe",
+      "Prévoir vêtements adaptés à la météo",
+      "Prévoir trousse de premiers soins"
+    );
+  }
+
+  /* DURATION */
+
+  if(days>=7){
+    items.push(
+      "Prévoir suffisamment de vêtements ou une solution de lavage",
+      "Prévoir plusieurs produits d'hygiène",
+      "Prévoir une pharmacie de voyage adaptée à la durée"
+    );
+  }
+
+  if(days>=14){
+    items.push(
+      "Prévoir une organisation du linge",
+      "Vérifier les dépenses récurrentes pendant le voyage",
+      "Prévoir une marge financière supplémentaire"
+    );
+  }
+
+  /* CHILDREN */
+
+  if(children!=="Non"){
+    items.push(
+      "Prévoir documents nécessaires pour les enfants",
+      "Prévoir vêtements de rechange facilement accessibles",
+      "Prévoir de quoi occuper les enfants pendant les trajets"
+    );
+
+    if(children.includes("bébé")){
+      items.push(
+        "Prévoir couches et produits d'hygiène",
+        "Prévoir alimentation adaptée",
+        "Prévoir poussette / porte-bébé selon le voyage"
+      );
+    }
+  }
+
+  /* ACTIVITIES */
+
+  if(activities){
+
+    const a=activities.toLowerCase();
+
+    if(a.includes("plage")){
+      items.push(
+        "Maillot de bain",
+        "Serviette",
+        "Crème solaire",
+        "Lunettes de soleil",
+        "Sac pour affaires humides"
+      );
+    }
+
+    if(a.includes("randonnée")){
+      items.push(
+        "Chaussures adaptées",
+        "Gourde",
+        "Protection solaire",
+        "Vêtements adaptés à la météo",
+        "Télécharger les itinéraires hors ligne"
+      );
+    }
+
+    if(a.includes("sport")){
+      items.push(
+        "Tenue de sport",
+        "Chaussures adaptées",
+        "Matériel spécifique"
+      );
+    }
+
+    if(a.includes("soirée")){
+      items.push(
+        "Prévoir une tenue adaptée",
+        "Prévoir moyen de transport pour les retours"
+      );
+    }
+  }
+
+  /* LUGGAGE */
+
+  if(luggage==="Petit sac"){
+    items.push(
+      "Limiter les objets non indispensables",
+      "Préparer une tenue de secours compacte"
+    );
+  }
+
+  if(luggage==="Bagage cabine"){
+    items.push(
+      "Vérifier les règles de liquides",
+      "Garder documents et objets importants en cabine"
+    );
+  }
+
+  if(luggage==="Valise en soute" || luggage==="Plusieurs valises"){
+    items.push(
+      "Identifier les bagages",
+      "Garder les objets de valeur avec vous",
+      "Photographier le contenu des bagages si nécessaire"
+    );
+  }
+
+  /* CONSTRAINTS */
+
+  if(constraints){
+
+    items.push(
+      `Prendre en compte votre contrainte : ${constraints}`
+    );
+  }
+
+  /* GENERAL */
+
+  items.push(
+    "Charger téléphone et appareils électroniques",
+    "Prévoir chargeurs et adaptateurs nécessaires",
+    "Télécharger les réservations hors ligne",
+    "Prévoir une tenue confortable pour le trajet",
+    "Vérifier la météo avant le départ",
+    "Prévoir une marge pour les imprévus"
+  );
+
+  const unique=[...new Set(items)];
+
+  const score=Math.min(
+    100,
+    55 +
+    (days>=5?10:0) +
+    (transport?10:0) +
+    (housing?10:0) +
+    (activities?10:0) +
+    (constraints?5:0)
+  );
+
+  document.getElementById("travelResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="verdict good">
+        Checklist générée
+      </div>
+
+      <div class="score">${score}/100</div>
+
+      <p>
+        Voyage de <strong>${days} jour(s)</strong>,
+        pour <strong>${people} personne(s)</strong>,
+        destination : <strong>${escapeHTML(destination)}</strong>.
+      </p>
+
+      <div class="result-section">
+
+        <h3>📋 Votre checklist</h3>
+
+        <ul>
+          ${unique.map(x=>`
+            <li>
+              <label>
+                <input type="checkbox">
+                ${escapeHTML(x)}
+              </label>
+            </li>
+          `).join("")}
+        </ul>
+
+      </div>
+
+      <div class="result-section">
+
+        <h3>💡 Conseil</h3>
+
+        <p>
+          Cette checklist est construite à partir des paramètres
+          que vous avez renseignés. Vérifiez toujours les règles
+          officielles liées à votre destination et votre transport
+          avant le départ.
+        </p>
+
+      </div>
+
+      <button class="btn btn-secondary"
+              onclick="saveGeneratedProject('Voyage — ${escapeHTML(destination)}')">
+        📁 Ajouter à Mon dossier
+      </button>
+
+    </div>
+
+  `;
+}
+
+
+/* =========================================================
+   TRAVEL BUDGET
+========================================================= */
+
+function travelBudgetForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>💶 Budget voyage</h1>
+      <p>Estimez rapidement le coût global de votre voyage.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Transport</label>
+          <input type="number" id="tbTransport" placeholder="€">
+        </div>
+
+        <div class="field">
+          <label>Hébergement</label>
+          <input type="number" id="tbHousing" placeholder="€">
+        </div>
+
+        <div class="field">
+          <label>Nourriture</label>
+          <input type="number" id="tbFood" placeholder="€">
+        </div>
+
+        <div class="field">
+          <label>Activités</label>
+          <input type="number" id="tbActivities" placeholder="€">
+        </div>
+
+        <div class="field">
+          <label>Autres dépenses</label>
+          <input type="number" id="tbOther" placeholder="€">
+        </div>
+
+        <div class="field">
+          <label>Marge imprévus (%)</label>
+          <input type="number" id="tbMargin" value="10">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="calculateTravelBudget()">
+        Calculer
+      </button>
+
+    </div>
+
+    <div id="travelBudgetResult"></div>
+  `;
+}
+
+
+function calculateTravelBudget(){
+
+  const values=[
+    "tbTransport",
+    "tbHousing",
+    "tbFood",
+    "tbActivities",
+    "tbOther"
+  ].map(id=>Number(document.getElementById(id).value)||0);
+
+  const base=values.reduce((a,b)=>a+b,0);
+
+  const margin=
+    Number(document.getElementById("tbMargin").value)||0;
+
+  const extra=base*margin/100;
+
+  const total=base+extra;
+
+  document.getElementById("travelBudgetResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>💰 Estimation</h2>
+
+      <p>Budget de base : <strong>${formatEuro(base)}</strong></p>
+
+      <p>Marge imprévus : <strong>${formatEuro(extra)}</strong></p>
+
+      <h2>Total conseillé : ${formatEuro(total)}</h2>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   PURCHASE ANALYSIS
+========================================================= */
+
+function purchaseForm(){
+
+  return `
+
+    <div class="tool-header">
+
+      <h1>🛒 Analyse d'achat</h1>
+
+      <p>
+        Donnez-nous les informations disponibles et obtenez
+        une première analyse structurée.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Produit</label>
+          <input id="purchaseProduct"
+                 placeholder="Ex : iPhone, canapé, montre...">
+        </div>
+
+        <div class="field">
+          <label>Prix demandé (€)</label>
+          <input type="number" id="purchasePrice">
+        </div>
+
+        <div class="field">
+          <label>État</label>
+          <select id="purchaseCondition">
+            <option>Neuf</option>
+            <option>Comme neuf</option>
+            <option>Bon état</option>
+            <option>État moyen</option>
+            <option>À réparer</option>
+            <option>Inconnu</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Vendeur</label>
+          <select id="purchaseSeller">
+            <option>Professionnel</option>
+            <option>Particulier</option>
+            <option>Marketplace</option>
+            <option>Inconnu</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Garantie</label>
+          <select id="purchaseWarranty">
+            <option>Oui</option>
+            <option>Non</option>
+            <option>Je ne sais pas</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Frais supplémentaires (€)</label>
+          <input type="number" id="purchaseFees" value="0">
+        </div>
+
+        <div class="field full">
+          <label>Description / annonce</label>
+          <textarea id="purchaseDescription"
+            placeholder="Collez ici le texte de l'annonce..."></textarea>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="analyzePurchase()">
+        Analyser l'achat
+      </button>
+
+    </div>
+
+    <div id="purchaseResult"></div>
+  `;
+}
+
+
+function analyzePurchase(){
+
+  const product =
+    document.getElementById("purchaseProduct").value || "Produit";
+
+  const price =
+    Number(document.getElementById("purchasePrice").value)||0;
+
+  const condition =
+    document.getElementById("purchaseCondition").value;
+
+  const seller =
+    document.getElementById("purchaseSeller").value;
+
+  const warranty =
+    document.getElementById("purchaseWarranty").value;
+
+  const fees =
+    Number(document.getElementById("purchaseFees").value)||0;
+
+  const description =
+    document.getElementById("purchaseDescription").value;
+
+  let score=70;
+
+  let positives=[];
+  let risks=[];
+  let questions=[];
+
+  if(condition==="Neuf"){
+    positives.push("Produit neuf");
+    score+=8;
+  }
+
+  if(condition==="Comme neuf"){
+    positives.push("État annoncé comme excellent");
+    score+=5;
+  }
+
+  if(condition==="À réparer"){
+    risks.push("Des frais de réparation peuvent s'ajouter");
+    score-=25;
+  }
+
+  if(seller==="Professionnel"){
+    positives.push("Vendeur professionnel");
+    score+=5;
+  }
+
+  if(seller==="Particulier"){
+    questions.push("Pourquoi le vendeur se sépare-t-il du produit ?");
+  }
+
+  if(warranty==="Oui"){
+    positives.push("Garantie annoncée");
+    score+=7;
+  }else{
+    risks.push("Garantie absente ou incertaine");
+    score-=8;
+  }
+
+  if(fees>0){
+    risks.push(`Frais supplémentaires : ${formatEuro(fees)}`);
+    score-=3;
+  }
+
+  if(description.length<50){
+    risks.push("Description très courte");
+    score-=7;
+    questions.push("Demander davantage de photos et de détails.");
+  }
+
+  questions.push(
+    "Demander une preuve d'achat si elle existe",
+    "Vérifier l'état réel avant paiement",
+    "Comparer avec plusieurs offres similaires"
+  );
+
+  score=Math.max(0,Math.min(100,score));
+
+  let verdict="Bonne base";
+  let cls="good";
+
+  if(score<70){
+    verdict="À vérifier";
+    cls="medium";
+  }
+
+  if(score<45){
+    verdict="Attention";
+    cls="bad";
+  }
+
+  document.getElementById("purchaseResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="verdict ${cls}">
+        ${verdict}
+      </div>
+
+      <div class="score">${score}/100</div>
+
+      <p>
+        Coût affiché : <strong>${formatEuro(price+fees)}</strong>
+      </p>
+
+      <div class="result-section">
+        <h3>✅ Points positifs</h3>
+        <ul>
+          ${positives.length
+            ? positives.map(x=>`<li>${escapeHTML(x)}</li>`).join("")
+            : "<li>Aucun élément positif clairement identifié.</li>"
+          }
+        </ul>
+      </div>
+
+      <div class="result-section">
+        <h3>⚠️ Points de vigilance</h3>
+        <ul>
+          ${risks.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="result-section">
+        <h3>❓ Questions à poser</h3>
+        <ul>
+          ${questions.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+        </ul>
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   COMPARE
+========================================================= */
+
+function compareForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>⚖️ Comparer deux options</h1>
+      <p>Donnez vos priorités pour obtenir un résultat plus pertinent.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Option A</label>
+          <input id="cmpA" placeholder="Ex : Produit A">
+        </div>
+
+        <div class="field">
+          <label>Prix A (€)</label>
+          <input type="number" id="cmpPriceA">
+        </div>
+
+        <div class="field">
+          <label>Option B</label>
+          <input id="cmpB" placeholder="Ex : Produit B">
+        </div>
+
+        <div class="field">
+          <label>Prix B (€)</label>
+          <input type="number" id="cmpPriceB">
+        </div>
+
+        <div class="field full">
+          <label>Votre priorité</label>
+          <select id="cmpPriority">
+            <option>Prix</option>
+            <option>Qualité</option>
+            <option>Durabilité</option>
+            <option>Rapport qualité/prix</option>
+          </select>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="compareOptions()">
+        Comparer
+      </button>
+
+    </div>
+
+    <div id="compareResult"></div>
+  `;
+}
+
+
+function compareOptions(){
+
+  const a=document.getElementById("cmpA").value||"A";
+  const b=document.getElementById("cmpB").value||"B";
+
+  const pa=Number(document.getElementById("cmpPriceA").value)||0;
+  const pb=Number(document.getElementById("cmpPriceB").value)||0;
+
+  const priority=document.getElementById("cmpPriority").value;
+
+  let winner="";
+
+  if(priority==="Prix"){
+    winner=pa<pb?a:b;
+  }else{
+    winner="Impossible de déterminer sans davantage d'informations";
+  }
+
+  document.getElementById("compareResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Résultat</h2>
+
+      ${
+        winner.includes("Impossible")
+        ? `<p>${winner}</p>`
+        : `<p>Pour votre priorité <strong>${priority}</strong>,
+        l'option qui semble la plus intéressante sur le critère
+        renseigné est <strong>${escapeHTML(winner)}</strong>.</p>`
+      }
+
+      <ul>
+        <li>${escapeHTML(a)} : ${formatEuro(pa)}</li>
+        <li>${escapeHTML(b)} : ${formatEuro(pb)}</li>
+      </ul>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   DISCOUNT
+========================================================= */
+
+function discountForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>🏷️ Calculateur de réduction</h1>
+      <p>Calculez le prix final et l'économie réalisée.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Prix initial (€)</label>
+          <input type="number" id="discountPrice">
+        </div>
+
+        <div class="field">
+          <label>Réduction (%)</label>
+          <input type="number" id="discountPercent">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="calculateDiscount()">
+        Calculer
+      </button>
+
+    </div>
+
+    <div id="discountResult"></div>
+  `;
+}
+
+
+function calculateDiscount(){
+
+  const price=Number(document.getElementById("discountPrice").value)||0;
+  const pct=Number(document.getElementById("discountPercent").value)||0;
+
+  const saving=price*pct/100;
+  const final=price-saving;
+
+  document.getElementById("discountResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Prix final : ${formatEuro(final)}</h2>
+
+      <p>Vous économisez <strong>${formatEuro(saving)}</strong>.</p>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   DOCUMENT
+========================================================= */
+
+function documentForm(){
+
+  return `
+
+    <div class="tool-header">
+
+      <h1>📄 Analyse de document</h1>
+
+      <p>
+        Collez le texte d'un document pour repérer les éléments
+        importants.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="field">
+
+        <label>Texte du document</label>
+
+        <textarea id="documentText"
+          style="min-height:250px"
+          placeholder="Collez ici le texte du contrat, courrier, facture, annonce..."></textarea>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="analyzeDocument()">
+        Analyser
+      </button>
+
+    </div>
+
+    <div id="documentResult"></div>
+  `;
+}
+
+
+function analyzeDocument(){
+
+  const text=
+    document.getElementById("documentText").value.trim();
+
+  if(!text){
+
+    toast("Collez d'abord le texte du document.");
+
+    return;
+  }
+
+  const dates=
+    text.match(/\b\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}\b/g)||[];
+
+  const amounts=
+    text.match(/\b\d+(?:[.,]\d+)?\s?(?:€|euros?)\b/gi)||[];
+
+  const keywords=[
+    "obligation",
+    "résiliation",
+    "échéance",
+    "paiement",
+    "délai",
+    "préavis",
+    "engagement",
+    "signature",
+    "renouvellement",
+    "garantie"
+  ];
+
+  const found=keywords.filter(k=>
+    text.toLowerCase().includes(k)
+  );
+
+  document.getElementById("documentResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="verdict good">
+        Analyse terminée
+      </div>
+
+      <div class="result-section">
+
+        <h3>📅 Dates détectées</h3>
+
+        <ul>
+          ${
+            dates.length
+            ? dates.map(d=>`<li>${d}</li>`).join("")
+            : "<li>Aucune date évidente détectée.</li>"
+          }
+        </ul>
+
+      </div>
+
+      <div class="result-section">
+
+        <h3>💶 Montants détectés</h3>
+
+        <ul>
+          ${
+            amounts.length
+            ? amounts.map(a=>`<li>${escapeHTML(a)}</li>`).join("")
+            : "<li>Aucun montant évident détecté.</li>"
+          }
+        </ul>
+
+      </div>
+
+      <div class="result-section">
+
+        <h3>⚠️ Notions importantes détectées</h3>
+
+        <ul>
+          ${
+            found.length
+            ? found.map(x=>`<li>${x}</li>`).join("")
+            : "<li>Aucune notion spécifique détectée.</li>"
+          }
+        </ul>
+
+      </div>
+
+      <div class="result-section">
+
+        <h3>🧠 À retenir</h3>
+
+        <p>
+          Cette analyse est automatique et indicative.
+          Pour une décision juridique ou financière importante,
+          vérifiez toujours le document complet et demandez conseil
+          à un professionnel compétent si nécessaire.
+        </p>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   DOCUMENT CHECKLIST
+========================================================= */
+
+function documentChecklistForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>📋 Checklist administrative</h1>
+      <p>Transformez une démarche en étapes simples.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="field">
+
+        <label>Quelle démarche ?</label>
+
+        <textarea id="docChecklistText"
+          placeholder="Ex : louer un appartement, refaire une carte d'identité, changer d'assurance..."></textarea>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="generateDocumentChecklist()">
+        Générer
+      </button>
+
+    </div>
+
+    <div id="docChecklistResult"></div>
+  `;
+}
+
+
+function generateDocumentChecklist(){
+
+  const text=
+    document.getElementById("docChecklistText").value ||
+    "votre démarche";
+
+  const items=[
+    "Identifier précisément la démarche",
+    "Vérifier les conditions nécessaires",
+    "Lister les documents justificatifs",
+    "Vérifier les dates limites",
+    "Préparer les copies nécessaires",
+    "Effectuer la demande",
+    "Conserver une preuve de dépôt",
+    "Noter les éventuelles échéances suivantes"
+  ];
+
+  document.getElementById("docChecklistResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Checklist : ${escapeHTML(text)}</h2>
+
+      <ul>
+        ${items.map(x=>`
+          <li>
+            <label>
+              <input type="checkbox">
+              ${x}
+            </label>
+          </li>
+        `).join("")}
+      </ul>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   BUDGET
+========================================================= */
+
+function budgetForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>💰 Analyse de budget</h1>
+      <p>Calculez votre marge disponible.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Revenus mensuels (€)</label>
+          <input type="number" id="budgetIncome">
+        </div>
+
+        <div class="field">
+          <label>Loyer / logement (€)</label>
+          <input type="number" id="budgetRent">
+        </div>
+
+        <div class="field">
+          <label>Crédits (€)</label>
+          <input type="number" id="budgetCredit">
+        </div>
+
+        <div class="field">
+          <label>Autres dépenses fixes (€)</label>
+          <input type="number" id="budgetFixed">
+        </div>
+
+        <div class="field">
+          <label>Dépenses variables (€)</label>
+          <input type="number" id="budgetVariable">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="analyzeBudget()">
+        Analyser
+      </button>
+
+    </div>
+
+    <div id="budgetResult"></div>
+  `;
+}
+
+
+function analyzeBudget(){
+
+  const income=Number(document.getElementById("budgetIncome").value)||0;
+
+  const expenses=[
+    "budgetRent",
+    "budgetCredit",
+    "budgetFixed",
+    "budgetVariable"
+  ].map(id=>Number(document.getElementById(id).value)||0);
+
+  const total=expenses.reduce((a,b)=>a+b,0);
+  const remaining=income-total;
+
+  let cls="good";
+  let verdict="Situation confortable";
+
+  if(remaining<income*.2){
+    cls="medium";
+    verdict="Budget à surveiller";
+  }
+
+  if(remaining<0){
+    cls="bad";
+    verdict="Budget déficitaire";
+  }
+
+  document.getElementById("budgetResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="verdict ${cls}">
+        ${verdict}
+      </div>
+
+      <h2>
+        Reste estimé :
+        ${formatEuro(remaining)}
+      </h2>
+
+      <p>
+        Dépenses mensuelles :
+        <strong>${formatEuro(total)}</strong>
+      </p>
+
+      <p>
+        Taux de dépenses :
+        <strong>
+          ${income ? Math.round(total/income*100) : 0}%
+        </strong>
+      </p>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   HOUSING
+========================================================= */
+
+function rentForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>🏠 Analyse de loyer</h1>
+      <p>Évaluez le poids du logement dans votre budget.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Revenus mensuels (€)</label>
+          <input type="number" id="rentIncome">
+        </div>
+
+        <div class="field">
+          <label>Loyer (€)</label>
+          <input type="number" id="rentAmount">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="analyzeRent()">
+        Analyser
+      </button>
+
+    </div>
+
+    <div id="rentResult"></div>
+  `;
+}
+
+
+function analyzeRent(){
+
+  const income=Number(document.getElementById("rentIncome").value)||0;
+  const rent=Number(document.getElementById("rentAmount").value)||0;
+
+  const ratio=income?rent/income*100:0;
+
+  let cls="good";
+  let verdict="Poids raisonnable";
+
+  if(ratio>30){
+    cls="medium";
+    verdict="Poids élevé";
+  }
+
+  if(ratio>40){
+    cls="bad";
+    verdict="Poids très élevé";
+  }
+
+  document.getElementById("rentResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="verdict ${cls}">
+        ${verdict}
+      </div>
+
+      <div class="score">
+        ${Math.round(ratio)}%
+      </div>
+
+      <p>
+        Le logement représente environ
+        <strong>${Math.round(ratio)}%</strong>
+        de vos revenus renseignés.
+      </p>
+
+    </div>
+  `;
+}
+
+
+function moveForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>📦 Budget déménagement</h1>
+      <p>Estimez les dépenses liées à votre déménagement.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Location véhicule (€)</label>
+          <input type="number" id="moveVehicle">
+        </div>
+
+        <div class="field">
+          <label>Cartons / matériel (€)</label>
+          <input type="number" id="moveBoxes">
+        </div>
+
+        <div class="field">
+          <label>Essence (€)</label>
+          <input type="number" id="moveFuel">
+        </div>
+
+        <div class="field">
+          <label>Professionnels (€)</label>
+          <input type="number" id="movePro">
+        </div>
+
+        <div class="field">
+          <label>Autres (€)</label>
+          <input type="number" id="moveOther">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="calculateMove()">
+        Calculer
+      </button>
+
+    </div>
+
+    <div id="moveResult"></div>
+  `;
+}
+
+
+function calculateMove(){
+
+  const ids=[
+    "moveVehicle",
+    "moveBoxes",
+    "moveFuel",
+    "movePro",
+    "moveOther"
+  ];
+
+  const total=ids
+    .map(id=>Number(document.getElementById(id).value)||0)
+    .reduce((a,b)=>a+b,0);
+
+  document.getElementById("moveResult").innerHTML=`
+
+    <div class="result">
+      <h2>Budget estimé : ${formatEuro(total)}</h2>
+      <p>Pensez à conserver une petite marge pour les imprévus.</p>
+    </div>
+
+  `;
+}
+
+
+/* =========================================================
+   WORK
+========================================================= */
+
+function jobForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>💼 Analyse d'offre d'emploi</h1>
+      <p>Identifiez rapidement les éléments importants.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="field">
+        <label>Texte de l'offre</label>
+
+        <textarea id="jobText"
+          style="min-height:250px"
+          placeholder="Collez l'offre ici..."></textarea>
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="analyzeJob()">
+        Analyser
+      </button>
+
+    </div>
+
+    <div id="jobResult"></div>
+  `;
+}
+
+
+function analyzeJob(){
+
+  const text=
+    document.getElementById("jobText").value;
+
+  const lower=text.toLowerCase();
+
+  const elements=[];
+
+  if(lower.includes("salaire") || lower.includes("€"))
+    elements.push("Rémunération mentionnée");
+
+  if(lower.includes("télétravail"))
+    elements.push("Télétravail mentionné");
+
+  if(lower.includes("cdi"))
+    elements.push("CDI mentionné");
+
+  if(lower.includes("cdd"))
+    elements.push("CDD mentionné");
+
+  if(lower.includes("permis"))
+    elements.push("Permis demandé");
+
+  document.getElementById("jobResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Éléments détectés</h2>
+
+      <ul>
+        ${
+          elements.length
+          ? elements.map(x=>`<li>${x}</li>`).join("")
+          : "<li>Aucun élément spécifique détecté.</li>"
+        }
+      </ul>
+
+      <h3>Questions à vérifier</h3>
+
+      <ul>
+        <li>Quel est le salaire exact et la structure de rémunération ?</li>
+        <li>Quels sont les horaires ?</li>
+        <li>Quels avantages sont inclus ?</li>
+        <li>Quelle est la période d'essai ?</li>
+        <li>Quel est le lieu exact de travail ?</li>
+      </ul>
+
+    </div>
+  `;
+}
+
+
+function interviewForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>🎤 Préparation entretien</h1>
+      <p>Préparez les questions classiques et vos propres questions.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Poste</label>
+          <input id="interviewJob"
+                 placeholder="Ex : infirmier, vendeur...">
+        </div>
+
+        <div class="field">
+          <label>Expérience</label>
+          <input id="interviewExperience"
+                 placeholder="Ex : débutant, 2 ans...">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="generateInterview()">
+        Préparer
+      </button>
+
+    </div>
+
+    <div id="interviewResult"></div>
+  `;
+}
+
+
+function generateInterview(){
+
+  const job=
+    document.getElementById("interviewJob").value ||
+    "ce poste";
+
+  const experience=
+    document.getElementById("interviewExperience").value ||
+    "votre expérience";
+
+  const questions=[
+    "Présentez-vous.",
+    "Pourquoi souhaitez-vous rejoindre notre structure ?",
+    "Quelles sont vos principales qualités ?",
+    "Quel est votre principal axe d'amélioration ?",
+    "Parlez-nous d'une situation difficile que vous avez gérée.",
+    "Pourquoi devrions-nous vous choisir ?",
+    "Avez-vous des questions pour nous ?"
+  ];
+
+  document.getElementById("interviewResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Préparation — ${escapeHTML(job)}</h2>
+
+      <p>
+        Profil renseigné : ${escapeHTML(experience)}
+      </p>
+
+      <h3>Questions probables</h3>
+
+      <ul>
+        ${questions.map(q=>`<li>${q}</li>`).join("")}
+      </ul>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   STUDY
+========================================================= */
+
+function studyForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>📚 Planning de révision</h1>
+      <p>Organisez vos révisions selon le temps disponible.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Matière</label>
+          <input id="studySubject">
+        </div>
+
+        <div class="field">
+          <label>Nombre de jours</label>
+          <input type="number" id="studyDays" value="7">
+        </div>
+
+        <div class="field">
+          <label>Temps par jour (minutes)</label>
+          <input type="number" id="studyMinutes" value="60">
+        </div>
+
+        <div class="field">
+          <label>Niveau actuel</label>
+          <select id="studyLevel">
+            <option>Débutant</option>
+            <option>Moyen</option>
+            <option>Bon</option>
+          </select>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="generateStudy()">
+        Créer mon planning
+      </button>
+
+    </div>
+
+    <div id="studyResult"></div>
+  `;
+}
+
+
+function generateStudy(){
+
+  const subject=
+    document.getElementById("studySubject").value || "la matière";
+
+  const days=
+    Number(document.getElementById("studyDays").value)||7;
+
+  const minutes=
+    Number(document.getElementById("studyMinutes").value)||60;
+
+  const level=
+    document.getElementById("studyLevel").value;
+
+  const plan=[];
+
+  for(let i=1;i<=days;i++){
+
+    let task="Révision générale + questions";
+
+    if(i===1) task="Évaluation du niveau + repérage des notions difficiles";
+    else if(i<days*.4) task="Apprentissage des notions principales";
+    else if(i<days*.75) task="Exercices + mémorisation active";
+    else if(i<days) task="Révisions ciblées + entraînement";
+    else task="Révision légère + récupération";
+
+    plan.push(`
+      <li>
+        <strong>Jour ${i}</strong> — ${task}
+        (${minutes} min)
+      </li>
+    `);
+  }
+
+  document.getElementById("studyResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Planning — ${escapeHTML(subject)}</h2>
+
+      <p>Niveau : ${level}</p>
+
+      <ul>
+        ${plan.join("")}
+      </ul>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   EVENT
+========================================================= */
+
+function eventForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>🎉 Budget événement</h1>
+      <p>Estimez le budget d'un événement selon le nombre de personnes.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Nombre de personnes</label>
+          <input type="number" id="eventPeople" value="10">
+        </div>
+
+        <div class="field">
+          <label>Budget nourriture (€)</label>
+          <input type="number" id="eventFood">
+        </div>
+
+        <div class="field">
+          <label>Boissons (€)</label>
+          <input type="number" id="eventDrinks">
+        </div>
+
+        <div class="field">
+          <label>Décoration (€)</label>
+          <input type="number" id="eventDecor">
+        </div>
+
+        <div class="field">
+          <label>Autres (€)</label>
+          <input type="number" id="eventOther">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="calculateEvent()">
+        Calculer
+      </button>
+
+    </div>
+
+    <div id="eventResult"></div>
+  `;
+}
+
+
+function calculateEvent(){
+
+  const people=
+    Number(document.getElementById("eventPeople").value)||1;
+
+  const total=[
+    "eventFood",
+    "eventDrinks",
+    "eventDecor",
+    "eventOther"
+  ]
+  .map(id=>Number(document.getElementById(id).value)||0)
+  .reduce((a,b)=>a+b,0);
+
+  document.getElementById("eventResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Total : ${formatEuro(total)}</h2>
+
+      <p>
+        Soit environ
+        <strong>${formatEuro(total/people)}</strong>
+        par personne.
+      </p>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   GENERIC CHECKLIST
+========================================================= */
+
+function genericChecklistForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>✅ Générateur de checklist</h1>
+      <p>Décrivez votre projet et obtenez une première liste d'actions.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="field">
+
+        <label>Votre projet</label>
+
+        <textarea id="genericProject"
+          placeholder="Ex : organiser mon anniversaire, préparer un déménagement..."></textarea>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="generateGenericChecklist()">
+        Générer
+      </button>
+
+    </div>
+
+    <div id="genericResult"></div>
+  `;
+}
+
+
+function generateGenericChecklist(){
+
+  const project=
+    document.getElementById("genericProject").value ||
+    "mon projet";
+
+  const items=[
+    "Définir précisément l'objectif",
+    "Lister les contraintes",
+    "Définir un budget si nécessaire",
+    "Fixer une date ou une échéance",
+    "Lister les personnes concernées",
+    "Rassembler les documents ou informations utiles",
+    "Comparer les différentes options",
+    "Réaliser les premières actions",
+    "Vérifier ce qui reste à faire",
+    "Faire un dernier contrôle avant finalisation"
+  ];
+
+  document.getElementById("genericResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Checklist — ${escapeHTML(project)}</h2>
+
+      <ul>
+        ${items.map(x=>`
+          <li>
+            <label>
+              <input type="checkbox">
+              ${x}
+            </label>
+          </li>
+        `).join("")}
+      </ul>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   CAR ANALYSIS
+========================================================= */
+
+function carAnalysisForm(){
+
+  return `
+
+    <div class="tool-header">
+
+      <h1>🚗 Analyse d'annonce voiture</h1>
+
+      <p>
+        Analysez rapidement les informations disponibles
+        avant de contacter le vendeur.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Prix (€)</label>
+          <input type="number" id="carPrice">
+        </div>
+
+        <div class="field">
+          <label>Kilométrage</label>
+          <input type="number" id="carKm">
+        </div>
+
+        <div class="field">
+          <label>Année</label>
+          <input type="number" id="carYear">
+        </div>
+
+        <div class="field">
+          <label>Carburant</label>
+          <select id="carFuel">
+            <option>Essence</option>
+            <option>Diesel</option>
+            <option>Hybride</option>
+            <option>Électrique</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Boîte</label>
+          <select id="carGear">
+            <option>Manuelle</option>
+            <option>Automatique</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Description de l'annonce</label>
+          <textarea id="carDescription"
+            placeholder="Collez l'annonce ici..."></textarea>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="analyzeCar()">
+        Analyser
+      </button>
+
+    </div>
+
+    <div id="carResult"></div>
+  `;
+}
+
+
+function analyzeCar(){
+
+  const price=Number(document.getElementById("carPrice").value)||0;
+  const km=Number(document.getElementById("carKm").value)||0;
+  const year=Number(document.getElementById("carYear").value)||0;
+  const description=
+    document.getElementById("carDescription").value;
+
+  let score=75;
+
+  const positives=[];
+  const risks=[];
+  const questions=[];
+
+  if(km>180000){
+    score-=15;
+    risks.push("Kilométrage élevé");
+  }
+
+  if(km>250000){
+    score-=10;
+    risks.push("Kilométrage très élevé");
+  }
+
+  if(year && new Date().getFullYear()-year>12){
+    score-=10;
+    risks.push("Véhicule relativement ancien");
+  }
+
+  if(price>0 && price<5000){
+    risks.push("Prix particulièrement bas : vérifier l'état et l'historique");
+    score-=5;
+  }
+
+  if(description.length>150){
+    positives.push("Annonce relativement détaillée");
+    score+=5;
+  }else{
+    risks.push("Annonce peu détaillée");
+    questions.push("Demander l'historique complet du véhicule.");
+  }
+
+  questions.push(
+    "Demander les factures d'entretien",
+    "Vérifier le contrôle technique",
+    "Demander le nombre de propriétaires",
+    "Vérifier la distribution si concernée",
+    "Essayer le véhicule à froid et à chaud"
+  );
+
+  score=Math.max(0,Math.min(100,score));
+
+  let verdict="Intéressant à étudier";
+  let cls="good";
+
+  if(score<70){
+    verdict="À vérifier";
+    cls="medium";
+  }
+
+  if(score<45){
+    verdict="Attention";
+    cls="bad";
+  }
+
+  document.getElementById("carResult").innerHTML=`
+
+    <div class="result">
+
+      <div class="verdict ${cls}">
+        ${verdict}
+      </div>
+
+      <div class="score">${score}/100</div>
+
+      <p>
+        Prix : <strong>${formatEuro(price)}</strong>
+        ${km?` · ${km.toLocaleString("fr-FR")} km`:""}
+        ${year?` · ${year}`:""}
+      </p>
+
+      <div class="result-section">
+        <h3>✅ Points positifs</h3>
+        <ul>
+          ${
+            positives.length
+            ? positives.map(x=>`<li>${x}</li>`).join("")
+            : "<li>Aucun avantage particulier détecté.</li>"
+          }
+        </ul>
+      </div>
+
+      <div class="result-section">
+        <h3>⚠️ Risques / vigilance</h3>
+        <ul>
+          ${
+            risks.map(x=>`<li>${x}</li>`).join("")
+          }
+        </ul>
+      </div>
+
+      <div class="result-section">
+        <h3>🔧 Questions à poser</h3>
+        <ul>
+          ${questions.map(x=>`<li>${x}</li>`).join("")}
+        </ul>
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   CAR COST
+========================================================= */
+
+function carCostForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>⛽ Coût réel d'une voiture</h1>
+      <p>Ne regardez pas seulement le prix d'achat.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Prix d'achat (€)</label>
+          <input type="number" id="ccPurchase">
+        </div>
+
+        <div class="field">
+          <label>Durée de possession (années)</label>
+          <input type="number" id="ccYears" value="5">
+        </div>
+
+        <div class="field">
+          <label>Kilomètres / an</label>
+          <input type="number" id="ccKm" value="12000">
+        </div>
+
+        <div class="field">
+          <label>Carburant / énergie par an (€)</label>
+          <input type="number" id="ccFuel">
+        </div>
+
+        <div class="field">
+          <label>Assurance / an (€)</label>
+          <input type="number" id="ccInsurance">
+        </div>
+
+        <div class="field">
+          <label>Entretien / an (€)</label>
+          <input type="number" id="ccMaintenance">
+        </div>
+
+        <div class="field">
+          <label>Autres frais / an (€)</label>
+          <input type="number" id="ccOther">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="calculateCarCost()">
+        Calculer
+      </button>
+
+    </div>
+
+    <div id="carCostResult"></div>
+  `;
+}
+
+
+function calculateCarCost(){
+
+  const purchase=
+    Number(document.getElementById("ccPurchase").value)||0;
+
+  const years=
+    Number(document.getElementById("ccYears").value)||1;
+
+  const annual=[
+    "ccFuel",
+    "ccInsurance",
+    "ccMaintenance",
+    "ccOther"
+  ]
+  .map(id=>Number(document.getElementById(id).value)||0)
+  .reduce((a,b)=>a+b,0);
+
+  const total=purchase+(annual*years);
+  const monthly=total/(years*12);
+
+  document.getElementById("carCostResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Coût total estimé</h2>
+
+      <div class="score">
+        ${formatEuro(total)}
+      </div>
+
+      <p>
+        Environ
+        <strong>${formatEuro(monthly)}</strong>
+        par mois sur ${years} an(s).
+      </p>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   CAR COMPARE
+========================================================= */
+
+function carCompareForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>⚖️ Comparer deux voitures</h1>
+      <p>Comparez-les sur les informations que vous connaissez.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Voiture A</label>
+          <input id="carA">
+        </div>
+
+        <div class="field">
+          <label>Prix A (€)</label>
+          <input type="number" id="carAPrice">
+        </div>
+
+        <div class="field">
+          <label>Kilométrage A</label>
+          <input type="number" id="carAKm">
+        </div>
+
+        <div class="field">
+          <label>Voiture B</label>
+          <input id="carB">
+        </div>
+
+        <div class="field">
+          <label>Prix B (€)</label>
+          <input type="number" id="carBPrice">
+        </div>
+
+        <div class="field">
+          <label>Kilométrage B</label>
+          <input type="number" id="carBKm">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="compareCars()">
+        Comparer
+      </button>
+
+    </div>
+
+    <div id="carCompareResult"></div>
+  `;
+}
+
+
+function compareCars(){
+
+  const a=document.getElementById("carA").value||"Voiture A";
+  const b=document.getElementById("carB").value||"Voiture B";
+
+  const ap=Number(document.getElementById("carAPrice").value)||0;
+  const bp=Number(document.getElementById("carBPrice").value)||0;
+
+  const ak=Number(document.getElementById("carAKm").value)||0;
+  const bk=Number(document.getElementById("carBKm").value)||0;
+
+  let winner="";
+
+  if(ap && bp && ak && bk){
+
+    const scoreA=
+      (ap<bp?2:0)+(ak<bk?2:0);
+
+    const scoreB=
+      (bp<ap?2:0)+(bk<ak?2:0);
+
+    winner=scoreA>scoreB?a:
+           scoreB>scoreA?b:
+           "Égalité sur les critères renseignés";
+  }
+
+  document.getElementById("carCompareResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Comparaison</h2>
+
+      <ul>
+        <li>${escapeHTML(a)} : ${formatEuro(ap)}, ${ak.toLocaleString("fr-FR")} km</li>
+        <li>${escapeHTML(b)} : ${formatEuro(bp)}, ${bk.toLocaleString("fr-FR")} km</li>
+      </ul>
+
+      <h3>
+        ${
+          winner
+          ? `Sur les critères renseignés : ${escapeHTML(winner)}`
+          : "Renseignez davantage d'informations pour une comparaison."
+        }
+      </h3>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   CAR CHECKLIST
+========================================================= */
+
+function carChecklistForm(){
+
+  return `
+
+    <div class="tool-header">
+      <h1>🔧 Checklist visite voiture</h1>
+      <p>Ne repartez pas sans avoir vérifié les points essentiels.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Type de voiture</label>
+          <input id="carCheckType"
+                 placeholder="Ex : Clio diesel">
+        </div>
+
+        <div class="field">
+          <label>Kilométrage</label>
+          <input type="number" id="carCheckKm">
+        </div>
+
+      </div>
+
+      <br>
+
+      <button class="btn btn-primary"
+              onclick="generateCarChecklist()">
+        Générer
+      </button>
+
+    </div>
+
+    <div id="carChecklistResult"></div>
+  `;
+}
+
+
+function generateCarChecklist(){
+
+  const type=
+    document.getElementById("carCheckType").value ||
+    "véhicule";
+
+  const km=
+    Number(document.getElementById("carCheckKm").value)||0;
+
+  const items=[
+    "Vérifier l'identité du vendeur",
+    "Vérifier carte grise",
+    "Vérifier contrôle technique",
+    "Demander les factures d'entretien",
+    "Vérifier les niveaux",
+    "Inspecter les pneus",
+    "Inspecter la carrosserie",
+    "Vérifier les optiques",
+    "Tester toutes les portes et vitres",
+    "Tester climatisation / chauffage",
+    "Tester éclairage",
+    "Démarrer le moteur à froid si possible",
+    "Écouter les bruits anormaux",
+    "Faire un essai routier",
+    "Tester freinage",
+    "Tester embrayage / boîte",
+    "Vérifier les voyants au tableau de bord",
+    "Comparer le kilométrage avec les documents"
+  ];
+
+  if(km>150000){
+    items.push(
+      "Demander les interventions importantes déjà réalisées",
+      "Vérifier les pièces d'usure récentes"
+    );
+  }
+
+  document.getElementById("carChecklistResult").innerHTML=`
+
+    <div class="result">
+
+      <h2>Checklist — ${escapeHTML(type)}</h2>
+
+      <ul>
+        ${[...new Set(items)].map(x=>`
+          <li>
+            <label>
+              <input type="checkbox">
+              ${x}
+            </label>
+          </li>
+        `).join("")}
+      </ul>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+function createProject(){
+
+  const name=
+    document.getElementById("projectName").value.trim();
+
+  const type=
+    document.getElementById("projectType").value;
+
+  if(!name){
+    toast("Donnez un nom au projet.");
+    return;
+  }
+
+  projects.unshift({
+    id:Date.now(),
+    name,
+    type,
+    created:new Date().toLocaleDateString("fr-FR")
+  });
+
+  localStorage.setItem(
+    "boiteProjects",
+    JSON.stringify(projects)
+  );
+
+  document.getElementById("projectName").value="";
+
+  renderProjects();
+
+  toast("Projet créé 📁");
+}
+
+
+function saveGeneratedProject(name){
+
+  projects.unshift({
+    id:Date.now(),
+    name,
+    type:"Résultat",
+    created:new Date().toLocaleDateString("fr-FR")
+  });
+
+  localStorage.setItem(
+    "boiteProjects",
+    JSON.stringify(projects)
+  );
+
+  toast("Ajouté à Mon dossier 📁");
+}
+
+
+function renderProjects(){
+
+  const list=document.getElementById("projectList");
+
+  if(!projects.length){
+
+    list.innerHTML=`
+      <div class="card empty">
+        <h2>Aucun projet</h2>
+        <p>Créez votre premier projet ci-dessus.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  list.innerHTML=projects.map(p=>`
+
+    <div class="card" style="margin-bottom:12px">
+
+      <div class="project">
+
+        <div class="project-info">
+
+          <h3>${escapeHTML(p.name)}</h3>
+
+          <p>
+            ${escapeHTML(p.type)}
+            · créé le ${p.created}
+          </p>
+
+        </div>
+
+        <button
+          class="btn btn-danger"
+          onclick="deleteProject(${p.id})">
+
+          Supprimer
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+function deleteProject(id){
+
+  projects=projects.filter(p=>p.id!==id);
+
+  localStorage.setItem(
+    "boiteProjects",
+    JSON.stringify(projects)
+  );
+
+  renderProjects();
+
+  toast("Projet supprimé");
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function formatEuro(value){
+
+  return new Intl.NumberFormat(
+    "fr-FR",
+    {
+      style:"currency",
+      currency:"EUR"
+    }
+  ).format(value||0);
 
 }
 
 
 function escapeHTML(str){
 
-return String(str||"")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+  return String(str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* FAVORITES */
-
-function getFavorites(){
-
-return JSON.parse(localStorage.getItem("favorites")||"[]");
-
-}
-
-
-function toggleFavorite(id,button){
-
-let favorites=getFavorites();
-
-if(favorites.includes(id)){
-
-favorites=favorites.filter(x=>x!==id);
-
-button.classList.remove("active");
-button.textContent="☆";
-
-}else{
-
-favorites.push(id);
-
-button.classList.add("active");
-button.textContent="★";
-
-}
-
-localStorage.setItem("favorites",JSON.stringify(favorites));
-
-}
-
-
-function renderFavorites(){
-
-const box=document.getElementById("favoritesList");
-
-const favorites=getFavorites();
-
-if(!favorites.length){
-
-box.innerHTML=`
-<div class="card empty">
-<h3>Aucun favori pour le moment ⭐</h3>
-<p>Ajoutez vos outils préférés depuis les cartes.</p>
-</div>
-`;
-
-return;
-
-}
-
-box.innerHTML=favorites
-.filter(id=>tools[id])
-.map(id=>`
-
-<div class="card tool">
-
-<div class="toolIcon">${getToolIcon(id)}</div>
-
-<h3>${tools[id].title}</h3>
-
-<p>${tools[id].description}</p>
-
-<button class="primary" onclick="openTool('${id}')">Ouvrir</button>
-
-</div>
-
-`).join("");
-
-}
-
-
-function getToolIcon(id){
-
-const map={
-travelChecklist:"🧳",
-purchase:"🛒",
-document:"📄",
-compare:"⚖️",
-carAnalysis:"🚗",
-carCost:"💶",
-carChecklist:"📝",
-rent:"🏠",
-move:"📦",
-budget:"📊",
-discount:"🏷️",
-job:"💼",
-interview:"🎤",
-studyPlanner:"📚",
-travelBudget:"💶",
-eventBudget:"🎉",
-checklist:"☑️"
-};
-
-return map[id]||"🧰";
-
-}
-
-
-/* SEARCH */
-
-function globalSearch(value){
-
-const q=value.toLowerCase().trim();
-
-if(q.length<2) return;
-
-const routes={
-
-"voyage":"travel",
-"vacance":"travel",
-"valise":"travel",
-"checklist":"travel",
-"voiture":"cars",
-"auto":"cars",
-"loyer":"housing",
-"appartement":"housing",
-"déménagement":"housing",
-"budget":"money",
-"argent":"money",
-"réduction":"money",
-"travail":"work",
-"emploi":"work",
-"entretien":"work",
-"étude":"study",
-"révision":"study",
-"achat":"shopping",
-"acheter":"shopping",
-"document":"documents",
-"contrat":"documents",
-"courrier":"documents",
-"anniversaire":"events",
-"mariage":"events",
-"organisation":"organization"
-
-};
-
-for(const key in routes){
-
-if(q.includes(key)){
-
-showView(routes[key]);
-
-return;
-
-}
-
-}
-
-}
-
-
-function createProject(){
-
-const name=prompt("Nom du projet ?");
-
-if(!name) return;
-
-const projects=JSON.parse(localStorage.getItem("projects")||"[]");
-
-projects.push({
-id:Date.now(),
-name:name,
-created:new Date().toLocaleDateString("fr-FR")
-});
-
-localStorage.setItem("projects",JSON.stringify(projects));
-
-renderProjects();
-
-}
-
-
-function renderProjects(){
-
-const box=document.getElementById("projectsList");
-
-const projects=JSON.parse(localStorage.getItem("projects")||"[]");
-
-if(!projects.length){
-
-box.innerHTML=`
-<div class="card empty">
-<h3>Votre dossier est vide 🗂️</h3>
-<p>Créez votre premier projet pour commencer.</p>
-</div>
-`;
-
-return;
-
-}
-
-box.innerHTML=projects.map(p=>`
-
-<div class="card project">
-
-<div>
-<h3>📁 ${escapeHTML(p.name)}</h3>
-<div class="small">Créé le ${p.created}</div>
-</div>
-
-<button class="secondary" onclick="deleteProject(${p.id})">
-Supprimer
-</button>
-
-</div>
-
-`).join("");
-
-}
-
-
-function deleteProject(id){
-
-let projects=JSON.parse(localStorage.getItem("projects")||"[]");
-
-projects=projects.filter(p=>p.id!==id);
-
-localStorage.setItem("projects",JSON.stringify(projects));
-
-renderProjects();
-
-}
-
-
-/* TRAVEL */
-
-function generateTravelChecklist(){
-
-const destination=document.getElementById("travelDestination").value.trim();
-
-const type=document.getElementById("travelType").value;
-
-const start=document.getElementById("travelStart").value;
-
-const end=document.getElementById("travelEnd").value;
-
-const people=Number(document.getElementById("travelPeople").value||1);
-
-const transport=document.getElementById("travelTransport").value;
-
-const housing=document.getElementById("travelHousing").value;
-
-const activities=document.getElementById("travelActivities").value;
-
-const constraints=document.getElementById("travelConstraints").value;
-
-let days=0;
-
-if(start&&end){
-
-const a=new Date(start);
-const b=new Date(end);
-
-days=Math.max(1,Math.ceil((b-a)/86400000));
-
-}
-
-let list=[
-
-"Pièce d'identité / passeport",
-"Billets et réservations",
-"Moyen de paiement principal",
-"Carte bancaire de secours si possible",
-"Téléphone + chargeur",
-"Batterie externe",
-"Produits d'hygiène",
-"Médicaments habituels",
-"Vêtements adaptés à la durée du séjour",
-"Chaussures adaptées",
-"Documents importants sauvegardés"
-
-];
-
-if(days>=5){
-list.push(
-"Prévoir suffisamment de sous-vêtements",
-"Prévoir une solution pour laver du linge si nécessaire"
-);
-}
-
-if(transport==="Avion"){
-list.push(
-"Vérifier les dimensions et le poids des bagages",
-"Vérifier les documents nécessaires à l'embarquement",
-"Préparer les objets interdits en cabine"
-);
-}
-
-if(transport==="Voiture"){
-list.push(
-"Vérifier les niveaux du véhicule",
-"Vérifier la pression des pneus",
-"Prévoir les documents du véhicule",
-"Prévoir câble / chargeur voiture",
-"Prévoir une trousse de secours",
-"Prévoir de l'eau pour le trajet"
-);
-}
-
-if(housing==="Camping"){
-list.push(
-"Tente / hébergement",
-"Matelas ou couchage",
-"Lampe",
-"Serviette",
-"Matériel de cuisine adapté"
-);
-}
-
-if(type==="Plage"){
-list.push(
-"Maillot de bain",
-"Serviette de plage",
-"Crème solaire",
-"Lunettes de soleil",
-"Casquette / chapeau"
-);
-}
-
-if(type==="Montagne"){
-list.push(
-"Chaussures adaptées",
-"Vêtement chaud",
-"Vêtement imperméable",
-"Protection solaire",
-"Petit sac à dos"
-);
-}
-
-if(activities.toLowerCase().includes("randonnée")){
-list.push(
-"Chaussures de randonnée",
-"Eau",
-"Encas",
-"Petite trousse de secours"
-);
-}
-
-if(activities.toLowerCase().includes("sport")){
-list.push(
-"Tenue de sport",
-"Chaussures adaptées",
-"Équipement spécifique"
-);
-}
-
-if(constraints){
-
-list.push(
-"Prendre en compte : "+constraints
-);
-
-}
-
-let dateText=days?`${days} jour${days>1?"s":""}`:"durée non précisée";
-
-document.getElementById("travelResult").innerHTML=`
-
-<div class="result">
-
-<span class="pill">${escapeHTML(destination||"Destination non précisée")}</span>
-
-<h3>🧳 Votre préparation</h3>
-
-<p>
-<strong>${dateText}</strong> ·
-${people} voyageur${people>1?"s":""} ·
-${escapeHTML(transport)}
-</p>
-
-<ul>
-${list.map(x=>`<li>☐ ${escapeHTML(x)}</li>`).join("")}
-</ul>
-
-<p class="small">
-💡 Plus tard, cette logique pourra être connectée à une vraie IA
-pour prendre en compte automatiquement la météo, les règles locales,
-les activités et beaucoup plus de paramètres.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* PURCHASE */
-
-function analyzePurchase(){
-
-const product=document.getElementById("purchaseProduct").value;
-
-const price=Number(document.getElementById("purchasePrice").value||0);
-
-const condition=document.getElementById("purchaseCondition").value;
-
-const seller=document.getElementById("purchaseSeller").value;
-
-const warranty=document.getElementById("purchaseWarranty").value;
-
-let score=70;
-
-if(warranty==="Non") score-=12;
-if(seller==="Particulier") score-=5;
-if(condition==="État moyen") score-=15;
-if(condition==="Bon état") score-=5;
-if(price<=0) score-=10;
-
-score=Math.max(0,Math.min(100,score));
-
-let status=score>=75?"🟢 Potentiellement intéressant":score>=55?"🟠 À vérifier":"🔴 Prudence";
-
-let questions=[
-"Pourquoi le vendeur vend-il le produit ?",
-"Pouvez-vous obtenir une preuve d'achat ?",
-"Le produit présente-t-il des défauts non visibles sur l'annonce ?",
-"Une facture ou garantie est-elle disponible ?",
-"Pouvez-vous vérifier le produit avant paiement ?"
-];
-
-document.getElementById("purchaseResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${score}/100</div>
-
-<h3>${status}</h3>
-
-<p>
-Analyse de <strong>${escapeHTML(product||"cet achat")}</strong>
-${price?` à ${euro(price)}`:""}.
-</p>
-
-<ul>
-<li>État déclaré : ${escapeHTML(condition)}</li>
-<li>Vendeur : ${escapeHTML(seller)}</li>
-<li>Garantie : ${escapeHTML(warranty)}</li>
-</ul>
-
-<h3>❓ Questions à poser</h3>
-
-<ul>
-${questions.map(q=>`<li>${q}</li>`).join("")}
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-/* DOCUMENT */
-
-function analyzeDocument(){
-
-const text=document.getElementById("documentText").value.trim();
-
-if(!text){
-
-alert("Collez d'abord le texte du document.");
-
-return;
-
-}
-
-const sentences=text
-.split(/[.!?]\s+/)
-.filter(Boolean);
-
-const preview=sentences.slice(0,5);
-
-document.getElementById("documentResult").innerHTML=`
-
-<div class="result">
-
-<h3>🧠 Première lecture</h3>
-
-<p>
-Le document contient environ <strong>${text.split(/\s+/).length} mots</strong>.
-</p>
-
-<h3>📌 Informations détectées</h3>
-
-<ul>
-${preview.map(s=>`<li>${escapeHTML(s)}</li>`).join("")}
-</ul>
-
-<h3>⚠️ À vérifier</h3>
-
-<ul>
-<li>Les dates importantes</li>
-<li>Les montants</li>
-<li>Les obligations demandées</li>
-<li>Les conditions particulières</li>
-</ul>
-
-<p class="small">
-Cette version réalise une analyse locale basique.
-Une future version pourra utiliser une vraie IA pour résumer,
-extraire automatiquement les dates, montants, obligations et actions.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* COMPARE */
-
-function compareOptions(){
-
-const a=document.getElementById("optionA").value||"Option A";
-
-const b=document.getElementById("optionB").value||"Option B";
-
-const criteria=document.getElementById("compareCriteria").value;
-
-const infoA=document.getElementById("compareAInfo").value;
-
-const infoB=document.getElementById("compareBInfo").value;
-
-document.getElementById("compareResult").innerHTML=`
-
-<div class="result">
-
-<h3>⚖️ Comparaison</h3>
-
-<div class="formGrid">
-
-<div>
-<h3>${escapeHTML(a)}</h3>
-<p>${escapeHTML(infoA||"Informations non renseignées.")}</p>
-</div>
-
-<div>
-<h3>${escapeHTML(b)}</h3>
-<p>${escapeHTML(infoB||"Informations non renseignées.")}</p>
-</div>
-
-</div>
-
-<h3>🎯 Vos critères</h3>
-
-<p>${escapeHTML(criteria||"Aucun critère précisé.")}</p>
-
-<p class="small">
-💡 La vraie version intelligente pourra attribuer automatiquement
-un poids à chaque critère et produire une recommandation personnalisée.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* CAR */
-
-function analyzeCar(){
-
-const ad=document.getElementById("carAd").value;
-
-const price=Number(document.getElementById("carPrice").value||0);
-
-const km=Number(document.getElementById("carKm").value||0);
-
-const year=Number(document.getElementById("carYear").value||0);
-
-let score=70;
-
-const currentYear=new Date().getFullYear();
-
-if(km>200000) score-=20;
-else if(km>150000) score-=10;
-else if(km>100000) score-=5;
-
-if(year && currentYear-year>12) score-=15;
-
-if(price<=0) score-=5;
-
-score=Math.max(0,Math.min(100,score));
-
-const status=score>=75?"🟢 À étudier":score>=55?"🟠 À vérifier":"🔴 Prudence";
-
-document.getElementById("carResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${score}/100</div>
-
-<h3>${status}</h3>
-
-<ul>
-<li>Prix : ${price?euro(price):"non renseigné"}</li>
-<li>Kilométrage : ${km?km.toLocaleString("fr-FR")+" km":"non renseigné"}</li>
-<li>Année : ${year||"non renseignée"}</li>
-</ul>
-
-<h3>🔧 Points à contrôler</h3>
-
-<ul>
-<li>Historique d'entretien</li>
-<li>Contrôle technique</li>
-<li>Factures disponibles</li>
-<li>Pneus et freins</li>
-<li>Essai à froid</li>
-<li>Voyants au tableau de bord</li>
-<li>Correspondance carte grise / véhicule</li>
-</ul>
-
-<h3>❓ Questions vendeur</h3>
-
-<ul>
-<li>Pourquoi vendez-vous le véhicule ?</li>
-<li>Quel est le dernier entretien réalisé ?</li>
-<li>Y a-t-il des frais à prévoir prochainement ?</li>
-<li>Le véhicule a-t-il eu un accident ?</li>
-<li>Pouvez-vous fournir les factures ?</li>
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-function calculateCarCost(){
-
-const total=
-Number(document.getElementById("costFuel").value||0)+
-Number(document.getElementById("costInsurance").value||0)+
-Number(document.getElementById("costMaintenance").value||0)+
-Number(document.getElementById("costOther").value||0);
-
-document.getElementById("carCostResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${euro(total)}</div>
-
-<h3>Coût mensuel estimé</h3>
-
-<p>Soit environ <strong>${euro(total*12)}</strong> par an.</p>
-
-</div>
-
-`;
-
-}
-
-
-function generateCarChecklist(){
-
-const items=[
-"Vérifier l'identité du vendeur",
-"Demander la carte grise",
-"Demander le contrôle technique",
-"Demander les factures d'entretien",
-"Vérifier les niveaux",
-"Vérifier les pneus",
-"Vérifier les freins",
-"Inspecter la carrosserie",
-"Vérifier les optiques",
-"Tester climatisation et équipements",
-"Vérifier les voyants",
-"Faire un essai routier",
-"Écouter les bruits anormaux",
-"Vérifier l'embrayage / boîte",
-"Vérifier les documents",
-"Ne pas payer avant d'avoir vérifié l'ensemble"
-];
-
-document.getElementById("carChecklistResult").innerHTML=`
-
-<div class="result">
-
-<h3>☑️ Checklist</h3>
-
-<ul>
-${items.map(x=>`<li>☐ ${x}</li>`).join("")}
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-/* HOUSING */
-
-function analyzeRent(){
-
-const income=Number(document.getElementById("rentIncome").value||0);
-
-const rent=Number(document.getElementById("rentValue").value||0);
-
-const charges=Number(document.getElementById("rentCharges").value||0);
-
-const total=rent+charges;
-
-const ratio=income?total/income*100:0;
-
-let status=ratio<=30?"🟢 Raisonnable":ratio<=40?"🟠 À surveiller":"🔴 Élevé";
-
-document.getElementById("rentResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${ratio.toFixed(1)}%</div>
-
-<h3>${status}</h3>
-
-<p>
-Logement : <strong>${euro(total)}</strong> / mois.
-</p>
-
-<p>
-Après logement, il vous reste environ
-<strong>${euro(income-total)}</strong>.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-function calculateMove(){
-
-const total=
-Number(document.getElementById("moveTransport").value||0)+
-Number(document.getElementById("moveBoxes").value||0)+
-Number(document.getElementById("moveDeposit").value||0)+
-Number(document.getElementById("moveOther").value||0);
-
-document.getElementById("moveResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${euro(total)}</div>
-
-<h3>Budget estimé</h3>
-
-<ul>
-<li>Transport : ${euro(Number(document.getElementById("moveTransport").value||0))}</li>
-<li>Matériel : ${euro(Number(document.getElementById("moveBoxes").value||0))}</li>
-<li>Dépôt / frais : ${euro(Number(document.getElementById("moveDeposit").value||0))}</li>
-<li>Autres : ${euro(Number(document.getElementById("moveOther").value||0))}</li>
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-/* MONEY */
-
-function analyzeBudget(){
-
-const income=Number(document.getElementById("budgetIncome").value||0);
-
-const expenses=
-Number(document.getElementById("budgetHousing").value||0)+
-Number(document.getElementById("budgetFood").value||0)+
-Number(document.getElementById("budgetTransport").value||0)+
-Number(document.getElementById("budgetLeisure").value||0)+
-Number(document.getElementById("budgetOther").value||0);
-
-const remaining=income-expenses;
-
-document.getElementById("budgetResult").innerHTML=`
-
-<div class="result">
-
-<div class="score ${remaining>=0?"good":"bad"}">${euro(remaining)}</div>
-
-<h3>${remaining>=0?"🟢 Budget positif":"🔴 Budget déficitaire"}</h3>
-
-<p>
-Dépenses totales : <strong>${euro(expenses)}</strong>
-</p>
-
-<p>
-Taux de dépenses :
-<strong>${income?(expenses/income*100).toFixed(1):0}%</strong>
-</p>
-
-</div>
-
-`;
-
-}
-
-
-function calculateDiscount(){
-
-const price=Number(document.getElementById("discountPrice").value||0);
-
-const percent=Number(document.getElementById("discountPercent").value||0);
-
-const saving=price*percent/100;
-
-const final=price-saving;
-
-document.getElementById("discountResult").innerHTML=`
-
-<div class="result">
-
-<h3>Prix final</h3>
-
-<div class="score">${euro(final)}</div>
-
-<p>Vous économisez <strong>${euro(saving)}</strong>.</p>
-
-</div>
-
-`;
-
-}
-
-
-/* WORK */
-
-function analyzeJob(){
-
-const text=document.getElementById("jobText").value.trim();
-
-if(!text){
-
-alert("Collez une offre d'emploi.");
-
-return;
-
-}
-
-const words=text.split(/\s+/).length;
-
-document.getElementById("jobResult").innerHTML=`
-
-<div class="result">
-
-<h3>📋 Première analyse</h3>
-
-<p>L'offre contient environ <strong>${words} mots</strong>.</p>
-
-<h3>À rechercher</h3>
-
-<ul>
-<li>Intitulé exact du poste</li>
-<li>Type de contrat</li>
-<li>Horaires</li>
-<li>Rémunération</li>
-<li>Lieu</li>
-<li>Compétences demandées</li>
-<li>Expérience requise</li>
-<li>Avantages</li>
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-function prepareInterview(){
-
-const job=document.getElementById("interviewJob").value||"ce poste";
-
-document.getElementById("interviewResult").innerHTML=`
-
-<div class="result">
-
-<h3>🎤 Préparation pour ${escapeHTML(job)}</h3>
-
-<h3>Questions probables</h3>
-
-<ul>
-<li>Présentez-vous.</li>
-<li>Pourquoi souhaitez-vous ce poste ?</li>
-<li>Pourquoi notre structure ?</li>
-<li>Quels sont vos points forts ?</li>
-<li>Quel est votre principal axe d'amélioration ?</li>
-<li>Parlez-nous d'une situation difficile que vous avez gérée.</li>
-<li>Pourquoi devrions-nous vous choisir ?</li>
-</ul>
-
-<h3>💡 À préparer</h3>
-
-<ul>
-<li>Votre présentation en 60 secondes</li>
-<li>2 ou 3 exemples concrets</li>
-<li>Vos disponibilités</li>
-<li>Vos questions à poser au recruteur</li>
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-/* STUDY */
-
-function createStudyPlan(){
-
-const subject=document.getElementById("studySubject").value||"votre matière";
-
-const exam=document.getElementById("studyExam").value;
-
-const hours=Number(document.getElementById("studyHours").value||2);
-
-const days=Number(document.getElementById("studyDays").value||5);
-
-const topics=document.getElementById("studyTopics").value;
-
-let remaining="";
-
-if(exam){
-
-const diff=Math.ceil(
-(new Date(exam)-new Date())/86400000
-);
-
-remaining=`Il vous reste environ <strong>${Math.max(0,diff)} jours</strong>.`;
-
-}
-
-document.getElementById("studyResult").innerHTML=`
-
-<div class="result">
-
-<h3>📚 Plan pour ${escapeHTML(subject)}</h3>
-
-<p>${remaining}</p>
-
-<ul>
-<li>Temps disponible : ${hours} h/jour</li>
-<li>Jours de travail : ${days} jours/semaine</li>
-<li>Thèmes : ${escapeHTML(topics||"à définir")}</li>
-</ul>
-
-<h3>Organisation conseillée</h3>
-
-<ul>
-<li>🧠 50% compréhension du cours</li>
-<li>✍️ 30% exercices / entraînement</li>
-<li>🔁 20% rappels et réactivation</li>
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-/* TRAVEL BUDGET */
-
-function calculateTravelBudget(){
-
-const total=
-Number(document.getElementById("tbTransport").value||0)+
-Number(document.getElementById("tbHousing").value||0)+
-Number(document.getElementById("tbFood").value||0)+
-Number(document.getElementById("tbActivities").value||0)+
-Number(document.getElementById("tbShopping").value||0)+
-Number(document.getElementById("tbUnexpected").value||0);
-
-document.getElementById("tbResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${euro(total)}</div>
-
-<h3>Budget total estimé</h3>
-
-<p>
-Pensez à conserver une marge pour les imprévus.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* EVENTS */
-
-function calculateEventBudget(){
-
-const people=Number(document.getElementById("eventPeople").value||0);
-
-const total=
-people*Number(document.getElementById("eventFood").value||0)+
-Number(document.getElementById("eventDrinks").value||0)+
-Number(document.getElementById("eventDecoration").value||0)+
-Number(document.getElementById("eventPlace").value||0)+
-Number(document.getElementById("eventOther").value||0);
-
-document.getElementById("eventResult").innerHTML=`
-
-<div class="result">
-
-<div class="score">${euro(total)}</div>
-
-<h3>Budget total</h3>
-
-<p>
-Soit environ <strong>${euro(people?total/people:0)}</strong> par personne.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* CHECKLIST */
-
-function generateChecklist(){
-
-const situation=document.getElementById("checklistSituation").value.trim();
-
-if(!situation){
-
-alert("Décrivez votre situation.");
-
-return;
-
-}
-
-const lower=situation.toLowerCase();
-
-let items=[
-"Définir clairement l'objectif",
-"Faire la liste des contraintes",
-"Définir un budget si nécessaire",
-"Rassembler les documents utiles",
-"Identifier les échéances",
-"Faire les démarches importantes",
-"Vérifier les éléments avant de finaliser"
-];
-
-if(lower.includes("déménag")){
-
-items.push(
-"Prévenir les organismes concernés",
-"Organiser les cartons",
-"Prévoir le transport",
-"Relever les compteurs",
-"Mettre à jour les adresses"
-);
-
-}
-
-if(lower.includes("mariage")){
-
-items.push(
-"Invités",
-"Tenues",
-"Prestataires",
-"Repas",
-"Transport",
-"Décoration",
-"Planning du jour J"
-);
-
-}
-
-if(lower.includes("vacance")||lower.includes("voyage")){
-
-items.push(
-"Réserver transport",
-"Réserver hébergement",
-"Vérifier les documents",
-"Préparer les bagages",
-"Prévoir le budget"
-);
-
-}
-
-document.getElementById("checklistResult").innerHTML=`
-
-<div class="result">
-
-<h3>☑️ Votre checklist</h3>
-
-<ul>
-${items.map(x=>`<li>☐ ${escapeHTML(x)}</li>`).join("")}
-</ul>
-
-</div>
-
-`;
-
-}
-
-
-function generateGenericChecklist(){
-
-const text=document.getElementById("organizationText").value.trim();
-
-if(!text){
-
-alert("Décrivez votre projet.");
-
-return;
-
-}
-
-const result=document.getElementById("organizationResult");
-
-result.innerHTML=`
-
-<div class="result">
-
-<h3>🧠 Première organisation</h3>
-
-<p>
-Votre projet :
-<strong>${escapeHTML(text)}</strong>
-</p>
-
-<ul>
-<li>☐ Définir précisément l'objectif</li>
-<li>☐ Définir le budget</li>
-<li>☐ Identifier les contraintes</li>
-<li>☐ Lister les documents nécessaires</li>
-<li>☐ Déterminer les échéances</li>
-<li>☐ Comparer les options</li>
-<li>☐ Réaliser les démarches</li>
-<li>☐ Vérifier avant de finaliser</li>
-</ul>
-
-<p class="small">
-La prochaine évolution permettra de générer automatiquement
-des étapes adaptées à votre situation avec une vraie IA.
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* INIT */
-
-showHome();
+/* =========================================================
+   INIT
+========================================================= */
+
+renderCategories();
+renderPopular();
 
 </script>
 
