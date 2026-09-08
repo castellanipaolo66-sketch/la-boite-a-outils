@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>La Boîte à Outils</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f6f7f9;
+  color: #111827;
+}
+
+header {
+  padding: 22px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.badge {
+  font-size: 12px;
+  color: #6b7280;
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 7px 10px;
+  border-radius: 20px;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 35px 6% 80px;
+}
+
+.hero {
+  text-align: center;
+  padding: 30px 0 45px;
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1;
+  letter-spacing: -3px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.search {
+  max-width: 700px;
+  margin: 30px auto;
+  display: flex;
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 7px;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.06);
+}
+
+.search input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 14px;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.search button,
+.primary {
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 11px;
+  padding: 13px 18px;
+  font-weight: 700;
+}
+
+h2 {
+  margin-top: 35px;
+}
+
+.grid,
+.tools {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.category {
+  cursor: pointer;
+}
+
+.category span,
+.tool-icon {
+  font-size: 27px;
+}
+
+.category b {
+  display: block;
+  margin-top: 10px;
+}
+
+.tool {
+  cursor: pointer;
+}
+
+.tool h3 {
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+
+.tool p {
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.panel {
+  display: none;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 25px;
+}
+
+.panel.active {
+  display: block;
+}
+
+.back {
+  border: none;
+  background: #eef0f3;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.field {
+  margin: 17px 0;
+}
+
+.field label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  font: inherit;
+}
+
+.result {
+  display: none;
+  margin-top: 20px;
+  padding: 18px;
+  background: #f8fafc;
+  border-radius: 13px;
+  line-height: 1.6;
+}
+
+.result.show {
+  display: block;
+}
+
+@media(max-width:800px) {
+  .grid,
+  .tools {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:500px) {
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+
+  .badge {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🧰 La Boîte à Outils</div>
+  <div class="badge">Prototype V0.2</div>
+</header>
+
+<main>
+
+<section id="home">
+
+  <div class="hero">
+
+    <h1>
+      Un problème du quotidien ?
+      <br>
+      Trouvez l’outil.
+    </h1>
+
+    <p>
+      Des outils simples pour comprendre, comparer,
+      calculer et organiser.
+    </p>
+
+    <div class="search">
+
+      <input
+        id="search"
+        placeholder="Ex. voiture, déménagement, achat..."
+      >
+
+      <button onclick="searchTool()">
+        Chercher
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <h2>Explorer par besoin</h2>
+
+  <div class="grid">
+
+    <div class="card category" onclick="openCars()">
+      <span>🚗</span>
+      <b>Ma voiture</b>
+    </div>
+
+    <div class="card category">
+      <span>🏠</span>
+      <b>Mon logement</b>
+    </div>
+
+    <div class="card category">
+      <span>💰</span>
+      <b>Mon argent</b>
+    </div>
+
+    <div class="card category">
+      <span>💼</span>
+      <b>Mon travail</b>
+    </div>
+
+    <div class="card category">
+      <span>📚</span>
+      <b>Mes études</b>
+    </div>
+
+    <div class="card category">
+      <span>✈️</span>
+      <b>Mes voyages</b>
+    </div>
+
+    <div class="card category">
+      <span>🛒</span>
+      <b>Mes achats</b>
+    </div>
+
+    <div class="card category">
+      <span>📄</span>
+      <b>Mes documents</b>
+    </div>
+
+    <div class="card category">
+      <span>🎉</span>
+      <b>Mes événements</b>
+    </div>
+
+    <div class="card category">
+      <span>🧠</span>
+      <b>Mon organisation</b>
+    </div>
+
+  </div>
+
+
+  <h2>Outils populaires</h2>
+
+  <div class="tools">
+
+    <div class="card tool">
+      <div class="tool-icon">📄</div>
+      <h3>Comprendre un document</h3>
+      <p>
+        Comprendre rapidement un document important.
+      </p>
+    </div>
+
+    <div class="card tool">
+      <div class="tool-icon">🛒</div>
+      <h3>Analyser un achat</h3>
+      <p>
+        Identifier les points forts et les risques.
+      </p>
+    </div>
+
+    <div class="card tool">
+      <div class="tool-icon">✅</div>
+      <h3>Créer une checklist</h3>
+      <p>
+        Transformer un projet en liste d'actions.
+      </p>
+    </div>
+
+    <div class="card tool">
+      <div class="tool-icon">💰</div>
+      <h3>Calculer le coût réel</h3>
+      <p>
+        Estimer le coût réel d'un projet.
+      </p>
+    </div>
+
+    <div class="card tool">
+      <div class="tool-icon">⚖️</div>
+      <h3>Comparer deux options</h3>
+      <p>
+        Comparer deux choix simplement.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CATEGORIE VOITURE -->
+
+<section id="cars" class="panel">
+
+  <button class="back" onclick="backHome()">
+    ← Retour
+  </button>
+
+  <h2>🚗 Ma voiture</h2>
+
+  <p>
+    Des outils pour acheter, comparer et mieux gérer
+    sa voiture.
+  </p>
+
+  <div class="tools">
+
+    <div class="card tool" onclick="openCarAnalyzer()">
+
+      <div class="tool-icon">🔎</div>
+
+      <h3>Analyser une annonce</h3>
+
+      <p>
+        Analyse une annonce avant de contacter le vendeur.
+      </p>
+
+    </div>
+
+
+    <div class="card tool">
+
+      <div class="tool-icon">💰</div>
+
+      <h3>Coût réel</h3>
+
+      <p>
+        Combien cette voiture va vraiment me coûter ?
+      </p>
+
+    </div>
+
+
+    <div class="card tool">
+
+      <div class="tool-icon">⚖️</div>
+
+      <h3>Comparer deux voitures</h3>
+
+      <p>
+        Mets deux véhicules face à face.
+      </p>
+
+    </div>
+
+
+    <div class="card tool">
+
+      <div class="tool-icon">🛠️</div>
+
+      <h3>Checklist avant achat</h3>
+
+      <p>
+        Les vérifications à faire avant la visite.
+      </p>
+
+    </div>
+
+
+    <div class="card tool">
+
+      <div class="tool-icon">📅</div>
+
+      <h3>Entretien</h3>
+
+      <p>
+        Les entretiens à prévoir.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ANALYSE ANNONCE -->
+
+<section id="carAnalyzer" class="panel">
+
+  <button class="back" onclick="openCars()">
+    ← Retour
+  </button>
+
+  <h2>🔎 Analyser une annonce</h2>
+
+  <p>
+    Donne-nous les informations disponibles sur la voiture.
+  </p>
+
+
+  <div class="field">
+
+    <label>Marque / modèle</label>
+
+    <input
+      id="carModel"
+      placeholder="Ex. Renault Clio V"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Année</label>
+
+    <input
+      id="carYear"
+      type="number"
+      placeholder="2023"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Kilométrage</label>
+
+    <input
+      id="carKm"
+      type="number"
+      placeholder="52000"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Prix demandé (€)</label>
+
+    <input
+      id="carPrice"
+      type="number"
+      placeholder="12900"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label>Description de l'annonce</label>
+
+    <textarea
+      id="carDescription"
+      rows="8"
+      placeholder="Colle ici le texte de l'annonce Leboncoin, La Centrale, AutoScout24..."
+    ></textarea>
+
+  </div>
+
+
+  <button class="primary" onclick="analyzeCar()">
+    🔍 Analyser l'annonce
+  </button>
+
+
+  <div id="carResult" class="result"></div>
+
+</section>
+
+</main>
+
+
+<script>
+
+function openCars() {
+
+  document.getElementById("home").style.display = "none";
+
+  document.getElementById("carAnalyzer")
+    .classList.remove("active");
+
+  document.getElementById("cars")
+    .classList.add("active");
+
+  window.scrollTo(0,0);
+}
+
+
+function backHome() {
+
+  document.getElementById("cars")
+    .classList.remove("active");
+
+  document.getElementById("home")
+    .style.display = "block";
+
+  window.scrollTo(0,0);
+}
+
+
+function openCarAnalyzer() {
+
+  document.getElementById("cars")
+    .classList.remove("active");
+
+  document.getElementById("carAnalyzer")
+    .classList.add("active");
+
+  window.scrollTo(0,0);
+}
+
+
+function analyzeCar() {
+
+  const model =
+    document.getElementById("carModel").value;
+
+  const year =
+    Number(document.getElementById("carYear").value);
+
+  const km =
+    Number(document.getElementById("carKm").value);
+
+  const price =
+    Number(document.getElementById("carPrice").value);
+
+  const description =
+    document.getElementById("carDescription").value;
+
+
+  let positives = [];
+  let warnings = [];
+
+
+  if (model) {
+    positives.push("Modèle renseigné");
+  }
+
+  if (year) {
+    positives.push("Année renseignée");
+  }
+
+  if (km) {
+    positives.push("Kilométrage renseigné");
+  }
+
+  if (price) {
+    positives.push("Prix renseigné");
+  }
+
+
+  if (!description) {
+    warnings.push(
+      "La description de l'annonce est vide."
+    );
+  }
+
+
+  if (!price) {
+    warnings.push(
+      "Le prix n'est pas renseigné."
+    );
+  }
+
+
+  if (!km) {
+    warnings.push(
+      "Le kilométrage n'est pas renseigné."
+    );
+  }
+
+
+  let result = `
+    <h3>🔎 Première analyse</h3>
+
+    <p>
+      <b>Véhicule :</b>
+      ${model || "Non renseigné"}
+    </p>
+
+    <p>
+      <b>Prix :</b>
+      ${price ? price.toLocaleString("fr-FR") + " €" : "Non renseigné"}
+    </p>
+
+    <h4>🟢 Informations disponibles</h4>
+
+    ${
+      positives.length
+      ? positives.map(x => "• " + x).join("<br>")
+      : "Aucune information suffisante."
+    }
+
+    <h4>🟠 Points à vérifier</h4>
+
+    ${
+      warnings.length
+      ? warnings.map(x => "• " + x).join("<br>")
+      : "• Historique d'entretien<br>• Factures<br>• Contrôle technique<br>• État des pneus et freins"
+    }
+
+    <h4>📋 Checklist avant achat</h4>
+
+    ☐ Historique d'entretien<br>
+    ☐ Factures et justificatifs<br>
+    ☐ Contrôle technique<br>
+    ☐ Nombre de propriétaires<br>
+    ☐ État des pneus<br>
+    ☐ État des freins<br>
+    ☐ Essai routier<br>
+    ☐ Vérification des voyants
+
+    <p style="color:#6b7280">
+      ⚠️ Prototype : cette analyse est une démonstration.
+      La prochaine version utilisera une véritable IA.
+    </p>
+  `;
+
+
+  const box =
+    document.getElementById("carResult");
+
+  box.innerHTML = result;
+
+  box.classList.add("show");
+}
+
+
+function searchTool() {
+
+  const search =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+
+  if (
+    search.includes("voiture") ||
+    search.includes("auto") ||
+    search.includes("clio") ||
+    search.includes("véhicule")
+  ) {
+
+    openCars();
+
+  } else {
+
+    alert(
+      "Cette catégorie sera bientôt disponible 🚀"
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
