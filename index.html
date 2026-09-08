@@ -2,39 +2,37 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d4f52">
-<meta name="description" content="La Boîte à Outils du Quotidien — des outils simples pour résoudre les problèmes du quotidien.">
-<title>La Boîte à Outils — V6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f6f3eb">
+<title>La Boîte à Outils — V6.1</title>
 
 <style>
 :root{
-  --petrol:#0d4f52;
-  --petrol-dark:#08383b;
-  --petrol-soft:#dcebea;
-  --cream:#f7f3ea;
-  --cream-2:#fffdf8;
-  --ink:#173335;
-  --muted:#6b7d7e;
-  --white:#ffffff;
-  --border:rgba(13,79,82,.12);
-  --shadow:0 18px 50px rgba(14,55,57,.10);
-  --shadow-soft:0 8px 25px rgba(14,55,57,.07);
+  --bg:#f6f3eb;
+  --surface:#ffffff;
+  --surface-soft:#eef3f1;
+  --text:#173b3d;
+  --muted:#708486;
+  --primary:#0d5b5d;
+  --primary-dark:#09484a;
+  --cream:#f1ecdf;
+  --border:#dfe8e5;
+  --shadow:0 16px 40px rgba(17,55,57,.08);
   --radius:24px;
   --radius-sm:16px;
-  --transition:.25s ease;
 }
 
 [data-theme="dark"]{
-  --cream:#0b1819;
-  --cream-2:#102123;
-  --ink:#edf7f5;
-  --muted:#9fb2b1;
-  --white:#132729;
-  --petrol-soft:#173b3d;
-  --border:rgba(220,235,234,.10);
-  --shadow:0 18px 50px rgba(0,0,0,.28);
-  --shadow-soft:0 8px 25px rgba(0,0,0,.22);
+  --bg:#101c1d;
+  --surface:#172829;
+  --surface-soft:#203738;
+  --text:#f3f5ef;
+  --muted:#a9bdbc;
+  --primary:#63b8b5;
+  --primary-dark:#4fa5a2;
+  --cream:#263838;
+  --border:#304748;
+  --shadow:0 16px 40px rgba(0,0,0,.25);
 }
 
 *{
@@ -48,20 +46,17 @@ html{
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
-  background:
-    radial-gradient(circle at 5% 0%,rgba(13,79,82,.10),transparent 28%),
-    radial-gradient(circle at 95% 10%,rgba(13,79,82,.07),transparent 25%),
-    var(--cream);
-  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
   min-height:100vh;
-  transition:background .3s ease,color .3s ease;
+  transition:.25s ease;
 }
 
 button,
 input,
-select,
-textarea{
+textarea,
+select{
   font:inherit;
 }
 
@@ -82,344 +77,295 @@ a{
   position:sticky;
   top:0;
   z-index:100;
-  padding:14px 18px;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  background:rgba(247,243,234,.82);
+  height:76px;
+  background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(18px);
   border-bottom:1px solid var(--border);
 }
 
-[data-theme="dark"] .header{
-  background:rgba(11,24,25,.82);
-}
-
 .header-inner{
-  max-width:1180px;
+  max-width:1300px;
+  height:100%;
   margin:auto;
+  padding:0 28px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:14px;
+  gap:25px;
 }
 
-.logo{
+.brand{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
   font-weight:900;
-  letter-spacing:-.6px;
-  font-size:17px;
+  font-size:18px;
+  white-space:nowrap;
 }
 
-.logo-mark{
-  width:40px;
-  height:40px;
-  border-radius:13px;
+.brand-icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  background:var(--primary);
   display:grid;
   place-items:center;
-  background:var(--petrol);
-  color:white;
-  box-shadow:0 8px 20px rgba(13,79,82,.22);
-  font-size:19px;
+  font-size:21px;
+  box-shadow:0 8px 20px rgba(13,91,93,.18);
 }
 
 .nav{
-  display:none;
-  gap:5px;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
-.nav button{
+.nav button,
+.header-action{
   border:0;
   background:transparent;
   color:var(--muted);
-  padding:10px 13px;
+  padding:11px 15px;
   border-radius:12px;
-  font-weight:700;
+  font-weight:800;
 }
 
-.nav button:hover{
-  background:var(--petrol-soft);
-  color:var(--petrol);
+.nav button:hover,
+.header-action:hover{
+  background:var(--surface-soft);
+  color:var(--text);
 }
 
 .header-actions{
   display:flex;
+  align-items:center;
   gap:8px;
 }
 
-.icon-btn{
-  width:42px;
-  height:42px;
-  border-radius:13px;
+.header-action{
+  width:44px;
+  height:44px;
+  padding:0;
+  background:var(--surface);
   border:1px solid var(--border);
-  background:var(--white);
-  color:var(--ink);
-  display:grid;
-  place-items:center;
-  box-shadow:var(--shadow-soft);
-  transition:transform var(--transition),background var(--transition);
-}
-
-.icon-btn:hover{
-  transform:translateY(-2px);
+  font-size:20px;
 }
 
 /* =========================
-   LAYOUT
+   APP
 ========================= */
 
 .app{
-  max-width:1180px;
+  max-width:1300px;
   margin:auto;
-  padding:22px 16px 100px;
+  padding:0 28px 70px;
 }
 
 .view{
   display:none;
-  animation:fadeUp .35s ease;
 }
 
 .view.active{
   display:block;
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
 /* =========================
-   HERO
+   HOME
 ========================= */
 
 .hero{
+  max-width:1120px;
+  margin:58px auto 0;
+  padding:65px 70px 72px;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(255,255,255,.12),transparent 25%),
+    radial-gradient(circle at 5% 100%,rgba(255,255,255,.08),transparent 22%),
+    var(--primary);
+  color:white;
   position:relative;
   overflow:hidden;
-  border-radius:32px;
-  padding:36px 22px 30px;
-  background:
-    linear-gradient(135deg,#0d4f52 0%,#17696a 58%,#2b7774 100%);
-  color:white;
-  box-shadow:0 24px 70px rgba(13,79,82,.24);
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-  right:-100px;
-  top:-120px;
 }
 
 .hero::after{
   content:"";
   position:absolute;
-  width:170px;
-  height:170px;
+  width:250px;
+  height:250px;
   border-radius:50%;
-  background:rgba(255,255,255,.06);
-  left:-80px;
-  bottom:-100px;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  max-width:780px;
+  border:1px solid rgba(255,255,255,.1);
+  right:-80px;
+  top:-100px;
 }
 
 .eyebrow{
   display:inline-flex;
-  align-items:center;
-  gap:7px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.16);
-  padding:7px 11px;
+  padding:8px 13px;
   border-radius:999px;
-  font-size:12px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  font-size:13px;
   font-weight:800;
-  margin-bottom:16px;
+  margin-bottom:24px;
 }
 
 .hero h1{
-  font-size:clamp(34px,7vw,66px);
+  max-width:850px;
+  font-size:clamp(44px,6vw,76px);
   line-height:.98;
-  letter-spacing:-3px;
-  max-width:760px;
-  margin-bottom:17px;
-}
-
-.hero h1 span{
-  color:#dcebea;
+  letter-spacing:-4px;
+  margin-bottom:22px;
 }
 
 .hero p{
+  max-width:720px;
   color:rgba(255,255,255,.78);
-  max-width:650px;
-  line-height:1.6;
-  font-size:15px;
+  font-size:18px;
+  line-height:1.55;
+  margin-bottom:34px;
 }
 
-.search-wrap{
-  margin-top:25px;
-  display:flex;
-  gap:10px;
-  padding:8px;
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.16);
+.search-box{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.22);
   border-radius:18px;
-  backdrop-filter:blur(10px);
+  padding:7px;
+  display:flex;
+  max-width:820px;
 }
 
-.search-wrap input{
+.search-box input{
   flex:1;
   min-width:0;
   border:0;
   outline:0;
   background:transparent;
   color:white;
-  padding:12px 12px;
+  padding:17px;
+  font-size:16px;
 }
 
-.search-wrap input::placeholder{
-  color:rgba(255,255,255,.65);
+.search-box input::placeholder{
+  color:rgba(255,255,255,.62);
 }
 
-.search-btn{
+.primary-btn{
   border:0;
   border-radius:13px;
-  padding:0 17px;
-  background:#fff;
-  color:var(--petrol);
+  padding:0 25px;
+  min-height:52px;
+  background:white;
+  color:var(--primary-dark);
   font-weight:900;
+  transition:.2s ease;
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
 }
 
 /* =========================
-   SECTION
+   SECTIONS
 ========================= */
 
 .section{
-  margin-top:38px;
+  margin-top:70px;
 }
 
 .section-head{
   display:flex;
-  align-items:end;
   justify-content:space-between;
-  gap:15px;
-  margin-bottom:16px;
+  align-items:end;
+  gap:20px;
+  margin-bottom:22px;
 }
 
-.section-head h2{
-  font-size:25px;
-  letter-spacing:-1px;
+.section-title{
+  font-size:30px;
+  letter-spacing:-1.2px;
+  font-weight:950;
 }
 
-.section-head p{
+.section-subtitle{
   color:var(--muted);
-  font-size:13px;
-  margin-top:4px;
+  margin-top:6px;
+  font-size:15px;
 }
 
-.section-link{
+.text-button{
   border:0;
   background:transparent;
-  color:var(--petrol);
-  font-weight:800;
-  white-space:nowrap;
+  color:var(--primary);
+  font-weight:900;
 }
 
 /* =========================
    CATEGORIES
 ========================= */
 
-.category-grid{
+.categories{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
 }
 
-.category-card{
-  position:relative;
-  min-height:150px;
+.category{
   border:1px solid var(--border);
-  background:var(--white);
-  border-radius:22px;
-  padding:18px;
+  background:var(--surface);
+  border-radius:18px;
+  padding:19px;
+  min-height:120px;
   text-align:left;
-  color:var(--ink);
-  box-shadow:var(--shadow-soft);
-  overflow:hidden;
-  transition:transform var(--transition),box-shadow var(--transition),border var(--transition);
+  color:var(--text);
+  transition:.2s ease;
+  box-shadow:0 8px 25px rgba(17,55,57,.035);
 }
 
-.category-card:hover{
-  transform:translateY(-5px);
+.category:hover{
+  transform:translateY(-3px);
+  border-color:var(--primary);
   box-shadow:var(--shadow);
-  border-color:rgba(13,79,82,.24);
 }
 
 .category-icon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
+  width:39px;
+  height:39px;
   display:grid;
   place-items:center;
-  background:var(--petrol-soft);
-  margin-bottom:28px;
-  font-size:21px;
+  border-radius:12px;
+  background:var(--surface-soft);
+  margin-bottom:15px;
+  font-size:19px;
 }
 
-.category-card strong{
+.category strong{
   display:block;
-  font-size:16px;
+  font-size:15px;
+  margin-bottom:5px;
 }
 
-.category-card span{
-  display:block;
-  margin-top:5px;
+.category span{
   color:var(--muted);
   font-size:12px;
 }
 
-.category-arrow{
-  position:absolute;
-  right:15px;
-  bottom:15px;
-  width:30px;
-  height:30px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:var(--cream);
-}
-
 /* =========================
-   TOOL CARDS
+   FEATURED TOOLS
 ========================= */
 
-.tool-grid{
+.featured{
   display:grid;
-  grid-template-columns:1fr;
-  gap:13px;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
 }
 
 .tool-card{
+  background:var(--surface);
   border:1px solid var(--border);
-  background:var(--white);
   border-radius:22px;
-  padding:18px;
-  box-shadow:var(--shadow-soft);
-  transition:transform var(--transition),box-shadow var(--transition);
+  padding:25px;
+  box-shadow:0 8px 30px rgba(17,55,57,.04);
+  transition:.2s ease;
 }
 
 .tool-card:hover{
@@ -427,165 +373,220 @@ a{
   box-shadow:var(--shadow);
 }
 
-.tool-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-}
-
 .tool-icon{
-  width:45px;
-  height:45px;
+  width:48px;
+  height:48px;
   display:grid;
   place-items:center;
-  border-radius:14px;
-  background:var(--petrol-soft);
-  font-size:21px;
-}
-
-.favorite{
-  width:36px;
-  height:36px;
-  border-radius:11px;
-  border:1px solid var(--border);
-  background:transparent;
-  color:var(--muted);
-}
-
-.favorite.active{
-  color:var(--petrol);
-  background:var(--petrol-soft);
+  background:var(--surface-soft);
+  border-radius:15px;
+  font-size:23px;
+  margin-bottom:20px;
 }
 
 .tool-card h3{
-  margin-top:16px;
-  font-size:17px;
-  letter-spacing:-.3px;
+  font-size:20px;
+  margin-bottom:9px;
 }
 
 .tool-card p{
   color:var(--muted);
-  font-size:13px;
   line-height:1.5;
-  margin-top:7px;
+  font-size:14px;
+  min-height:64px;
 }
 
-.tool-meta{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-top:13px;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 8px;
-  border-radius:999px;
-  background:var(--cream);
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
-}
-
-.tool-button{
-  width:100%;
+.tool-link{
   border:0;
-  background:var(--petrol);
+  background:var(--primary);
   color:white;
-  padding:12px;
+  width:100%;
   border-radius:13px;
-  margin-top:15px;
+  min-height:46px;
+  margin-top:20px;
   font-weight:900;
 }
 
-.tool-button:hover{
-  background:var(--petrol-dark);
+.tool-link:hover{
+  background:var(--primary-dark);
 }
 
 /* =========================
-   STATS
+   MON DOSSIER
+========================= */
+
+.dossier{
+  border-radius:28px;
+  padding:34px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:35px;
+}
+
+.dossier-content{
+  max-width:700px;
+}
+
+.dossier-badge{
+  font-size:12px;
+  font-weight:900;
+  color:var(--primary);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:10px;
+}
+
+.dossier h2{
+  font-size:28px;
+  margin-bottom:9px;
+}
+
+.dossier p{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.dossier-btn{
+  flex-shrink:0;
+  background:var(--primary);
+  color:white;
+  border:0;
+  padding:15px 22px;
+  border-radius:14px;
+  font-weight:900;
+}
+
+/* =========================
+   MINI STATS
 ========================= */
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
 
 .stat{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:17px;
-  box-shadow:var(--shadow-soft);
+  background:var(--surface-soft);
+  border-radius:18px;
+  padding:22px;
 }
 
 .stat strong{
   display:block;
-  font-size:24px;
+  font-size:28px;
+  margin-bottom:5px;
 }
 
 .stat span{
   color:var(--muted);
-  font-size:12px;
+  font-size:13px;
+}
+
+/* =========================
+   TOOLS PAGE
+========================= */
+
+.page-head{
+  padding:55px 0 30px;
+}
+
+.page-head h1{
+  font-size:42px;
+  letter-spacing:-2px;
+}
+
+.page-head p{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.all-tools{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.simple-tool{
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:20px;
+  padding:22px;
+}
+
+.simple-tool h3{
+  margin:13px 0 7px;
+}
+
+.simple-tool p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.simple-tool button{
+  width:100%;
+  margin-top:17px;
+  min-height:43px;
+  border:0;
+  background:var(--surface-soft);
+  color:var(--text);
+  border-radius:12px;
+  font-weight:900;
 }
 
 /* =========================
    TOOL VIEW
 ========================= */
 
+.tool-page{
+  max-width:850px;
+  margin:55px auto;
+}
+
 .back{
   border:0;
   background:transparent;
-  color:var(--petrol);
-  font-weight:900;
-  margin-bottom:18px;
+  color:var(--muted);
+  font-weight:800;
+  margin-bottom:25px;
 }
 
-.tool-hero{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:26px;
-  padding:22px;
-  box-shadow:var(--shadow-soft);
+.tool-page-header{
+  margin-bottom:25px;
 }
 
-.tool-hero-icon{
-  width:52px;
-  height:52px;
+.tool-page-header .tool-icon{
   display:grid;
-  place-items:center;
-  border-radius:16px;
-  background:var(--petrol-soft);
-  font-size:25px;
-  margin-bottom:15px;
 }
 
-.tool-hero h1{
-  font-size:30px;
-  letter-spacing:-1.2px;
+.tool-page-header h1{
+  font-size:40px;
+  letter-spacing:-1.8px;
+  margin:12px 0 8px;
 }
 
-.tool-hero p{
+.tool-page-header p{
   color:var(--muted);
   line-height:1.55;
-  margin-top:8px;
 }
 
 .form-card{
-  margin-top:14px;
-  background:var(--white);
+  background:var(--surface);
   border:1px solid var(--border);
   border-radius:24px;
-  padding:20px;
-  box-shadow:var(--shadow-soft);
+  padding:28px;
+  box-shadow:var(--shadow);
 }
 
 .form-grid{
   display:grid;
-  gap:13px;
+  grid-template-columns:repeat(2,1fr);
+  gap:17px;
 }
 
 .field{
@@ -594,8 +595,12 @@ a{
   gap:7px;
 }
 
+.field.full{
+  grid-column:1/-1;
+}
+
 .field label{
-  font-size:12px;
+  font-size:13px;
   font-weight:900;
 }
 
@@ -604,206 +609,108 @@ a{
 .field textarea{
   width:100%;
   border:1px solid var(--border);
-  background:var(--cream);
-  color:var(--ink);
-  border-radius:13px;
-  padding:12px 13px;
+  background:var(--bg);
+  color:var(--text);
+  border-radius:12px;
+  padding:13px;
   outline:none;
 }
 
 .field textarea{
-  min-height:120px;
+  min-height:130px;
   resize:vertical;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus{
-  border-color:var(--petrol);
-  box-shadow:0 0 0 3px rgba(13,79,82,.08);
+  border-color:var(--primary);
 }
 
-.primary{
+.submit{
   width:100%;
+  min-height:50px;
+  margin-top:22px;
   border:0;
-  background:var(--petrol);
+  border-radius:13px;
+  background:var(--primary);
   color:white;
-  border-radius:14px;
-  padding:14px;
   font-weight:900;
-  margin-top:6px;
 }
-
-.secondary{
-  width:100%;
-  border:1px solid var(--border);
-  background:var(--white);
-  color:var(--ink);
-  border-radius:14px;
-  padding:13px;
-  font-weight:800;
-}
-
-/* =========================
-   RESULTS
-========================= */
 
 .result{
-  margin-top:15px;
-  background:var(--white);
+  margin-top:20px;
+  background:var(--surface-soft);
   border:1px solid var(--border);
-  border-radius:24px;
-  padding:20px;
-  box-shadow:var(--shadow);
+  border-radius:20px;
+  padding:24px;
+  line-height:1.6;
 }
 
 .result h3{
-  font-size:20px;
-  margin-bottom:13px;
+  margin-bottom:12px;
 }
 
-.result p{
-  color:var(--muted);
-  line-height:1.55;
+.result ul{
+  padding-left:20px;
 }
 
-.result-list{
-  list-style:none;
-  display:grid;
-  gap:9px;
-}
-
-.result-list li{
-  padding:11px 12px;
-  background:var(--cream);
-  border-radius:12px;
-  font-size:13px;
-  line-height:1.45;
-}
-
-.result-list li::before{
-  content:"✓";
-  color:var(--petrol);
-  font-weight:900;
-  margin-right:7px;
-}
-
-.score{
-  font-size:44px;
-  font-weight:950;
-  color:var(--petrol);
-  letter-spacing:-2px;
+.result li{
+  margin:5px 0;
 }
 
 .verdict{
-  display:inline-flex;
-  padding:7px 10px;
+  display:inline-block;
+  padding:7px 12px;
   border-radius:999px;
-  background:var(--petrol-soft);
-  color:var(--petrol);
-  font-size:12px;
+  background:var(--cream);
   font-weight:900;
-  margin:8px 0 15px;
+  margin-bottom:14px;
 }
 
 /* =========================
    PROJECTS
 ========================= */
 
-.project-grid{
+.projects{
   display:grid;
-  gap:13px;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
 }
 
-.project-card{
-  background:var(--white);
+.project{
+  background:var(--surface);
   border:1px solid var(--border);
-  border-radius:22px;
-  padding:18px;
-  box-shadow:var(--shadow-soft);
+  border-radius:20px;
+  padding:22px;
 }
 
-.project-card h3{
-  font-size:17px;
+.project h3{
+  margin-bottom:8px;
 }
 
-.project-card p{
+.project p{
   color:var(--muted);
-  font-size:12px;
-  margin-top:5px;
+  font-size:14px;
 }
 
-.project-actions{
-  display:flex;
-  gap:8px;
-  margin-top:14px;
-}
-
-.project-actions button{
-  flex:1;
-  border:1px solid var(--border);
-  background:var(--cream);
-  color:var(--ink);
-  padding:10px;
-  border-radius:11px;
-  font-weight:800;
-}
-
-.empty{
-  text-align:center;
-  padding:45px 20px;
+.project small{
+  display:block;
+  margin-top:16px;
   color:var(--muted);
-}
-
-.empty-icon{
-  font-size:38px;
-  margin-bottom:12px;
 }
 
 /* =========================
-   MOBILE NAV
+   EMPTY
 ========================= */
 
-.mobile-nav{
-  position:fixed;
-  z-index:120;
-  left:10px;
-  right:10px;
-  bottom:10px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:8px;
-  background:rgba(255,255,255,.90);
-  border:1px solid var(--border);
-  border-radius:20px;
-  box-shadow:0 15px 45px rgba(0,0,0,.15);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-
-[data-theme="dark"] .mobile-nav{
-  background:rgba(19,39,41,.92);
-}
-
-.mobile-nav button{
-  border:0;
-  background:transparent;
+.empty{
+  padding:50px 20px;
+  text-align:center;
   color:var(--muted);
-  padding:8px 3px;
-  border-radius:13px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.mobile-nav button span{
-  display:block;
-  font-size:19px;
-  margin-bottom:2px;
-}
-
-.mobile-nav button.active{
-  color:var(--petrol);
-  background:var(--petrol-soft);
+  background:var(--surface);
+  border:1px dashed var(--border);
+  border-radius:20px;
 }
 
 /* =========================
@@ -813,70 +720,129 @@ a{
 .footer{
   text-align:center;
   color:var(--muted);
-  font-size:12px;
-  margin-top:55px;
-  padding-bottom:20px;
+  font-size:13px;
+  padding:65px 0 20px;
 }
 
 /* =========================
-   DESKTOP
+   MOBILE
 ========================= */
 
-@media(min-width:700px){
+@media(max-width:900px){
 
-  .header{
-    padding:14px 25px;
+  .header-inner{
+    padding:0 16px;
   }
 
   .nav{
-    display:flex;
-  }
-
-  .mobile-nav{
     display:none;
   }
 
   .app{
-    padding:30px 25px 60px;
+    padding:0 16px 50px;
   }
 
   .hero{
-    padding:58px 55px 52px;
-  }
-
-  .category-grid{
-    grid-template-columns:repeat(5,1fr);
-  }
-
-  .tool-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .form-grid.two{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .form-grid.three{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .stats{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .project-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(min-width:1000px){
-
-  .tool-grid{
-    grid-template-columns:repeat(3,1fr);
+    margin-top:25px;
+    padding:38px 25px 30px;
+    border-radius:25px;
   }
 
   .hero h1{
-    font-size:64px;
+    font-size:48px;
+    letter-spacing:-2.7px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .search-box{
+    display:block;
+    background:rgba(255,255,255,.11);
+  }
+
+  .search-box input{
+    width:100%;
+    padding:14px;
+  }
+
+  .search-box .primary-btn{
+    width:100%;
+    min-height:48px;
+  }
+
+  .section{
+    margin-top:48px;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .featured,
+  .all-tools,
+  .projects{
+    grid-template-columns:1fr;
+  }
+
+  .dossier{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:25px;
+  }
+
+  .dossier-btn{
+    width:100%;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .tool-page{
+    margin:35px auto;
+  }
+
+  .tool-page-header h1{
+    font-size:34px;
+  }
+}
+
+@media(max-width:430px){
+
+  .brand{
+    font-size:15px;
+  }
+
+  .brand-icon{
+    width:38px;
+    height:38px;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .categories{
+    gap:8px;
+  }
+
+  .category{
+    padding:15px;
+    min-height:110px;
+  }
+
+  .section-title{
+    font-size:26px;
   }
 }
 </style>
@@ -887,8 +853,8 @@ a{
 <header class="header">
   <div class="header-inner">
 
-    <button class="logo" onclick="showView('home')" style="border:0;background:transparent;color:inherit;">
-      <span class="logo-mark">🧰</span>
+    <button class="brand" onclick="showView('home')" style="border:0;background:none;color:inherit">
+      <span class="brand-icon">🧰</span>
       <span>La Boîte à Outils</span>
     </button>
 
@@ -899,8 +865,8 @@ a{
     </nav>
 
     <div class="header-actions">
-      <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Mode nuit">🌙</button>
-      <button class="icon-btn" onclick="showView('projects')" aria-label="Mon dossier">📂</button>
+      <button class="header-action" onclick="toggleTheme()" title="Mode nuit">🌙</button>
+      <button class="header-action" onclick="showView('projects')" title="Mon dossier">📁</button>
     </div>
 
   </div>
@@ -916,148 +882,226 @@ a{
 
   <div class="hero">
 
-    <div class="hero-content">
+    <div class="eyebrow">✨ Votre assistant du quotidien</div>
 
-      <div class="eyebrow">
-        ✨ Votre assistant du quotidien
-      </div>
+    <h1>Un problème ?<br>Trouvez la solution.</h1>
 
-      <h1>
-        Un problème du quotidien ?
-        <span>Trouvez l'outil.</span>
-      </h1>
+    <p>
+      Des outils simples pour gérer les petits et grands problèmes du quotidien.
+      Voyages, achats, argent, documents, travail, logement… tout au même endroit.
+    </p>
 
-      <p>
-        Analysez une annonce, préparez un voyage, calculez votre budget,
-        organisez un déménagement ou comprenez un document.
-        Tout au même endroit.
-      </p>
-
-      <div class="search-wrap">
-        <input
-          id="globalSearch"
-          type="search"
-          placeholder="Ex : préparer mes vacances, analyser une voiture…"
-          oninput="smartSearch(this.value)"
-        >
-        <button class="search-btn" onclick="smartSearch(document.getElementById('globalSearch').value)">
-          Chercher
-        </button>
-      </div>
-
+    <div class="search-box">
+      <input
+        id="homeSearch"
+        placeholder="Ex. préparer mes vacances, comprendre mon contrat..."
+        onkeydown="if(event.key==='Enter') smartSearch()"
+      >
+      <button class="primary-btn" onclick="smartSearch()">Trouver mon outil →</button>
     </div>
 
   </div>
 
-  <div class="section">
+
+  <!-- UNIVERS -->
+
+  <section class="section">
 
     <div class="section-head">
       <div>
-        <h2>Tout commence ici</h2>
-        <p>Choisissez simplement votre besoin.</p>
+        <div class="section-title">Que voulez-vous faire ?</div>
+        <div class="section-subtitle">
+          Choisissez simplement votre besoin.
+        </div>
       </div>
     </div>
 
-    <div class="category-grid">
+    <div class="categories">
 
-      <button class="category-card" onclick="showCategory('car')">
+      <button class="category" onclick="openCategory('car')">
         <div class="category-icon">🚗</div>
         <strong>Ma voiture</strong>
         <span>Achat, coût, entretien</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('home')">
+      <button class="category" onclick="openCategory('housing')">
         <div class="category-icon">🏠</div>
         <strong>Mon logement</strong>
         <span>Loyer, déménagement</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('money')">
+      <button class="category" onclick="openCategory('money')">
         <div class="category-icon">💰</div>
         <strong>Mon argent</strong>
         <span>Budget et dépenses</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('work')">
+      <button class="category" onclick="openCategory('work')">
         <div class="category-icon">💼</div>
         <strong>Mon travail</strong>
         <span>Emploi et entretien</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('study')">
+      <button class="category" onclick="openCategory('study')">
         <div class="category-icon">📚</div>
         <strong>Mes études</strong>
         <span>Planning et révisions</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('travel')">
+      <button class="category" onclick="openCategory('travel')">
         <div class="category-icon">✈️</div>
         <strong>Mes voyages</strong>
         <span>Préparation personnalisée</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('shopping')">
+      <button class="category" onclick="openCategory('shopping')">
         <div class="category-icon">🛒</div>
         <strong>Mes achats</strong>
         <span>Comparer et décider</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('documents')">
+      <button class="category" onclick="openCategory('documents')">
         <div class="category-icon">📄</div>
         <strong>Mes documents</strong>
         <span>Comprendre et organiser</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('events')">
+      <button class="category" onclick="openCategory('events')">
         <div class="category-icon">🎉</div>
         <strong>Mes événements</strong>
         <span>Budget et organisation</span>
-        <div class="category-arrow">→</div>
       </button>
 
-      <button class="category-card" onclick="showCategory('organization')">
+      <button class="category" onclick="openCategory('organization')">
         <div class="category-icon">🧠</div>
         <strong>Mon organisation</strong>
         <span>Listes et méthodes</span>
-        <div class="category-arrow">→</div>
       </button>
 
     </div>
-  </div>
 
-  <div class="section">
+  </section>
+
+
+  <!-- OUTILS MIS EN AVANT -->
+
+  <section class="section">
 
     <div class="section-head">
       <div>
-        <h2>Les outils populaires</h2>
-        <p>Ceux qui servent le plus souvent.</p>
+        <div class="section-title">Les outils essentiels</div>
+        <div class="section-subtitle">
+          Trois points de départ pour les situations les plus courantes.
+        </div>
       </div>
-      <button class="section-link" onclick="showView('allTools')">Tout voir →</button>
+
+      <button class="text-button" onclick="showView('tools')">
+        Voir tous les outils →
+      </button>
     </div>
 
-    <div class="tool-grid" id="popularTools"></div>
+    <div class="featured">
 
-  </div>
+      <article class="tool-card">
 
-  <div class="section">
+        <div class="tool-icon">✈️</div>
+
+        <h3>Préparer mon voyage</h3>
+
+        <p>
+          Une checklist personnalisée selon destination, dates,
+          transport, logement, activités et contraintes.
+        </p>
+
+        <button class="tool-link" onclick="openTool('travel')">
+          Utiliser l'outil →
+        </button>
+
+      </article>
+
+
+      <article class="tool-card">
+
+        <div class="tool-icon">🛒</div>
+
+        <h3>Analyser un achat</h3>
+
+        <p>
+          Évaluez une annonce, son prix, le vendeur,
+          la garantie et les éventuels risques.
+        </p>
+
+        <button class="tool-link" onclick="openTool('purchase')">
+          Utiliser l'outil →
+        </button>
+
+      </article>
+
+
+      <article class="tool-card">
+
+        <div class="tool-icon">📄</div>
+
+        <h3>Comprendre un document</h3>
+
+        <p>
+          Repérez les dates, montants, obligations
+          et éléments importants d'un texte.
+        </p>
+
+        <button class="tool-link" onclick="openTool('document')">
+          Utiliser l'outil →
+        </button>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- MON DOSSIER -->
+
+  <section class="section">
+
+    <div class="dossier">
+
+      <div class="dossier-content">
+
+        <div class="dossier-badge">📁 Fonctionnalité centrale</div>
+
+        <h2>Gardez tout au même endroit.</h2>
+
+        <p>
+          Créez un dossier pour un projet et regroupez vos
+          analyses, checklists, notes et informations importantes.
+        </p>
+
+      </div>
+
+      <button class="dossier-btn" onclick="createProject()">
+        Créer mon dossier →
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROMESSE -->
+
+  <section class="section">
 
     <div class="stats">
+
       <div class="stat">
         <strong>10</strong>
-        <span>univers</span>
+        <span>univers du quotidien</span>
       </div>
 
       <div class="stat">
         <strong>20+</strong>
-        <span>outils</span>
+        <span>outils disponibles</span>
       </div>
 
       <div class="stat">
@@ -1065,53 +1109,28 @@ a{
         <span>pour commencer</span>
       </div>
 
-      <div class="stat">
-        <strong>100%</strong>
-        <span>mobile</span>
-      </div>
     </div>
 
-  </div>
+  </section>
 
 </section>
+
 
 <!-- =========================
-     GENERIC VIEW
+     ALL TOOLS
 ========================= -->
 
-<section id="categoryView" class="view">
+<section id="tools" class="view">
 
-  <button class="back" onclick="showView('home')">← Retour</button>
-
-  <div class="tool-hero">
-    <div class="tool-hero-icon" id="categoryIcon">🧰</div>
-    <h1 id="categoryTitle">Catégorie</h1>
-    <p id="categoryDescription"></p>
+  <div class="page-head">
+    <h1>Tous les outils</h1>
+    <p>Trouvez l'outil correspondant à votre situation.</p>
   </div>
 
-  <div class="section">
-    <div class="tool-grid" id="categoryTools"></div>
-  </div>
+  <div id="allTools" class="all-tools"></div>
 
 </section>
 
-<!-- =========================
-     TOOL VIEW
-========================= -->
-
-<section id="toolView" class="view">
-
-  <button class="back" onclick="goBack()">← Retour</button>
-
-  <div class="tool-hero">
-    <div class="tool-hero-icon" id="toolIcon">🧰</div>
-    <h1 id="toolTitle">Outil</h1>
-    <p id="toolDescription"></p>
-  </div>
-
-  <div id="toolContent"></div>
-
-</section>
 
 <!-- =========================
      PROJECTS
@@ -1119,45 +1138,15 @@ a{
 
 <section id="projects" class="view">
 
-  <div class="section-head">
-    <div>
-      <h2>Mon dossier</h2>
-      <p>Gardez vos projets importants au même endroit.</p>
-    </div>
+  <div class="page-head">
+    <h1>Mon dossier</h1>
+    <p>Vos projets personnels au même endroit.</p>
   </div>
 
-  <div class="form-card">
-    <div class="form-grid two">
-
-      <div class="field">
-        <label>Nom du projet</label>
-        <input id="projectName" placeholder="Ex : Acheter une voiture">
-      </div>
-
-      <div class="field">
-        <label>Type</label>
-        <select id="projectType">
-          <option>Projet personnel</option>
-          <option>Achat</option>
-          <option>Voyage</option>
-          <option>Logement</option>
-          <option>Études</option>
-          <option>Travail</option>
-          <option>Budget</option>
-          <option>Événement</option>
-        </select>
-      </div>
-
-    </div>
-
-    <button class="primary" onclick="addProject()">+ Créer mon projet</button>
-  </div>
-
-  <div class="section">
-    <div class="project-grid" id="projectList"></div>
-  </div>
+  <div id="projectsList" class="projects"></div>
 
 </section>
+
 
 <!-- =========================
      FAVORITES
@@ -1165,72 +1154,59 @@ a{
 
 <section id="favorites" class="view">
 
-  <div class="section-head">
-    <div>
-      <h2>Mes favoris</h2>
-      <p>Vos outils accessibles rapidement.</p>
-    </div>
+  <div class="page-head">
+    <h1>Mes favoris</h1>
+    <p>Les outils que vous utilisez le plus.</p>
   </div>
 
-  <div class="tool-grid" id="favoriteTools"></div>
+  <div id="favoritesList" class="all-tools"></div>
 
 </section>
+
 
 <!-- =========================
-     ALL TOOLS
+     TOOL
 ========================= -->
 
-<section id="allTools" class="view">
+<section id="toolView" class="view">
 
-  <button class="back" onclick="showView('home')">← Retour</button>
+  <div class="tool-page">
 
-  <div class="section-head">
-    <div>
-      <h2>Tous les outils</h2>
-      <p>Tout ce que la Boîte peut faire.</p>
-    </div>
+    <button class="back" onclick="showView('home')">
+      ← Retour
+    </button>
+
+    <div id="toolContent"></div>
+
   </div>
-
-  <div class="tool-grid" id="allToolGrid"></div>
 
 </section>
 
+
 <footer class="footer">
-  La Boîte à Outils du Quotidien · V6 · Fonctionne directement dans votre navigateur
+  La Boîte à Outils du Quotidien · V6.1 · Fonctionne directement dans votre navigateur
 </footer>
 
 </main>
 
-<nav class="mobile-nav">
-
-  <button onclick="showView('home')" id="navHome" class="active">
-    <span>⌂</span>
-    Accueil
-  </button>
-
-  <button onclick="showView('allTools')" id="navTools">
-    <span>🧰</span>
-    Outils
-  </button>
-
-  <button onclick="showView('projects')" id="navProjects">
-    <span>📂</span>
-    Dossier
-  </button>
-
-  <button onclick="showView('favorites')" id="navFavorites">
-    <span>♡</span>
-    Favoris
-  </button>
-
-</nav>
 
 <script>
 
-/* =========================================================
-   LA BOÎTE À OUTILS — V6
-   Fonctionnement local : aucun serveur / aucune API
-========================================================= */
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const STORAGE_PROJECTS = "boite_outils_projects_v61";
+const STORAGE_FAVORITES = "boite_outils_favorites_v61";
+const STORAGE_THEME = "boite_outils_theme_v61";
+
+let projects = JSON.parse(localStorage.getItem(STORAGE_PROJECTS) || "[]");
+let favorites = JSON.parse(localStorage.getItem(STORAGE_FAVORITES) || "[]");
+
+
+/* =====================================================
+   DATA
+===================================================== */
 
 const tools = [
 
@@ -1238,265 +1214,164 @@ const tools = [
     id:"travel",
     icon:"✈️",
     title:"Préparer mon voyage",
-    description:"Une checklist personnalisée selon destination, dates, transport, logement, activités et contraintes.",
-    category:"travel",
-    tags:["voyage","vacances","valise","checklist"]
+    desc:"Checklist personnalisée selon votre voyage.",
+    category:"travel"
   },
 
   {
     id:"purchase",
     icon:"🛒",
     title:"Analyser un achat",
-    description:"Évaluez une annonce, son prix, le vendeur, la garantie et les éventuels risques.",
-    category:"shopping",
-    tags:["achat","annonce","prix","shopping"]
+    desc:"Évaluer une annonce, un prix et les risques.",
+    category:"shopping"
   },
 
   {
     id:"document",
     icon:"📄",
     title:"Comprendre un document",
-    description:"Repérez les dates, montants, obligations et éléments importants d'un texte.",
-    category:"documents",
-    tags:["document","contrat","papier"]
+    desc:"Dates, montants, obligations et points importants.",
+    category:"documents"
   },
 
   {
     id:"budget",
     icon:"💰",
     title:"Analyser mon budget",
-    description:"Visualisez vos revenus, dépenses et votre reste disponible.",
-    category:"money",
-    tags:["budget","argent","dépenses"]
-  },
-
-  {
-    id:"compare",
-    icon:"⚖️",
-    title:"Comparer deux options",
-    description:"Structurez les avantages, inconvénients, coûts et critères importants.",
-    category:"organization",
-    tags:["comparaison","choix","décision"]
+    desc:"Comprendre vos revenus, dépenses et reste disponible.",
+    category:"money"
   },
 
   {
     id:"checklist",
     icon:"✅",
     title:"Créer une checklist",
-    description:"Transformez une situation en liste d'actions claire et organisée.",
-    category:"organization",
-    tags:["liste","organisation","checklist"]
+    desc:"Transformer une situation en liste d'actions.",
+    category:"organization"
   },
 
   {
-    id:"car",
-    icon:"🚗",
-    title:"Analyser une annonce voiture",
-    description:"Prix, kilométrage, année, motorisation, points positifs et points de vigilance.",
-    category:"car",
-    tags:["voiture","auto","annonce"]
-  },
-
-  {
-    id:"carCost",
-    icon:"🧮",
-    title:"Calculer le coût de ma voiture",
-    description:"Estimez le coût mensuel réel d'un véhicule.",
-    category:"car",
-    tags:["voiture","coût","budget"]
-  },
-
-  {
-    id:"carChecklist",
-    icon:"🔧",
-    title:"Checklist avant achat voiture",
-    description:"Les points à contrôler avant de signer.",
-    category:"car",
-    tags:["voiture","achat","contrôle"]
-  },
-
-  {
-    id:"rent",
-    icon:"🏠",
-    title:"Analyser mon loyer",
-    description:"Calculez le poids du loyer par rapport à vos revenus.",
-    category:"home",
-    tags:["loyer","logement","budget"]
-  },
-
-  {
-    id:"move",
-    icon:"📦",
-    title:"Préparer mon déménagement",
-    description:"Budget, cartons, démarches et organisation.",
-    category:"home",
-    tags:["déménagement","logement"]
+    id:"compare",
+    icon:"⚖️",
+    title:"Comparer deux options",
+    desc:"Comparer avantages, coûts, risques et critères.",
+    category:"organization"
   },
 
   {
     id:"discount",
     icon:"🏷️",
-    title:"Calculer une réduction",
-    description:"Calculez rapidement le prix après remise.",
-    category:"shopping",
-    tags:["prix","réduction","promotion"]
+    title:"Calculer une remise",
+    desc:"Calculer rapidement un prix après réduction.",
+    category:"shopping"
+  },
+
+  {
+    id:"travelBudget",
+    icon:"💶",
+    title:"Budget voyage",
+    desc:"Estimer le coût global d'un voyage.",
+    category:"travel"
+  },
+
+  {
+    id:"car",
+    icon:"🚗",
+    title:"Analyser une voiture",
+    desc:"Étudier une annonce automobile.",
+    category:"car"
+  },
+
+  {
+    id:"carCost",
+    icon:"⛽",
+    title:"Coût de ma voiture",
+    desc:"Estimer le coût mensuel et annuel.",
+    category:"car"
+  },
+
+  {
+    id:"carChecklist",
+    icon:"🔧",
+    title:"Checklist voiture",
+    desc:"Points à contrôler avant un achat.",
+    category:"car"
+  },
+
+  {
+    id:"rent",
+    icon:"🏠",
+    title:"Analyser un loyer",
+    desc:"Comparer loyer et revenus.",
+    category:"housing"
+  },
+
+  {
+    id:"move",
+    icon:"📦",
+    title:"Budget déménagement",
+    desc:"Estimer les dépenses d'un déménagement.",
+    category:"housing"
   },
 
   {
     id:"job",
     icon:"💼",
     title:"Analyser une offre d'emploi",
-    description:"Décryptez une offre et identifiez les points importants.",
-    category:"work",
-    tags:["emploi","travail","offre"]
+    desc:"Identifier les points importants d'une offre.",
+    category:"work"
   },
 
   {
     id:"interview",
     icon:"🎤",
     title:"Préparer un entretien",
-    description:"Préparez vos réponses et les questions à poser.",
-    category:"work",
-    tags:["entretien","emploi"]
+    desc:"Préparer vos réponses et questions.",
+    category:"work"
   },
 
   {
     id:"study",
     icon:"📚",
     title:"Créer mon planning d'études",
-    description:"Organisez vos révisions selon votre temps disponible.",
-    category:"study",
-    tags:["études","révisions","planning"]
-  },
-
-  {
-    id:"travelBudget",
-    icon:"💶",
-    title:"Calculer mon budget voyage",
-    description:"Estimez transport, logement, repas, activités et marge.",
-    category:"travel",
-    tags:["voyage","budget"]
+    desc:"Organiser vos révisions.",
+    category:"study"
   },
 
   {
     id:"event",
     icon:"🎉",
     title:"Budget événement",
-    description:"Organisez les dépenses d'un anniversaire, mariage ou soirée.",
-    category:"events",
-    tags:["anniversaire","soirée","mariage"]
+    desc:"Calculer le budget d'un événement.",
+    category:"events"
   },
 
   {
-    id:"documentChecklist",
-    icon:"📋",
-    title:"Checklist administrative",
-    description:"Transformez vos démarches en liste claire.",
-    category:"documents",
-    tags:["administratif","documents"]
+    id:"genericChecklist",
+    icon:"📝",
+    title:"Checklist personnalisée",
+    desc:"Créer une liste adaptée à votre situation.",
+    category:"organization"
   }
+
 ];
 
-const categories = {
 
-  car:{
-    icon:"🚗",
-    title:"Ma voiture",
-    description:"Acheter, comparer, budgéter et préparer vos démarches automobiles.",
-  },
-
-  home:{
-    icon:"🏠",
-    title:"Mon logement",
-    description:"Loyer, déménagement et organisation de votre logement.",
-  },
-
-  money:{
-    icon:"💰",
-    title:"Mon argent",
-    description:"Comprendre votre budget et prendre de meilleures décisions financières.",
-  },
-
-  work:{
-    icon:"💼",
-    title:"Mon travail",
-    description:"Offres d'emploi, entretiens et organisation professionnelle.",
-  },
-
-  study:{
-    icon:"📚",
-    title:"Mes études",
-    description:"Planifier vos révisions et mieux organiser votre travail.",
-  },
-
-  travel:{
-    icon:"✈️",
-    title:"Mes voyages",
-    description:"Préparer un voyage selon votre situation réelle.",
-  },
-
-  shopping:{
-    icon:"🛒",
-    title:"Mes achats",
-    description:"Comparer, calculer et analyser avant d'acheter.",
-  },
-
-  documents:{
-    icon:"📄",
-    title:"Mes documents",
-    description:"Comprendre et organiser vos documents et démarches.",
-  },
-
-  events:{
-    icon:"🎉",
-    title:"Mes événements",
-    description:"Organiser vos événements et maîtriser votre budget.",
-  },
-
-  organization:{
-    icon:"🧠",
-    title:"Mon organisation",
-    description:"Créer des listes, comparer des options et structurer vos projets.",
-  }
-
-};
-
-let previousView="home";
-let currentView="home";
-
-let favorites=JSON.parse(localStorage.getItem("boiteFavorites")||"[]");
-let projects=JSON.parse(localStorage.getItem("boiteProjects")||"[]");
-
-/* =========================
+/* =====================================================
    NAVIGATION
-========================= */
+===================================================== */
 
 function showView(id){
-
-  if(currentView!==id){
-    previousView=currentView;
-  }
-
-  currentView=id;
 
   document.querySelectorAll(".view").forEach(v=>{
     v.classList.remove("active");
   });
 
-  const target=document.getElementById(id);
+  const view=document.getElementById(id);
 
-  if(target){
-    target.classList.add("active");
+  if(view){
+    view.classList.add("active");
   }
-
-  document.querySelectorAll(".mobile-nav button").forEach(b=>{
-    b.classList.remove("active");
-  });
-
-  if(id==="home") document.getElementById("navHome").classList.add("active");
-  if(id==="allTools") document.getElementById("navTools").classList.add("active");
-  if(id==="projects") document.getElementById("navProjects").classList.add("active");
-  if(id==="favorites") document.getElementById("navFavorites").classList.add("active");
 
   window.scrollTo({
     top:0,
@@ -1505,82 +1380,48 @@ function showView(id){
 
   if(id==="projects") renderProjects();
   if(id==="favorites") renderFavorites();
+  if(id==="tools") renderAllTools();
 }
 
-function goBack(){
-  showView(previousView||"home");
+
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+function openCategory(category){
+
+  const filtered=tools.filter(t=>t.category===category);
+
+  const container=document.getElementById("allTools");
+
+  container.innerHTML=filtered.map(toolCard).join("");
+
+  document.getElementById("tools").classList.add("active");
+
+  document.querySelectorAll(".view").forEach(v=>{
+    if(v.id!=="tools") v.classList.remove("active");
+  });
+
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-/* =========================
-   THEME
-========================= */
 
-function toggleTheme(){
-
-  const body=document.body;
-
-  const current=body.getAttribute("data-theme");
-
-  const next=current==="dark" ? "light" : "dark";
-
-  if(next==="dark"){
-    body.setAttribute("data-theme","dark");
-    localStorage.setItem("boiteTheme","dark");
-    document.getElementById("themeBtn").textContent="☀️";
-  }else{
-    body.removeAttribute("data-theme");
-    localStorage.setItem("boiteTheme","light");
-    document.getElementById("themeBtn").textContent="🌙";
-  }
-}
-
-function loadTheme(){
-
-  if(localStorage.getItem("boiteTheme")==="dark"){
-    document.body.setAttribute("data-theme","dark");
-
-    setTimeout(()=>{
-      const btn=document.getElementById("themeBtn");
-      if(btn) btn.textContent="☀️";
-    },0);
-  }
-}
-
-/* =========================
-   TOOL CARDS
-========================= */
+/* =====================================================
+   TOOLS
+===================================================== */
 
 function toolCard(tool){
 
-  const active=favorites.includes(tool.id);
-
   return `
-    <article class="tool-card">
+    <article class="simple-tool">
 
-      <div class="tool-top">
+      <div class="tool-icon">${tool.icon}</div>
 
-        <div class="tool-icon">${tool.icon}</div>
+      <h3>${tool.title}</h3>
 
-        <button
-          class="favorite ${active?"active":""}"
-          onclick="event.stopPropagation();toggleFavorite('${tool.id}')"
-          aria-label="Favori"
-        >
-          ${active?"♥":"♡"}
-        </button>
+      <p>${tool.desc}</p>
 
-      </div>
-
-      <h3>${escapeHTML(tool.title)}</h3>
-
-      <p>${escapeHTML(tool.description)}</p>
-
-      <div class="tool-meta">
-        <span class="badge">Personnalisable</span>
-        <span class="badge">Gratuit</span>
-      </div>
-
-      <button class="tool-button" onclick="openTool('${tool.id}')">
+      <button onclick="openTool('${tool.id}')">
         Utiliser l'outil →
       </button>
 
@@ -1588,52 +1429,17 @@ function toolCard(tool){
   `;
 }
 
-function renderPopular(){
-
-  const popular=[
-    "travel",
-    "purchase",
-    "document",
-    "budget",
-    "checklist",
-    "compare"
-  ];
-
-  document.getElementById("popularTools").innerHTML=
-    popular.map(id=>toolCard(tools.find(t=>t.id===id))).join("");
-}
 
 function renderAllTools(){
 
-  document.getElementById("allToolGrid").innerHTML=
+  document.getElementById("allTools").innerHTML=
     tools.map(toolCard).join("");
 }
 
-function showCategory(category){
 
-  const data=categories[category];
-
-  if(!data) return;
-
-  previousView=currentView;
-
-  document.getElementById("categoryIcon").textContent=data.icon;
-  document.getElementById("categoryTitle").textContent=data.title;
-  document.getElementById("categoryDescription").textContent=data.description;
-
-  const categoryTools=tools.filter(t=>t.category===category);
-
-  document.getElementById("categoryTools").innerHTML=
-    categoryTools.length
-      ? categoryTools.map(toolCard).join("")
-      : `<div class="empty">Aucun outil dans cette catégorie pour le moment.</div>`;
-
-  showView("categoryView");
-}
-
-/* =========================
+/* =====================================================
    FAVORITES
-========================= */
+===================================================== */
 
 function toggleFavorite(id){
 
@@ -1644,177 +1450,104 @@ function toggleFavorite(id){
   }
 
   localStorage.setItem(
-    "boiteFavorites",
+    STORAGE_FAVORITES,
     JSON.stringify(favorites)
   );
 
-  renderPopular();
-  renderAllTools();
-
-  if(currentView==="favorites"){
-    renderFavorites();
-  }
-
-  if(currentView==="categoryView"){
-    const title=document.getElementById("categoryTitle").textContent;
-
-    const category=Object.keys(categories)
-      .find(key=>categories[key].title===title);
-
-    if(category) showCategory(category);
-  }
+  renderFavorites();
 }
+
 
 function renderFavorites(){
 
-  const list=tools.filter(t=>favorites.includes(t.id));
+  const container=document.getElementById("favoritesList");
 
-  document.getElementById("favoriteTools").innerHTML=
-    list.length
-      ? list.map(toolCard).join("")
-      : `
-        <div class="empty">
-          <div class="empty-icon">♡</div>
-          <strong>Aucun favori</strong>
-          <p>Ajoutez vos outils préférés pour les retrouver ici.</p>
-        </div>
-      `;
-}
+  const selected=tools.filter(t=>favorites.includes(t.id));
 
-/* =========================
-   PROJECTS
-========================= */
-
-function addProject(){
-
-  const name=document.getElementById("projectName").value.trim();
-
-  if(!name){
-    alert("Donnez un nom à votre projet.");
-    return;
-  }
-
-  const type=document.getElementById("projectType").value;
-
-  projects.unshift({
-    id:Date.now(),
-    name,
-    type,
-    created:new Date().toLocaleDateString("fr-FR")
-  });
-
-  localStorage.setItem(
-    "boiteProjects",
-    JSON.stringify(projects)
-  );
-
-  document.getElementById("projectName").value="";
-
-  renderProjects();
-}
-
-function renderProjects(){
-
-  const container=document.getElementById("projectList");
-
-  if(!projects.length){
+  if(!selected.length){
 
     container.innerHTML=`
       <div class="empty">
-        <div class="empty-icon">📂</div>
-        <strong>Votre dossier est vide</strong>
-        <p>Créez votre premier projet ci-dessus.</p>
+        ❤️<br><br>
+        Aucun favori pour le moment.<br>
+        Ajoutez vos outils préférés ici.
       </div>
     `;
 
     return;
   }
 
-  container.innerHTML=projects.map(project=>`
+  container.innerHTML=selected.map(toolCard).join("");
+}
 
-    <article class="project-card">
 
-      <h3>${escapeHTML(project.name)}</h3>
+/* =====================================================
+   PROJECTS
+===================================================== */
+
+function createProject(){
+
+  const name=prompt(
+    "Nom de votre projet :",
+    "Mon nouveau projet"
+  );
+
+  if(!name) return;
+
+  projects.push({
+    id:Date.now(),
+    name:name,
+    created:new Date().toLocaleDateString("fr-FR")
+  });
+
+  localStorage.setItem(
+    STORAGE_PROJECTS,
+    JSON.stringify(projects)
+  );
+
+  showView("projects");
+}
+
+
+function renderProjects(){
+
+  const container=document.getElementById("projectsList");
+
+  if(!projects.length){
+
+    container.innerHTML=`
+      <div class="empty">
+        📁<br><br>
+        Aucun projet pour le moment.<br><br>
+        Créez votre premier dossier pour commencer.
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML=projects.map(p=>`
+
+    <article class="project">
+
+      <h3>📁 ${escapeHTML(p.name)}</h3>
 
       <p>
-        ${escapeHTML(project.type)}
-        · Créé le ${project.created}
+        Votre espace pour regrouper les informations
+        liées à ce projet.
       </p>
 
-      <div class="project-actions">
-
-        <button onclick="deleteProject(${project.id})">
-          Supprimer
-        </button>
-
-        <button onclick="showView('allTools')">
-          Ajouter un outil
-        </button>
-
-      </div>
+      <small>Créé le ${p.created}</small>
 
     </article>
 
   `).join("");
 }
 
-function deleteProject(id){
 
-  projects=projects.filter(p=>p.id!==id);
-
-  localStorage.setItem(
-    "boiteProjects",
-    JSON.stringify(projects)
-  );
-
-  renderProjects();
-}
-
-/* =========================
-   SEARCH
-========================= */
-
-function smartSearch(query){
-
-  query=query.toLowerCase().trim();
-
-  if(!query){
-    renderPopular();
-    return;
-  }
-
-  const results=tools.filter(tool=>{
-
-    const text=[
-      tool.title,
-      tool.description,
-      tool.category,
-      ...tool.tags
-    ].join(" ").toLowerCase();
-
-    return text.includes(query);
-  });
-
-  if(results.length){
-
-    document.getElementById("popularTools").innerHTML=
-      results.map(toolCard).join("");
-
-  }else{
-
-    document.getElementById("popularTools").innerHTML=`
-      <div class="empty">
-        <div class="empty-icon">🔎</div>
-        <strong>Aucun outil trouvé</strong>
-        <p>Essayez par exemple : voiture, voyage, budget, achat ou document.</p>
-      </div>
-    `;
-  }
-}
-
-/* =========================
+/* =====================================================
    OPEN TOOL
-========================= */
+===================================================== */
 
 function openTool(id){
 
@@ -1822,24 +1555,47 @@ function openTool(id){
 
   if(!tool) return;
 
-  previousView=currentView;
+  document.querySelectorAll(".view").forEach(v=>{
+    v.classList.remove("active");
+  });
 
-  document.getElementById("toolIcon").textContent=tool.icon;
-  document.getElementById("toolTitle").textContent=tool.title;
-  document.getElementById("toolDescription").textContent=tool.description;
+  document.getElementById("toolView").classList.add("active");
 
-  const content=document.getElementById("toolContent");
+  const favorite=favorites.includes(id);
 
-  content.innerHTML=getToolHTML(id);
+  document.getElementById("toolContent").innerHTML=`
 
-  showView("toolView");
+    <div class="tool-page-header">
+
+      <div class="tool-icon">${tool.icon}</div>
+
+      <h1>${tool.title}</h1>
+
+      <p>${tool.desc}</p>
+
+      <button
+        class="text-button"
+        onclick="toggleFavorite('${tool.id}')"
+        style="margin-top:15px"
+      >
+        ${favorite ? "♥ Retirer des favoris" : "♡ Ajouter aux favoris"}
+      </button>
+
+    </div>
+
+    ${getToolForm(id)}
+
+  `;
+
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-/* =========================
-   TOOL FORMS
-========================= */
 
-function getToolHTML(id){
+/* =====================================================
+   TOOL FORMS
+===================================================== */
+
+function getToolForm(id){
 
   switch(id){
 
@@ -1855,11 +1611,18 @@ function getToolHTML(id){
     case "budget":
       return budgetForm();
 
+    case "checklist":
+    case "genericChecklist":
+      return checklistForm();
+
     case "compare":
       return compareForm();
 
-    case "checklist":
-      return checklistForm();
+    case "discount":
+      return discountForm();
+
+    case "travelBudget":
+      return travelBudgetForm();
 
     case "car":
       return carForm();
@@ -1876,9 +1639,6 @@ function getToolHTML(id){
     case "move":
       return moveForm();
 
-    case "discount":
-      return discountForm();
-
     case "job":
       return jobForm();
 
@@ -1888,353 +1648,212 @@ function getToolHTML(id){
     case "study":
       return studyForm();
 
-    case "travelBudget":
-      return travelBudgetForm();
-
     case "event":
       return eventForm();
 
-    case "documentChecklist":
-      return documentChecklistForm();
-
     default:
-      return `<div class="form-card">Outil en préparation.</div>`;
+      return checklistForm();
   }
+
 }
 
-/* =========================
+
+/* =====================================================
    TRAVEL
-========================= */
+===================================================== */
 
 function travelForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Destination</label>
-        <input id="travelDestination" placeholder="Ex : Espagne, Lisbonne, New York…">
-      </div>
-
-      <div class="field">
-        <label>Type de voyage</label>
-        <select id="travelType">
-          <option>Vacances</option>
-          <option>Week-end</option>
-          <option>Road trip</option>
-          <option>Voyage professionnel</option>
-          <option>Visite familiale</option>
-          <option>Plage</option>
-          <option>Montagne</option>
-          <option>Ville</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Date de départ</label>
-        <input type="date" id="travelStart">
-      </div>
-
-      <div class="field">
-        <label>Date de retour</label>
-        <input type="date" id="travelEnd">
-      </div>
-
-      <div class="field">
-        <label>Nombre d'adultes</label>
-        <input type="number" id="travelAdults" value="2" min="1">
-      </div>
-
-      <div class="field">
-        <label>Nombre d'enfants</label>
-        <input type="number" id="travelChildren" value="0" min="0">
-      </div>
-
-      <div class="field">
-        <label>Transport principal</label>
-        <select id="travelTransport">
-          <option>Voiture</option>
-          <option>Avion</option>
-          <option>Train</option>
-          <option>Bus</option>
-          <option>Bateau</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Logement</label>
-        <select id="travelHousing">
-          <option>Hôtel</option>
-          <option>Appartement</option>
-          <option>Camping</option>
-          <option>Chez des proches</option>
-          <option>Pas encore réservé</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Bagages</label>
-        <select id="travelLuggage">
-          <option>Petit sac</option>
-          <option>Bagage cabine</option>
-          <option>Valise en soute</option>
-          <option>Plusieurs valises</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Budget approximatif</label>
-        <input type="number" id="travelBudget" placeholder="€">
-      </div>
-
+    <div class="field">
+      <label>Destination</label>
+      <input id="travelDestination" placeholder="Ex. Lisbon, New York...">
     </div>
 
-    <div class="field" style="margin-top:13px;">
+    <div class="field">
+      <label>Type de voyage</label>
+      <select id="travelType">
+        <option>Vacances</option>
+        <option>Week-end</option>
+        <option>Road trip</option>
+        <option>Voyage professionnel</option>
+        <option>Visite familiale</option>
+        <option>Études</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Date de départ</label>
+      <input id="travelStart" type="date">
+    </div>
+
+    <div class="field">
+      <label>Date de retour</label>
+      <input id="travelEnd" type="date">
+    </div>
+
+    <div class="field">
+      <label>Nombre d'adultes</label>
+      <input id="travelAdults" type="number" value="1" min="1">
+    </div>
+
+    <div class="field">
+      <label>Nombre d'enfants</label>
+      <input id="travelChildren" type="number" value="0" min="0">
+    </div>
+
+    <div class="field">
+      <label>Transport</label>
+      <select id="travelTransport">
+        <option>Avion</option>
+        <option>Voiture</option>
+        <option>Train</option>
+        <option>Bus</option>
+        <option>Bateau</option>
+        <option>Mixte</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Logement</label>
+      <select id="travelHousing">
+        <option>Hôtel</option>
+        <option>Appartement</option>
+        <option>Camping</option>
+        <option>Chez des proches</option>
+        <option>Pas encore réservé</option>
+      </select>
+    </div>
+
+    <div class="field full">
       <label>Activités prévues</label>
-      <input id="travelActivities" placeholder="Ex : plage, restaurants, randonnée, visites…">
+      <input id="travelActivities"
+        placeholder="Ex. plage, randonnée, visites, restaurants...">
     </div>
 
-    <div class="field" style="margin-top:13px;">
-      <label>Contraintes / besoins particuliers</label>
-      <textarea id="travelConstraints" placeholder="Ex : médicaments, animaux, enfant, documents spécifiques, allergies, gros bagages…"></textarea>
+    <div class="field full">
+      <label>Contraintes particulières</label>
+      <textarea id="travelConstraints"
+        placeholder="Ex. petit budget, enfant, bagage cabine, médicament, animal..."></textarea>
     </div>
-
-    <button class="primary" onclick="generateTravel()">
-      ✨ Générer ma checklist personnalisée
-    </button>
 
   </div>
 
+  <button class="submit" onclick="generateTravel()">
+    Générer ma préparation personnalisée →
+  </button>
+
   <div id="travelResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function generateTravel(){
 
-  const destination=value("travelDestination")||"votre destination";
-  const type=value("travelType");
-  const start=value("travelStart");
-  const end=value("travelEnd");
-
-  const adults=Number(value("travelAdults"))||1;
-  const children=Number(value("travelChildren"))||0;
-
-  const transport=value("travelTransport");
-  const housing=value("travelHousing");
-  const luggage=value("travelLuggage");
-  const budget=Number(value("travelBudget"))||0;
-
-  const activities=value("travelActivities");
-  const constraints=value("travelConstraints");
+  const destination=document.getElementById("travelDestination").value || "votre destination";
+  const type=document.getElementById("travelType").value;
+  const start=document.getElementById("travelStart").value;
+  const end=document.getElementById("travelEnd").value;
+  const adults=Number(document.getElementById("travelAdults").value||1);
+  const children=Number(document.getElementById("travelChildren").value||0);
+  const transport=document.getElementById("travelTransport").value;
+  const housing=document.getElementById("travelHousing").value;
+  const activities=document.getElementById("travelActivities").value;
+  const constraints=document.getElementById("travelConstraints").value;
 
   let days=0;
 
   if(start && end){
-
-    const a=new Date(start);
-    const b=new Date(end);
-
-    days=Math.max(
-      1,
-      Math.ceil((b-a)/(1000*60*60*24))
-    );
+    const diff=new Date(end)-new Date(start);
+    days=Math.max(1,Math.round(diff/86400000)+1);
   }
 
-  const items=[];
+  let list=[];
 
-  /* Base */
-
-  items.push(
-    "Vérifier les dates, réservations et horaires",
-    "Préparer les documents nécessaires",
-    "Prévoir un moyen de paiement de secours",
-    "Vérifier téléphone, chargeur et batterie externe",
-    "Prévoir une petite trousse de premiers soins"
-  );
-
-  /* Destination */
-
-  if(destination.toLowerCase().includes("étranger") ||
-     destination.toLowerCase().includes("espagne") ||
-     destination.toLowerCase().includes("portugal") ||
-     destination.toLowerCase().includes("italie")){
-
-    items.push(
-      "Vérifier les documents d'identité nécessaires",
-      "Vérifier les conditions d'entrée et de circulation"
-    );
-  }
-
-  /* Transport */
-
-  if(transport==="Voiture"){
-
-    items.push(
-      "Vérifier pneus, niveaux et éclairage",
-      "Préparer permis, assurance et documents du véhicule",
-      "Prévoir câble de recharge / chargeur téléphone",
-      "Prévoir de l'eau pour le trajet"
-    );
-
-    if(days>=5){
-      items.push("Prévoir une petite réserve de produits pour la voiture");
-    }
-  }
+  list.push("Vérifier les pièces d'identité et leur validité");
+  list.push("Vérifier les conditions d'entrée dans le pays");
+  list.push("Réserver ou confirmer le transport");
+  list.push("Confirmer le logement");
+  list.push("Préparer les moyens de paiement");
+  list.push("Prévoir une solution de secours pour les documents importants");
 
   if(transport==="Avion"){
+    list.push("Faire l'enregistrement en ligne");
+    list.push("Vérifier les dimensions et le poids des bagages");
+    list.push("Préparer les documents de voyage accessibles");
+  }
 
-    items.push(
-      "Vérifier les dimensions et poids des bagages",
-      "Faire l'enregistrement si nécessaire",
-      "Préparer les documents de voyage accessibles"
-    );
-
+  if(transport==="Voiture"){
+    list.push("Vérifier pneus, niveaux et pression");
+    list.push("Vérifier assurance et assistance");
+    list.push("Prévoir les équipements obligatoires selon les pays traversés");
   }
 
   if(transport==="Train" || transport==="Bus"){
-
-    items.push(
-      "Télécharger les billets hors ligne",
-      "Vérifier la gare, le quai et les horaires"
-    );
+    list.push("Télécharger les billets hors connexion");
   }
 
-  /* Housing */
-
-  if(housing==="Hôtel"){
-
-    items.push(
-      "Vérifier horaires d'arrivée et de départ",
-      "Vérifier les conditions d'annulation"
-    );
-
+  if(housing==="Hôtel" || housing==="Appartement"){
+    list.push("Vérifier les horaires de check-in/check-out");
+    list.push("Vérifier caution, frais et conditions d'annulation");
   }
 
   if(housing==="Camping"){
-
-    items.push(
-      "Préparer tente et matériel de couchage",
-      "Prévoir lampe et batterie externe",
-      "Prévoir serviette et produits d'hygiène"
-    );
+    list.push("Préparer tente, couchage et équipement adapté");
   }
-
-  /* Luggage */
-
-  if(luggage==="Petit sac"){
-
-    items.push(
-      "Limiter les vêtements au strict nécessaire",
-      "Prévoir une tenue polyvalente"
-    );
-
-  }else if(luggage==="Valise en soute" || luggage==="Plusieurs valises"){
-
-    items.push(
-      "Étiqueter les bagages",
-      "Préparer une tenue et les essentiels dans le bagage facilement accessible"
-    );
-  }
-
-  /* Duration */
-
-  if(days>=7){
-
-    items.push(
-      "Prévoir suffisamment de vêtements ou une solution de lavage",
-      "Prévoir une petite trousse de pharmacie plus complète",
-      "Vérifier les dépenses récurrentes pendant l'absence"
-    );
-
-  }else if(days<=2){
-
-    items.push(
-      "Privilégier une valise légère",
-      "Préparer les vêtements la veille du départ"
-    );
-  }
-
-  /* Children */
 
   if(children>0){
-
-    items.push(
-      "Préparer les affaires adaptées aux enfants",
-      "Prévoir activités et collations pour les trajets",
-      "Vérifier les documents de chaque enfant"
-    );
+    list.push("Préparer les affaires adaptées aux enfants");
+    list.push("Prévoir activités et temps de pause");
   }
 
-  /* Activities */
+  if(days>=7){
+    list.push("Prévoir une organisation pour le linge");
+    list.push("Prévoir une marge de médicaments et produits essentiels");
+  }
+
+  if(days>=14){
+    list.push("Vérifier les conditions bancaires à l'étranger");
+    list.push("Prévoir une organisation plus complète du budget");
+  }
 
   if(activities){
-
-    const act=activities.toLowerCase();
-
-    if(act.includes("plage") || act.includes("mer")){
-
-      items.push(
-        "Prévoir maillot, serviette et protection solaire",
-        "Prévoir sac pour les affaires mouillées"
-      );
-    }
-
-    if(act.includes("randonnée") || act.includes("montagne")){
-
-      items.push(
-        "Prévoir chaussures adaptées",
-        "Prévoir eau et protection contre le soleil",
-        "Vérifier la météo avant les sorties"
-      );
-    }
-
-    if(act.includes("restaurant")){
-
-      items.push(
-        "Repérer quelques restaurants et vérifier les horaires"
-      );
-    }
+    list.push("Vérifier les réservations nécessaires pour : "+activities);
   }
-
-  /* Constraints */
 
   if(constraints){
-
-    items.push(
-      "Intégrer les contraintes personnelles dans la préparation",
-      "Préparer les éléments indispensables liés à vos besoins spécifiques"
-    );
+    list.push("Prendre en compte la contrainte suivante : "+constraints);
   }
-
-  /* Budget */
-
-  if(budget>0){
-
-    items.push(
-      `Garder une marge de sécurité sur le budget de ${formatEuro(budget)}`,
-      "Prévoir les dépenses imprévues"
-    );
-  }
-
-  const unique=[...new Set(items)];
 
   document.getElementById("travelResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Votre checklist — ${escapeHTML(destination)}</h3>
+      <span class="verdict">Préparation personnalisée</span>
 
-      <div class="verdict">
-        ${days ? days+" jour"+(days>1?"s":"")+" · ":""}
-        ${adults+children} voyageur${adults+children>1?"s":""}
-      </div>
+      <h3>${escapeHTML(destination)}</h3>
 
-      <ul class="result-list">
-        ${unique.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <p>
+        ${days ? days+" jour(s)" : "Dates non précisées"} ·
+        ${adults} adulte(s) ·
+        ${children} enfant(s) ·
+        ${type}
+      </p>
+
+      <br>
+
+      <strong>Votre checklist :</strong>
+
+      <ul>
+        ${list.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
       </ul>
 
     </div>
@@ -2242,177 +1861,175 @@ function generateTravel(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    PURCHASE
-========================= */
+===================================================== */
 
 function purchaseForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Produit</label>
-        <input id="purchaseProduct" placeholder="Ex : iPhone, voiture, canapé…">
-      </div>
-
-      <div class="field">
-        <label>Prix</label>
-        <input type="number" id="purchasePrice" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>État</label>
-        <select id="purchaseCondition">
-          <option>Neuf</option>
-          <option>Très bon état</option>
-          <option>Bon état</option>
-          <option>État moyen</option>
-          <option>À réparer</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Vendeur</label>
-        <select id="purchaseSeller">
-          <option>Professionnel</option>
-          <option>Particulier</option>
-          <option>Marketplace</option>
-          <option>Je ne sais pas</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Garantie</label>
-        <select id="purchaseWarranty">
-          <option>Oui</option>
-          <option>Non</option>
-          <option>Je ne sais pas</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Frais supplémentaires</label>
-        <input type="number" id="purchaseFees" placeholder="€">
-      </div>
-
+    <div class="field">
+      <label>Produit</label>
+      <input id="purchaseProduct" placeholder="Ex. iPhone, voiture, canapé...">
     </div>
 
-    <div class="field" style="margin-top:13px;">
+    <div class="field">
+      <label>Prix</label>
+      <input id="purchasePrice" type="number" placeholder="€">
+    </div>
+
+    <div class="field">
+      <label>État</label>
+      <select id="purchaseCondition">
+        <option>Neuf</option>
+        <option>Très bon état</option>
+        <option>Bon état</option>
+        <option>Occasion à vérifier</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Vendeur</label>
+      <input id="purchaseSeller" placeholder="Particulier, magasin...">
+    </div>
+
+    <div class="field">
+      <label>Garantie</label>
+      <select id="purchaseWarranty">
+        <option>Oui</option>
+        <option>Non</option>
+        <option>Inconnue</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Frais supplémentaires</label>
+      <input id="purchaseFees" type="number" placeholder="€">
+    </div>
+
+    <div class="field full">
       <label>Description / annonce</label>
-      <textarea id="purchaseDescription" placeholder="Collez ici l'annonce ou décrivez le produit…"></textarea>
+      <textarea id="purchaseDescription"
+        placeholder="Collez ici l'annonce ou décrivez le produit..."></textarea>
     </div>
-
-    <button class="primary" onclick="analyzePurchase()">
-      🔎 Analyser l'achat
-    </button>
 
   </div>
 
+  <button class="submit" onclick="analyzePurchase()">
+    Analyser cet achat →
+  </button>
+
   <div id="purchaseResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function analyzePurchase(){
 
-  const product=value("purchaseProduct")||"Produit";
-  const price=Number(value("purchasePrice"))||0;
-  const condition=value("purchaseCondition");
-  const seller=value("purchaseSeller");
-  const warranty=value("purchaseWarranty");
-  const fees=Number(value("purchaseFees"))||0;
-  const description=value("purchaseDescription");
+  const product=document.getElementById("purchaseProduct").value || "Produit";
+  const price=Number(document.getElementById("purchasePrice").value||0);
+  const condition=document.getElementById("purchaseCondition").value;
+  const seller=document.getElementById("purchaseSeller").value;
+  const warranty=document.getElementById("purchaseWarranty").value;
+  const fees=Number(document.getElementById("purchaseFees").value||0);
+  const description=document.getElementById("purchaseDescription").value.toLowerCase();
 
   let score=70;
-  const positives=[];
-  const risks=[];
-  const questions=[];
-
-  if(condition==="Neuf") score+=10;
-  if(condition==="Très bon état") score+=7;
-  if(condition==="Bon état") score+=2;
-  if(condition==="État moyen") score-=8;
-  if(condition==="À réparer") score-=18;
-
-  if(seller==="Professionnel"){
-    positives.push("Vendeur professionnel : cadre d'achat généralement plus structuré.");
-    score+=5;
-  }
-
-  if(seller==="Particulier"){
-    risks.push("Achat auprès d'un particulier : vérifiez précisément l'état et les preuves disponibles.");
-    questions.push("Pourquoi le produit est-il vendu ?");
-  }
+  let risks=[];
+  let positives=[];
 
   if(warranty==="Oui"){
-    positives.push("Une garantie est annoncée.");
-    score+=7;
+    score+=10;
+    positives.push("Garantie annoncée");
   }else if(warranty==="Non"){
-    risks.push("Aucune garantie annoncée.");
-    score-=7;
+    score-=12;
+    risks.push("Absence de garantie");
   }else{
-    questions.push("Quelle garantie est réellement applicable ?");
+    risks.push("Garantie à vérifier");
   }
 
-  if(fees>0){
-    risks.push(`Ajoutez ${formatEuro(fees)} de frais au prix affiché.`);
+  if(condition==="Neuf"){
+    positives.push("Produit neuf");
   }
 
-  if(description.length<40){
-    risks.push("La description est assez courte : demandez davantage d'informations.");
-    score-=4;
+  if(condition==="Occasion à vérifier"){
+    score-=10;
+    risks.push("État nécessitant une vérification");
   }
 
-  questions.push(
-    "Pouvez-vous fournir les justificatifs disponibles ?",
-    "Le produit présente-t-il des défauts non visibles sur les photos ?",
-    "Depuis combien de temps le vendeur possède-t-il le produit ?"
-  );
+  if(!seller){
+    score-=5;
+    risks.push("Vendeur non précisé");
+  }
+
+  if(!description){
+    score-=8;
+    risks.push("Description très limitée");
+  }
+
+  if(/urgent|vite|besoin d'argent|dernier prix|cash/.test(description)){
+    risks.push("Formulations pouvant nécessiter davantage de vigilance");
+    score-=5;
+  }
 
   score=Math.max(0,Math.min(100,score));
 
-  let verdict="À examiner";
-
-  if(score>=80) verdict="Plutôt intéressant";
-  else if(score<55) verdict="Prudence";
+  let verdict=
+    score>=80 ? "Plutôt intéressant" :
+    score>=60 ? "À vérifier avant achat" :
+    "Vigilance recommandée";
 
   document.getElementById("purchaseResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Analyse de ${escapeHTML(product)}</h3>
+      <span class="verdict">${verdict} · ${score}/100</span>
 
-      <div class="score">${score}/100</div>
-
-      <div class="verdict">${verdict}</div>
+      <h3>${escapeHTML(product)}</h3>
 
       <p>
-        Coût affiché estimé :
-        <strong>${formatEuro(price+fees)}</strong>
+        Coût affiché : <strong>${price.toFixed(2)} €</strong><br>
+        Coût avec frais déclarés :
+        <strong>${(price+fees).toFixed(2)} €</strong>
       </p>
 
-      <h3 style="margin-top:20px;">Points positifs</h3>
+      <br>
 
-      <ul class="result-list">
-        ${(positives.length?positives:["Prix et informations à vérifier plus précisément."])
-          .map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <strong>Points positifs</strong>
+
+      <ul>
+        ${positives.length
+          ? positives.map(x=>`<li>${escapeHTML(x)}</li>`).join("")
+          : "<li>Aucun point positif particulier identifié.</li>"}
       </ul>
 
-      <h3 style="margin-top:20px;">Points de vigilance</h3>
+      <br>
 
-      <ul class="result-list">
-        ${(risks.length?risks:["Aucun signal majeur détecté par cette analyse locale."])
-          .map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <strong>Points à vérifier</strong>
+
+      <ul>
+        ${risks.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
       </ul>
 
-      <h3 style="margin-top:20px;">Questions à poser</h3>
+      <br>
 
-      <ul class="result-list">
-        ${[...new Set(questions)].map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <strong>Questions à poser au vendeur</strong>
+
+      <ul>
+        <li>Pourquoi vendez-vous le produit ?</li>
+        <li>Depuis combien de temps l'avez-vous ?</li>
+        <li>Une facture est-elle disponible ?</li>
+        <li>Y a-t-il un défaut ou problème connu ?</li>
+        <li>Quels accessoires sont inclus ?</li>
       </ul>
 
     </div>
@@ -2420,61 +2037,64 @@ function analyzePurchase(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    DOCUMENT
-========================= */
+===================================================== */
 
 function documentForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="field">
-      <label>Collez le texte du document</label>
-      <textarea id="documentText" style="min-height:240px;" placeholder="Collez ici votre contrat, courrier, facture, document administratif…"></textarea>
-    </div>
+  <div class="field">
+    <label>Collez votre document ou son contenu</label>
 
-    <button class="primary" onclick="analyzeDocument()">
-      📄 Analyser le document
-    </button>
-
+    <textarea id="documentText"
+      style="min-height:260px"
+      placeholder="Collez ici votre contrat, courrier, facture, règlement..."></textarea>
   </div>
+
+  <button class="submit" onclick="analyzeDocument()">
+    Comprendre le document →
+  </button>
 
   <div id="documentResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function analyzeDocument(){
 
-  const text=value("documentText");
+  const text=document.getElementById("documentText").value;
 
-  if(!text){
-    alert("Collez d'abord le texte du document.");
+  if(!text.trim()){
+    document.getElementById("documentResult").innerHTML=`
+      <div class="result">
+        Ajoutez d'abord le texte du document.
+      </div>
+    `;
     return;
   }
 
-  const amounts=text.match(
-    /\d+(?:[\s.,]\d+)*\s?(?:€|euros?)/gi
-  )||[];
-
-  const dates=text.match(
-    /\b\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4}\b/g
-  )||[];
+  const amounts=text.match(/\d+(?:[.,]\d+)?\s?(?:€|euros?)/gi)||[];
+  const dates=text.match(/\b\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4}\b/g)||[];
 
   const keywords=[
-    "date",
-    "montant",
-    "paiement",
-    "résiliation",
-    "engagement",
-    "préavis",
-    "obligation",
     "contrat",
+    "résiliation",
+    "paiement",
     "échéance",
-    "délai",
-    "garantie"
+    "engagement",
+    "obligation",
+    "garantie",
+    "préavis",
+    "renouvellement",
+    "assurance"
   ];
 
   const found=keywords.filter(k=>
@@ -2485,161 +2105,141 @@ function analyzeDocument(){
 
     <div class="result">
 
-      <h3>Résumé de lecture</h3>
+      <span class="verdict">Analyse locale du document</span>
+
+      <h3>Ce qu'il faut regarder</h3>
 
       <p>
-        Le texte contient environ
-        <strong>${text.split(/\s+/).length}</strong>
-        mots.
+        Le texte contient environ ${text.length} caractères.
       </p>
 
-      <h3 style="margin-top:20px;">Montants détectés</h3>
+      <br>
 
-      <ul class="result-list">
-        ${
-          amounts.length
-          ? amounts.map(x=>`<li>${escapeHTML(x)}</li>`).join("")
-          : "<li>Aucun montant clairement détecté.</li>"
-        }
-      </ul>
+      <strong>Dates détectées</strong>
 
-      <h3 style="margin-top:20px;">Dates détectées</h3>
-
-      <ul class="result-list">
+      <ul>
         ${
           dates.length
-          ? [...new Set(dates)].map(x=>`<li>${escapeHTML(x)}</li>`).join("")
-          : "<li>Aucune date au format classique détectée.</li>"
+          ? dates.map(d=>`<li>${escapeHTML(d)}</li>`).join("")
+          : "<li>Aucune date détectée.</li>"
         }
       </ul>
 
-      <h3 style="margin-top:20px;">Éléments importants repérés</h3>
+      <br>
 
-      <ul class="result-list">
+      <strong>Montants détectés</strong>
+
+      <ul>
+        ${
+          amounts.length
+          ? amounts.map(a=>`<li>${escapeHTML(a)}</li>`).join("")
+          : "<li>Aucun montant détecté.</li>"
+        }
+      </ul>
+
+      <br>
+
+      <strong>Thèmes détectés</strong>
+
+      <ul>
         ${
           found.length
-          ? found.map(x=>`<li>${escapeHTML(x)}</li>`).join("")
-          : "<li>Aucun mot-clé particulier détecté.</li>"
+          ? found.map(k=>`<li>${escapeHTML(k)}</li>`).join("")
+          : "<li>Aucun thème prédéfini détecté.</li>"
         }
       </ul>
 
-      <p style="margin-top:18px;">
-        ⚠️ Cette analyse sert à repérer les éléments à vérifier.
-        Elle ne remplace pas l'avis d'un professionnel pour un document juridique,
-        médical ou financier important.
-      </p>
+      <br>
+
+      <small>
+        Cette analyse est une aide automatique locale et ne remplace pas
+        l'avis d'un professionnel pour un document juridique ou financier.
+      </small>
 
     </div>
 
   `;
 }
 
-/* =========================
+
+/* =====================================================
    BUDGET
-========================= */
+===================================================== */
 
 function budgetForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Revenus mensuels</label>
-        <input type="number" id="budgetIncome" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Logement</label>
-        <input type="number" id="budgetHousing" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Alimentation</label>
-        <input type="number" id="budgetFood" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Transport</label>
-        <input type="number" id="budgetTransport" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Abonnements</label>
-        <input type="number" id="budgetSubscriptions" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Autres dépenses</label>
-        <input type="number" id="budgetOther" placeholder="€">
-      </div>
-
+    <div class="field">
+      <label>Revenus mensuels</label>
+      <input id="budgetIncome" type="number">
     </div>
 
-    <button class="primary" onclick="analyzeBudget()">
-      💰 Analyser mon budget
-    </button>
+    <div class="field">
+      <label>Dépenses fixes</label>
+      <input id="budgetFixed" type="number">
+    </div>
+
+    <div class="field">
+      <label>Dépenses variables</label>
+      <input id="budgetVariable" type="number">
+    </div>
+
+    <div class="field">
+      <label>Épargne souhaitée</label>
+      <input id="budgetSaving" type="number">
+    </div>
 
   </div>
 
+  <button class="submit" onclick="analyzeBudget()">
+    Analyser mon budget →
+  </button>
+
   <div id="budgetResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function analyzeBudget(){
 
-  const income=number("budgetIncome");
-  const housing=number("budgetHousing");
-  const food=number("budgetFood");
-  const transport=number("budgetTransport");
-  const subscriptions=number("budgetSubscriptions");
-  const other=number("budgetOther");
+  const income=Number(document.getElementById("budgetIncome").value||0);
+  const fixed=Number(document.getElementById("budgetFixed").value||0);
+  const variable=Number(document.getElementById("budgetVariable").value||0);
+  const saving=Number(document.getElementById("budgetSaving").value||0);
 
-  const expenses=
-    housing+
-    food+
-    transport+
-    subscriptions+
-    other;
+  const remain=income-fixed-variable-saving;
 
-  const remaining=income-expenses;
-
-  let verdict="Situation à surveiller";
-
-  if(remaining>income*.25){
-    verdict="Bonne marge disponible";
-  }else if(remaining>0){
-    verdict="Budget positif mais à surveiller";
-  }else{
-    verdict="Budget déficitaire";
-  }
+  let verdict=
+    remain>=0 ? "Budget équilibré" :
+    "Budget à ajuster";
 
   document.getElementById("budgetResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Votre situation</h3>
+      <span class="verdict">${verdict}</span>
 
-      <div class="score">${formatEuro(remaining)}</div>
+      <h3>Votre reste disponible</h3>
 
-      <div class="verdict">${verdict}</div>
+      <p style="font-size:28px;font-weight:900">
+        ${remain.toFixed(2)} €
+      </p>
 
-      <ul class="result-list">
+      <br>
 
-        <li>Revenus : ${formatEuro(income)}</li>
-
-        <li>Dépenses : ${formatEuro(expenses)}</li>
-
-        <li>Reste disponible : ${formatEuro(remaining)}</li>
-
-        <li>
-          Poids du logement :
-          ${income ? Math.round(housing/income*100)+"%" : "—"}
-        </li>
-
+      <ul>
+        <li>Revenus : ${income.toFixed(2)} €</li>
+        <li>Dépenses fixes : ${fixed.toFixed(2)} €</li>
+        <li>Dépenses variables : ${variable.toFixed(2)} €</li>
+        <li>Épargne prévue : ${saving.toFixed(2)} €</li>
       </ul>
 
     </div>
@@ -2647,167 +2247,93 @@ function analyzeBudget(){
   `;
 }
 
-/* =========================
-   COMPARE
-========================= */
 
-function compareForm(){
-
-  return `
-
-  <div class="form-card">
-
-    <div class="form-grid two">
-
-      <div class="field">
-        <label>Option A</label>
-        <input id="compareA" placeholder="Ex : Option 1">
-      </div>
-
-      <div class="field">
-        <label>Option B</label>
-        <input id="compareB" placeholder="Ex : Option 2">
-      </div>
-
-      <div class="field">
-        <label>Critère 1</label>
-        <input id="compareC1" placeholder="Prix">
-      </div>
-
-      <div class="field">
-        <label>Critère 2</label>
-        <input id="compareC2" placeholder="Qualité">
-      </div>
-
-      <div class="field">
-        <label>Critère 3</label>
-        <input id="compareC3" placeholder="Praticité">
-      </div>
-
-      <div class="field">
-        <label>Critère 4</label>
-        <input id="compareC4" placeholder="Durabilité">
-      </div>
-
-    </div>
-
-    <button class="primary" onclick="generateCompare()">
-      ⚖️ Structurer ma comparaison
-    </button>
-
-  </div>
-
-  <div id="compareResult"></div>
-
-  `;
-}
-
-function generateCompare(){
-
-  const a=value("compareA")||"Option A";
-  const b=value("compareB")||"Option B";
-
-  const criteria=[
-    value("compareC1"),
-    value("compareC2"),
-    value("compareC3"),
-    value("compareC4")
-  ].filter(Boolean);
-
-  document.getElementById("compareResult").innerHTML=`
-
-    <div class="result">
-
-      <h3>${escapeHTML(a)} vs ${escapeHTML(b)}</h3>
-
-      <p>Pour chaque critère, notez chaque option de 1 à 5.</p>
-
-      <ul class="result-list">
-
-        ${
-          criteria.length
-          ? criteria.map(c=>`
-              <li>
-                <strong>${escapeHTML(c)}</strong><br>
-                ${escapeHTML(a)} : ___ / 5 ·
-                ${escapeHTML(b)} : ___ / 5
-              </li>
-            `).join("")
-          : "<li>Ajoutez au moins un critère de comparaison.</li>"
-        }
-
-        <li>Quel choix répond le mieux à votre besoin principal ?</li>
-        <li>Quel choix présente le moins de risques ?</li>
-        <li>Quel choix reste le plus intéressant à long terme ?</li>
-
-      </ul>
-
-    </div>
-
-  `;
-}
-
-/* =========================
+/* =====================================================
    CHECKLIST
-========================= */
+===================================================== */
 
 function checklistForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="field">
-      <label>Que devez-vous préparer ?</label>
-      <input id="checklistSubject" placeholder="Ex : déménagement, vacances, mariage…">
-    </div>
+  <div class="field">
+    <label>Que devez-vous préparer ?</label>
 
-    <div class="field">
-      <label>Informations supplémentaires</label>
-      <textarea id="checklistDetails" placeholder="Ajoutez les contraintes ou éléments importants…"></textarea>
-    </div>
-
-    <button class="primary" onclick="generateChecklist()">
-      ✅ Générer ma checklist
-    </button>
-
+    <input id="checklistSubject"
+      placeholder="Ex. déménagement, mariage, rentrée...">
   </div>
+
+  <div class="field" style="margin-top:17px">
+    <label>Informations complémentaires</label>
+
+    <textarea id="checklistContext"
+      placeholder="Date, nombre de personnes, budget, contraintes..."></textarea>
+  </div>
+
+  <button class="submit" onclick="generateChecklist()">
+    Créer ma checklist →
+  </button>
 
   <div id="checklistResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function generateChecklist(){
 
-  const subject=value("checklistSubject")||"votre projet";
-  const details=value("checklistDetails");
+  const subject=
+    document.getElementById("checklistSubject").value ||
+    "votre projet";
 
-  const items=[
+  const context=
+    document.getElementById("checklistContext").value;
+
+  let list=[
     "Définir précisément l'objectif",
     "Lister les éléments indispensables",
     "Fixer les dates importantes",
-    "Prévoir le budget nécessaire",
-    "Réserver ou acheter ce qui doit l'être",
-    "Vérifier les documents nécessaires",
-    "Prévoir une marge pour les imprévus",
-    "Faire une dernière vérification avant le jour J"
+    "Définir le budget disponible",
+    "Réserver ou acheter ce qui est nécessaire",
+    "Prévoir une solution de secours",
+    "Faire une vérification finale"
   ];
 
-  if(details){
-    items.push(
-      "Prendre en compte les contraintes indiquées dans votre situation"
-    );
+  if(/mariage|anniversaire|fête|événement/i.test(subject)){
+    list.push("Confirmer les invités");
+    list.push("Préparer le lieu");
+    list.push("Prévoir nourriture et boissons");
+  }
+
+  if(/déménagement|appartement|maison/i.test(subject)){
+    list.push("Organiser les cartons");
+    list.push("Prévenir les organismes concernés");
+    list.push("Prévoir le transport");
+  }
+
+  if(/voyage|vacances/i.test(subject)){
+    list.push("Vérifier les documents de voyage");
+    list.push("Préparer les bagages");
+  }
+
+  if(context){
+    list.push("Tenir compte de votre contrainte : "+context);
   }
 
   document.getElementById("checklistResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Checklist — ${escapeHTML(subject)}</h3>
+      <span class="verdict">Checklist personnalisée</span>
 
-      <ul class="result-list">
-        ${items.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <h3>${escapeHTML(subject)}</h3>
+
+      <ul>
+        ${list.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
       </ul>
 
     </div>
@@ -2815,123 +2341,318 @@ function generateChecklist(){
   `;
 }
 
-/* =========================
-   CAR
-========================= */
 
-function carForm(){
+/* =====================================================
+   COMPARE
+===================================================== */
 
-  return `
+function compareForm(){
 
-  <div class="form-card">
+return `
 
-    <div class="form-grid two">
+<div class="form-card">
 
-      <div class="field">
-        <label>Prix</label>
-        <input type="number" id="carPrice" placeholder="€">
-      </div>
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Année</label>
-        <input type="number" id="carYear" placeholder="2023">
-      </div>
-
-      <div class="field">
-        <label>Kilométrage</label>
-        <input type="number" id="carKm" placeholder="85000">
-      </div>
-
-      <div class="field">
-        <label>Motorisation</label>
-        <input id="carEngine" placeholder="Ex : 1.5 dCi 100">
-      </div>
-
+    <div class="field">
+      <label>Option A</label>
+      <input id="compareA">
     </div>
 
-    <div class="field" style="margin-top:13px;">
-      <label>Description de l'annonce</label>
-      <textarea id="carDescription" placeholder="Collez l'annonce ici…"></textarea>
+    <div class="field">
+      <label>Option B</label>
+      <input id="compareB">
     </div>
 
-    <button class="primary" onclick="analyzeCar()">
-      🚗 Analyser l'annonce
-    </button>
+    <div class="field">
+      <label>Prix A</label>
+      <input id="comparePriceA" type="number">
+    </div>
+
+    <div class="field">
+      <label>Prix B</label>
+      <input id="comparePriceB" type="number">
+    </div>
+
+    <div class="field full">
+      <label>Vos critères</label>
+      <textarea id="compareCriteria"
+        placeholder="Ex. prix, qualité, durée, garantie, praticité..."></textarea>
+    </div>
 
   </div>
 
-  <div id="carResult"></div>
+  <button class="submit" onclick="compareOptions()">
+    Comparer →
+  </button>
+
+  <div id="compareResult"></div>
+
+</div>
+
+`;
+}
+
+
+function compareOptions(){
+
+  const a=document.getElementById("compareA").value||"Option A";
+  const b=document.getElementById("compareB").value||"Option B";
+
+  const pa=Number(document.getElementById("comparePriceA").value||0);
+  const pb=Number(document.getElementById("comparePriceB").value||0);
+
+  const criteria=document.getElementById("compareCriteria").value;
+
+  let recommendation="À départager selon vos priorités.";
+
+  if(pa && pb){
+    recommendation=
+      pa<pb
+      ? `${a} est moins cher de ${(pb-pa).toFixed(2)} €.`
+      : pa>pb
+      ? `${b} est moins cher de ${(pa-pb).toFixed(2)} €.`
+      : "Les deux options ont le même prix.";
+  }
+
+  document.getElementById("compareResult").innerHTML=`
+
+    <div class="result">
+
+      <span class="verdict">Comparaison</span>
+
+      <h3>${escapeHTML(a)} vs ${escapeHTML(b)}</h3>
+
+      <p>${escapeHTML(recommendation)}</p>
+
+      ${
+        criteria
+        ? `<br><strong>Vos critères :</strong><p>${escapeHTML(criteria)}</p>`
+        : ""
+      }
+
+    </div>
 
   `;
 }
 
+
+/* =====================================================
+   DISCOUNT
+===================================================== */
+
+function discountForm(){
+
+return `
+
+<div class="form-card">
+
+  <div class="form-grid">
+
+    <div class="field">
+      <label>Prix initial</label>
+      <input id="discountPrice" type="number">
+    </div>
+
+    <div class="field">
+      <label>Remise (%)</label>
+      <input id="discountPercent" type="number">
+    </div>
+
+  </div>
+
+  <button class="submit" onclick="calculateDiscount()">
+    Calculer →
+  </button>
+
+  <div id="discountResult"></div>
+
+</div>
+
+`;
+}
+
+
+function calculateDiscount(){
+
+  const price=Number(document.getElementById("discountPrice").value||0);
+  const percent=Number(document.getElementById("discountPercent").value||0);
+
+  const saving=price*percent/100;
+  const final=price-saving;
+
+  document.getElementById("discountResult").innerHTML=`
+
+    <div class="result">
+
+      <h3>Prix final</h3>
+
+      <p style="font-size:30px;font-weight:900">
+        ${final.toFixed(2)} €
+      </p>
+
+      <p>
+        Économie : ${saving.toFixed(2)} €
+      </p>
+
+    </div>
+
+  `;
+}
+
+
+/* =====================================================
+   TRAVEL BUDGET
+===================================================== */
+
+function travelBudgetForm(){
+
+return `
+
+<div class="form-card">
+
+  <div class="form-grid">
+
+    <div class="field">
+      <label>Transport</label>
+      <input id="tbTransport" type="number">
+    </div>
+
+    <div class="field">
+      <label>Logement</label>
+      <input id="tbHousing" type="number">
+    </div>
+
+    <div class="field">
+      <label>Nourriture</label>
+      <input id="tbFood" type="number">
+    </div>
+
+    <div class="field">
+      <label>Activités</label>
+      <input id="tbActivities" type="number">
+    </div>
+
+    <div class="field">
+      <label>Autres dépenses</label>
+      <input id="tbOther" type="number">
+    </div>
+
+  </div>
+
+  <button class="submit" onclick="calculateTravelBudget()">
+    Calculer mon budget →
+  </button>
+
+  <div id="tbResult"></div>
+
+</div>
+
+`;
+}
+
+
+function calculateTravelBudget(){
+
+  const values=[
+    "tbTransport",
+    "tbHousing",
+    "tbFood",
+    "tbActivities",
+    "tbOther"
+  ].map(id=>Number(document.getElementById(id).value||0));
+
+  const total=values.reduce((a,b)=>a+b,0);
+
+  document.getElementById("tbResult").innerHTML=`
+
+    <div class="result">
+
+      <h3>Budget estimé</h3>
+
+      <p style="font-size:30px;font-weight:900">
+        ${total.toFixed(2)} €
+      </p>
+
+    </div>
+
+  `;
+}
+
+
+/* =====================================================
+   CAR
+===================================================== */
+
+function carForm(){
+
+return `
+
+<div class="form-card">
+
+  <div class="form-grid">
+
+    <div class="field">
+      <label>Prix</label>
+      <input id="carPrice" type="number">
+    </div>
+
+    <div class="field">
+      <label>Kilométrage</label>
+      <input id="carKm" type="number">
+    </div>
+
+    <div class="field">
+      <label>Année</label>
+      <input id="carYear" type="number">
+    </div>
+
+    <div class="field">
+      <label>Motorisation</label>
+      <input id="carEngine" placeholder="Ex. 1.5 dCi 100">
+    </div>
+
+    <div class="field full">
+      <label>Description de l'annonce</label>
+      <textarea id="carDescription"></textarea>
+    </div>
+
+  </div>
+
+  <button class="submit" onclick="analyzeCar()">
+    Analyser la voiture →
+  </button>
+
+  <div id="carResult"></div>
+
+</div>
+
+`;
+}
+
+
 function analyzeCar(){
 
-  const price=number("carPrice");
-  const year=number("carYear");
-  const km=number("carKm");
-  const engine=value("carEngine");
-  const description=value("carDescription");
+  const price=Number(document.getElementById("carPrice").value||0);
+  const km=Number(document.getElementById("carKm").value||0);
+  const year=Number(document.getElementById("carYear").value||0);
+  const engine=document.getElementById("carEngine").value||"Non précisée";
 
   let score=70;
-  const positives=[];
-  const risks=[];
-  const questions=[];
+  let risks=[];
 
-  const currentYear=new Date().getFullYear();
-
-  if(year){
-
-    const age=currentYear-year;
-
-    if(age<=3){
-      positives.push("Véhicule relativement récent.");
-      score+=8;
-    }
-
-    if(age>=10){
-      risks.push("Véhicule ancien : historique d'entretien particulièrement important.");
-      score-=8;
-    }
+  if(km>180000){
+    score-=15;
+    risks.push("Kilométrage élevé à prendre en compte.");
   }
 
-  if(km){
-
-    if(km<80000){
-      positives.push("Kilométrage inférieur à 80 000 km.");
-      score+=6;
-    }
-
-    if(km>180000){
-      risks.push("Kilométrage élevé : prévoir une vérification mécanique approfondie.");
-      score-=10;
-    }
+  if(year && new Date().getFullYear()-year>10){
+    score-=10;
+    risks.push("Véhicule relativement ancien.");
   }
 
-  if(price>0){
-
-    if(price<5000){
-      risks.push("Prix particulièrement bas : vérifier l'état et l'historique.");
-    }
-
-    questions.push("Le prix est-il négociable ?");
-  }
-
-  if(engine){
-    positives.push(`Motorisation indiquée : ${engine}`);
-  }else{
-    questions.push("Quelle est exactement la motorisation ?");
-  }
-
-  questions.push(
-    "Pouvez-vous fournir l'historique d'entretien ?",
-    "Le véhicule a-t-il eu des accidents ?",
-    "Quels frais sont à prévoir prochainement ?",
-    "Le contrôle technique est-il récent ?"
-  );
-
-  if(description.length<50){
-    risks.push("Description courte : demandez davantage d'informations.");
+  if(!price){
+    risks.push("Prix non renseigné.");
   }
 
   score=Math.max(0,Math.min(100,score));
@@ -2940,105 +2661,119 @@ function analyzeCar(){
 
     <div class="result">
 
-      <h3>Analyse du véhicule</h3>
+      <span class="verdict">Score indicatif : ${score}/100</span>
 
-      <div class="score">${score}/100</div>
+      <h3>Analyse de l'annonce</h3>
 
-      <div class="verdict">
-        ${score>=80?"Plutôt intéressant":score>=60?"À examiner":"Prudence"}
-      </div>
-
-      <ul class="result-list">
-
-        ${positives.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
-
-        ${risks.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
-
-        ${questions.map(x=>`<li>Question : ${escapeHTML(x)}</li>`).join("")}
-
+      <ul>
+        <li>Prix : ${price ? price+" €" : "non renseigné"}</li>
+        <li>Kilométrage : ${km ? km.toLocaleString("fr-FR")+" km" : "non renseigné"}</li>
+        <li>Année : ${year || "non renseignée"}</li>
+        <li>Motorisation : ${escapeHTML(engine)}</li>
       </ul>
 
-      <p style="margin-top:18px;">
-        ⚠️ Analyse indicative basée uniquement sur les informations saisies.
-        Elle ne remplace pas un contrôle mécanique.
-      </p>
+      <br>
+
+      <strong>Points à vérifier</strong>
+
+      <ul>
+        ${
+          risks.length
+          ? risks.map(x=>`<li>${escapeHTML(x)}</li>`).join("")
+          : "<li>Aucun risque évident détecté avec les informations fournies.</li>"
+        }
+      </ul>
+
+      <br>
+
+      <strong>À demander</strong>
+
+      <ul>
+        <li>Factures d'entretien</li>
+        <li>Historique du véhicule</li>
+        <li>Contrôle technique</li>
+        <li>Nombre de propriétaires</li>
+        <li>État des pneus et freins</li>
+      </ul>
 
     </div>
 
   `;
 }
 
-/* =========================
+
+/* =====================================================
    CAR COST
-========================= */
+===================================================== */
 
 function carCostForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Crédit / financement</label>
-        <input type="number" id="ccFinance" placeholder="€/mois">
-      </div>
-
-      <div class="field">
-        <label>Assurance</label>
-        <input type="number" id="ccInsurance" placeholder="€/mois">
-      </div>
-
-      <div class="field">
-        <label>Carburant</label>
-        <input type="number" id="ccFuel" placeholder="€/mois">
-      </div>
-
-      <div class="field">
-        <label>Entretien</label>
-        <input type="number" id="ccMaintenance" placeholder="€/mois">
-      </div>
-
-      <div class="field">
-        <label>Parking / péages</label>
-        <input type="number" id="ccExtra" placeholder="€/mois">
-      </div>
-
+    <div class="field">
+      <label>Carburant / mois</label>
+      <input id="ccFuel" type="number">
     </div>
 
-    <button class="primary" onclick="calculateCarCost()">
-      🧮 Calculer
-    </button>
+    <div class="field">
+      <label>Assurance / mois</label>
+      <input id="ccInsurance" type="number">
+    </div>
+
+    <div class="field">
+      <label>Entretien / mois</label>
+      <input id="ccMaintenance" type="number">
+    </div>
+
+    <div class="field">
+      <label>Autres frais / mois</label>
+      <input id="ccOther" type="number">
+    </div>
 
   </div>
 
-  <div id="carCostResult"></div>
+  <button class="submit" onclick="calculateCarCost()">
+    Calculer →
+  </button>
 
-  `;
+  <div id="ccResult"></div>
+
+</div>
+
+`;
 }
+
 
 function calculateCarCost(){
 
-  const total=
-    number("ccFinance")+
-    number("ccInsurance")+
-    number("ccFuel")+
-    number("ccMaintenance")+
-    number("ccExtra");
+  const ids=[
+    "ccFuel",
+    "ccInsurance",
+    "ccMaintenance",
+    "ccOther"
+  ];
 
-  document.getElementById("carCostResult").innerHTML=`
+  const total=ids.reduce(
+    (sum,id)=>sum+Number(document.getElementById(id).value||0),
+    0
+  );
+
+  document.getElementById("ccResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Coût mensuel estimé</h3>
+      <h3>Coût estimé</h3>
 
-      <div class="score">${formatEuro(total)}</div>
+      <p style="font-size:30px;font-weight:900">
+        ${total.toFixed(2)} €/mois
+      </p>
 
       <p>
-        Soit environ
-        <strong>${formatEuro(total*12)}</strong>
-        par an.
+        Soit environ ${(total*12).toFixed(2)} €/an.
       </p>
 
     </div>
@@ -3046,61 +2781,54 @@ function calculateCarCost(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    CAR CHECKLIST
-========================= */
+===================================================== */
 
 function carChecklistForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="field">
-      <label>Type de véhicule</label>
-      <input id="carCheckType" placeholder="Ex : Clio 5 diesel">
-    </div>
+  <button class="submit" onclick="generateCarChecklist()">
+    Générer la checklist →
+  </button>
 
-    <button class="primary" onclick="generateCarChecklist()">
-      🔧 Générer la checklist
-    </button>
+  <div id="carChecklistResult"></div>
 
-  </div>
+</div>
 
-  <div id="carCheckResult"></div>
-
-  `;
+`;
 }
+
 
 function generateCarChecklist(){
 
-  const type=value("carCheckType")||"véhicule";
-
-  const items=[
-    "Vérifier l'identité du vendeur",
+  const list=[
     "Vérifier la carte grise",
-    "Contrôler le kilométrage",
-    "Demander l'historique d'entretien",
-    "Vérifier les pneus",
-    "Vérifier les freins",
-    "Contrôler les niveaux",
-    "Tester les feux",
-    "Tester climatisation et équipements",
-    "Écouter le moteur à froid",
-    "Effectuer un essai routier",
     "Vérifier le contrôle technique",
-    "Vérifier les éventuels frais à prévoir",
-    "Comparer le prix avec des véhicules similaires"
+    "Demander les factures d'entretien",
+    "Vérifier le niveau et l'état des fluides",
+    "Contrôler les pneus",
+    "Contrôler les freins",
+    "Tester climatisation et chauffage",
+    "Tester éclairage et équipements",
+    "Faire un essai routier",
+    "Vérifier les voyants du tableau de bord",
+    "Vérifier la cohérence kilométrage / historique",
+    "Vérifier l'identité du vendeur"
   ];
 
-  document.getElementById("carCheckResult").innerHTML=`
+  document.getElementById("carChecklistResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Checklist — ${escapeHTML(type)}</h3>
+      <h3>Avant l'achat</h3>
 
-      <ul class="result-list">
-        ${items.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <ul>
+        ${list.map(x=>`<li>${x}</li>`).join("")}
       </ul>
 
     </div>
@@ -3108,74 +2836,72 @@ function generateCarChecklist(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    RENT
-========================= */
+===================================================== */
 
 function rentForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Revenus mensuels</label>
-        <input type="number" id="rentIncome">
-      </div>
-
-      <div class="field">
-        <label>Loyer</label>
-        <input type="number" id="rentAmount">
-      </div>
-
-      <div class="field">
-        <label>Charges</label>
-        <input type="number" id="rentCharges">
-      </div>
-
+    <div class="field">
+      <label>Revenus mensuels</label>
+      <input id="rentIncome" type="number">
     </div>
 
-    <button class="primary" onclick="analyzeRent()">
-      🏠 Analyser
-    </button>
+    <div class="field">
+      <label>Loyer</label>
+      <input id="rentAmount" type="number">
+    </div>
+
+    <div class="field">
+      <label>Charges</label>
+      <input id="rentCharges" type="number">
+    </div>
 
   </div>
 
+  <button class="submit" onclick="analyzeRent()">
+    Analyser →
+  </button>
+
   <div id="rentResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function analyzeRent(){
 
-  const income=number("rentIncome");
-  const rent=number("rentAmount");
-  const charges=number("rentCharges");
+  const income=Number(document.getElementById("rentIncome").value||0);
+  const rent=Number(document.getElementById("rentAmount").value||0);
+  const charges=Number(document.getElementById("rentCharges").value||0);
 
   const total=rent+charges;
   const ratio=income ? total/income*100 : 0;
 
-  let verdict="À surveiller";
-
-  if(ratio<=30) verdict="Poids du logement raisonnable";
-  else if(ratio<=35) verdict="Poids du logement à surveiller";
-  else verdict="Logement très lourd dans le budget";
+  const verdict=
+    ratio<=30 ? "Plutôt confortable" :
+    ratio<=35 ? "À surveiller" :
+    "Charge logement élevée";
 
   document.getElementById("rentResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Analyse du logement</h3>
+      <span class="verdict">${verdict}</span>
 
-      <div class="score">${Math.round(ratio)}%</div>
-
-      <div class="verdict">${verdict}</div>
+      <h3>${ratio.toFixed(1)} % des revenus</h3>
 
       <p>
-        Coût logement estimé :
-        <strong>${formatEuro(total)}/mois</strong>
+        Logement : ${total.toFixed(2)} €/mois.
       </p>
 
     </div>
@@ -3183,158 +2909,75 @@ function analyzeRent(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    MOVE
-========================= */
+===================================================== */
 
 function moveForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Distance du déménagement</label>
-        <select id="moveDistance">
-          <option>Local</option>
-          <option>Régional</option>
-          <option>Longue distance</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Besoin d'un camion ?</label>
-        <select id="moveTruck">
-          <option>Oui</option>
-          <option>Non</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Nombre de pièces</label>
-        <input type="number" id="moveRooms" value="2">
-      </div>
-
+    <div class="field">
+      <label>Cartons</label>
+      <input id="moveBoxes" type="number">
     </div>
 
-    <button class="primary" onclick="generateMove()">
-      📦 Préparer mon déménagement
-    </button>
+    <div class="field">
+      <label>Location véhicule</label>
+      <input id="moveTruck" type="number">
+    </div>
+
+    <div class="field">
+      <label>Dépôt de garantie</label>
+      <input id="moveDeposit" type="number">
+    </div>
+
+    <div class="field">
+      <label>Frais divers</label>
+      <input id="moveOther" type="number">
+    </div>
 
   </div>
 
+  <button class="submit" onclick="calculateMove()">
+    Calculer →
+  </button>
+
   <div id="moveResult"></div>
 
-  `;
+</div>
+
+`;
 }
 
-function generateMove(){
 
-  const distance=value("moveDistance");
-  const truck=value("moveTruck");
-  const rooms=number("moveRooms");
+function calculateMove(){
 
-  const items=[
-    "Prévenir les organismes concernés",
-    "Préparer les cartons progressivement",
-    "Étiqueter les cartons par pièce",
-    "Préparer une boîte avec les essentiels du premier jour",
-    "Relever les compteurs si nécessaire",
-    "Organiser l'état des lieux",
-    "Prévoir ménage de départ et d'arrivée"
+  const ids=[
+    "moveBoxes",
+    "moveTruck",
+    "moveDeposit",
+    "moveOther"
   ];
 
-  if(truck==="Oui"){
-    items.push(
-      "Réserver le véhicule suffisamment tôt",
-      "Vérifier assurance et conditions de location"
-    );
-  }
-
-  if(rooms>=3){
-    items.push(
-      "Prévoir plusieurs personnes pour le chargement",
-      "Organiser le chargement par ordre de priorité"
-    );
-  }
-
-  if(distance==="Longue distance"){
-    items.push(
-      "Prévoir une marge de temps supplémentaire",
-      "Anticiper carburant et péages"
-    );
-  }
+  const total=ids.reduce(
+    (s,id)=>s+Number(document.getElementById(id).value||0),
+    0
+  );
 
   document.getElementById("moveResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Checklist déménagement</h3>
+      <h3>Budget estimé</h3>
 
-      <ul class="result-list">
-        ${items.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
-      </ul>
-
-    </div>
-
-  `;
-}
-
-/* =========================
-   DISCOUNT
-========================= */
-
-function discountForm(){
-
-  return `
-
-  <div class="form-card">
-
-    <div class="form-grid two">
-
-      <div class="field">
-        <label>Prix initial</label>
-        <input type="number" id="discountPrice">
-      </div>
-
-      <div class="field">
-        <label>Réduction (%)</label>
-        <input type="number" id="discountPercent">
-      </div>
-
-    </div>
-
-    <button class="primary" onclick="calculateDiscount()">
-      🏷️ Calculer
-    </button>
-
-  </div>
-
-  <div id="discountResult"></div>
-
-  `;
-}
-
-function calculateDiscount(){
-
-  const price=number("discountPrice");
-  const percent=number("discountPercent");
-
-  const saved=price*percent/100;
-  const final=price-saved;
-
-  document.getElementById("discountResult").innerHTML=`
-
-    <div class="result">
-
-      <h3>Prix final</h3>
-
-      <div class="score">${formatEuro(final)}</div>
-
-      <p>
-        Vous économisez <strong>${formatEuro(saved)}</strong>.
+      <p style="font-size:30px;font-weight:900">
+        ${total.toFixed(2)} €
       </p>
 
     </div>
@@ -3342,82 +2985,82 @@ function calculateDiscount(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    JOB
-========================= */
+===================================================== */
 
 function jobForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="field">
-      <label>Texte de l'offre</label>
-      <textarea id="jobText" style="min-height:240px;" placeholder="Collez l'offre d'emploi…"></textarea>
-    </div>
+  <div class="field">
+    <label>Collez l'offre d'emploi</label>
 
-    <button class="primary" onclick="analyzeJob()">
-      💼 Analyser l'offre
-    </button>
-
+    <textarea id="jobText"
+      style="min-height:250px"></textarea>
   </div>
+
+  <button class="submit" onclick="analyzeJob()">
+    Analyser l'offre →
+  </button>
 
   <div id="jobResult"></div>
 
-  `;
+</div>
+
+`;
 }
+
 
 function analyzeJob(){
 
-  const text=value("jobText");
+  const text=document.getElementById("jobText").value;
 
-  if(!text){
-    alert("Collez l'offre d'emploi.");
-    return;
-  }
+  const found=[];
 
-  const words=text.split(/\s+/).length;
-
-  const signals=[
+  [
     "salaire",
-    "horaires",
+    "CDI",
+    "CDD",
     "télétravail",
+    "horaires",
     "expérience",
-    "formation",
     "permis",
-    "avantages",
-    "contrat"
-  ];
-
-  const found=signals.filter(s=>
-    text.toLowerCase().includes(s)
-  );
+    "formation"
+  ].forEach(word=>{
+    if(text.toLowerCase().includes(word.toLowerCase())){
+      found.push(word);
+    }
+  });
 
   document.getElementById("jobResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Lecture rapide</h3>
+      <h3>Éléments repérés</h3>
 
-      <ul class="result-list">
+      <ul>
+        ${
+          found.length
+          ? found.map(x=>`<li>${x}</li>`).join("")
+          : "<li>Aucun élément prédéfini détecté.</li>"
+        }
+      </ul>
 
-        <li>${words} mots environ dans l'offre.</li>
+      <br>
 
-        <li>
-          Informations repérées :
-          ${found.length ? found.join(", ") : "peu d'informations standard détectées"}.
-        </li>
+      <strong>À vérifier avant de postuler</strong>
 
-        <li>
-          Vérifiez les missions, le salaire, les horaires,
-          le contrat et les avantages.
-        </li>
-
-        <li>
-          Comparez les exigences du poste avec votre profil.
-        </li>
-
+      <ul>
+        <li>Rémunération</li>
+        <li>Type de contrat</li>
+        <li>Horaires</li>
+        <li>Lieu</li>
+        <li>Avantages</li>
+        <li>Missions réelles du poste</li>
       </ul>
 
     </div>
@@ -3425,53 +3068,56 @@ function analyzeJob(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    INTERVIEW
-========================= */
+===================================================== */
 
 function interviewForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Poste visé</label>
-        <input id="interviewJob" placeholder="Ex : infirmier, vendeur…">
-      </div>
-
-      <div class="field">
-        <label>Expérience</label>
-        <input id="interviewExperience" placeholder="Ex : débutant, 2 ans…">
-      </div>
-
+    <div class="field">
+      <label>Poste visé</label>
+      <input id="interviewJob">
     </div>
 
-    <button class="primary" onclick="generateInterview()">
-      🎤 Préparer mon entretien
-    </button>
+    <div class="field">
+      <label>Expérience</label>
+      <input id="interviewExperience">
+    </div>
 
   </div>
 
+  <button class="submit" onclick="prepareInterview()">
+    Préparer mon entretien →
+  </button>
+
   <div id="interviewResult"></div>
 
-  `;
+</div>
+
+`;
 }
 
-function generateInterview(){
 
-  const job=value("interviewJob")||"ce poste";
+function prepareInterview(){
 
-  const questions=[
-    "Présentez-vous en quelques phrases.",
-    "Pourquoi souhaitez-vous rejoindre cette entreprise ?",
-    "Pourquoi ce poste vous intéresse-t-il ?",
-    "Quelles sont vos principales qualités ?",
-    "Quel point souhaitez-vous améliorer ?",
-    "Parlez-moi d'une situation difficile que vous avez gérée.",
-    "Pourquoi devrions-nous vous choisir ?",
+  const job=
+    document.getElementById("interviewJob").value ||
+    "ce poste";
+
+  const list=[
+    "Présentez-vous.",
+    "Pourquoi souhaitez-vous rejoindre notre entreprise ?",
+    "Pourquoi ce poste ?",
+    "Quels sont vos points forts ?",
+    "Quel est votre principal axe d'amélioration ?",
+    "Parlez-nous d'une situation difficile que vous avez gérée.",
     "Avez-vous des questions pour nous ?"
   ];
 
@@ -3479,10 +3125,10 @@ function generateInterview(){
 
     <div class="result">
 
-      <h3>Entretien — ${escapeHTML(job)}</h3>
+      <h3>Préparation pour ${escapeHTML(job)}</h3>
 
-      <ul class="result-list">
-        ${questions.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <ul>
+        ${list.map(x=>`<li>${x}</li>`).join("")}
       </ul>
 
     </div>
@@ -3490,81 +3136,88 @@ function generateInterview(){
   `;
 }
 
-/* =========================
+
+/* =====================================================
    STUDY
-========================= */
+===================================================== */
 
 function studyForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Matière / objectif</label>
-        <input id="studySubject" placeholder="Ex : UE 2.11">
-      </div>
-
-      <div class="field">
-        <label>Jours disponibles</label>
-        <input type="number" id="studyDays" value="7" min="1">
-      </div>
-
-      <div class="field">
-        <label>Temps par jour</label>
-        <input type="number" id="studyMinutes" value="60" min="15">
-      </div>
-
+    <div class="field">
+      <label>Matière</label>
+      <input id="studySubject">
     </div>
 
-    <button class="primary" onclick="generateStudy()">
-      📚 Créer mon planning
-    </button>
+    <div class="field">
+      <label>Nombre de jours</label>
+      <input id="studyDays" type="number">
+    </div>
+
+    <div class="field">
+      <label>Temps disponible / jour</label>
+      <input id="studyTime" type="number">
+    </div>
 
   </div>
 
+  <button class="submit" onclick="createStudyPlan()">
+    Créer mon planning →
+  </button>
+
   <div id="studyResult"></div>
 
-  `;
+</div>
+
+`;
 }
 
-function generateStudy(){
 
-  const subject=value("studySubject")||"votre matière";
-  const days=number("studyDays")||1;
-  const minutes=number("studyMinutes")||60;
+function createStudyPlan(){
 
-  const items=[];
+  const subject=
+    document.getElementById("studySubject").value ||
+    "votre matière";
+
+  const days=Number(
+    document.getElementById("studyDays").value||7
+  );
+
+  const time=Number(
+    document.getElementById("studyTime").value||1
+  );
+
+  let list=[];
 
   for(let i=1;i<=days;i++){
 
-    let task="";
-
-    if(i===1){
-      task="Compréhension du cours + repérage des notions importantes";
-    }else if(i===days){
-      task="Révision finale + auto-évaluation";
+    if(i===days){
+      list.push(`Jour ${i} : révision finale + auto-évaluation`);
     }else if(i%3===0){
-      task="QCM / exercices + correction";
+      list.push(`Jour ${i} : exercices + révision active`);
     }else{
-      task="Révision active + fiches + rappel sans regarder le cours";
+      list.push(`Jour ${i} : apprentissage de ${subject}`);
     }
 
-    items.push(
-      `Jour ${i} — ${task} (${minutes} min)`
-    );
   }
 
   document.getElementById("studyResult").innerHTML=`
 
     <div class="result">
 
-      <h3>Planning — ${escapeHTML(subject)}</h3>
+      <span class="verdict">
+        ${days} jours · ${time} h/jour
+      </span>
 
-      <ul class="result-list">
-        ${items.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
+      <h3>Planning</h3>
+
+      <ul>
+        ${list.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
       </ul>
 
     </div>
@@ -3572,259 +3225,249 @@ function generateStudy(){
   `;
 }
 
-/* =========================
-   TRAVEL BUDGET
-========================= */
 
-function travelBudgetForm(){
-
-  return `
-
-  <div class="form-card">
-
-    <div class="form-grid two">
-
-      <div class="field">
-        <label>Transport</label>
-        <input type="number" id="tbTransport" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Logement</label>
-        <input type="number" id="tbHousing" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Repas</label>
-        <input type="number" id="tbFood" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Activités</label>
-        <input type="number" id="tbActivities" placeholder="€">
-      </div>
-
-      <div class="field">
-        <label>Autres</label>
-        <input type="number" id="tbOther" placeholder="€">
-      </div>
-
-    </div>
-
-    <button class="primary" onclick="calculateTravelBudget()">
-      💶 Calculer
-    </button>
-
-  </div>
-
-  <div id="tbResult"></div>
-
-  `;
-}
-
-function calculateTravelBudget(){
-
-  const total=
-    number("tbTransport")+
-    number("tbHousing")+
-    number("tbFood")+
-    number("tbActivities")+
-    number("tbOther");
-
-  const margin=total*.10;
-
-  document.getElementById("tbResult").innerHTML=`
-
-    <div class="result">
-
-      <h3>Budget voyage</h3>
-
-      <div class="score">${formatEuro(total)}</div>
-
-      <p>
-        Budget conseillé avec 10 % de marge :
-        <strong>${formatEuro(total+margin)}</strong>
-      </p>
-
-    </div>
-
-  `;
-}
-
-/* =========================
+/* =====================================================
    EVENT
-========================= */
+===================================================== */
 
 function eventForm(){
 
-  return `
+return `
 
-  <div class="form-card">
+<div class="form-card">
 
-    <div class="form-grid two">
+  <div class="form-grid">
 
-      <div class="field">
-        <label>Événement</label>
-        <input id="eventName" placeholder="Ex : anniversaire">
-      </div>
-
-      <div class="field">
-        <label>Nombre d'invités</label>
-        <input type="number" id="eventGuests" value="20">
-      </div>
-
-      <div class="field">
-        <label>Budget total</label>
-        <input type="number" id="eventBudget" placeholder="€">
-      </div>
-
+    <div class="field">
+      <label>Nombre d'invités</label>
+      <input id="eventGuests" type="number">
     </div>
 
-    <button class="primary" onclick="generateEvent()">
-      🎉 Organiser
-    </button>
+    <div class="field">
+      <label>Lieu</label>
+      <input id="eventVenue" type="number">
+    </div>
+
+    <div class="field">
+      <label>Nourriture</label>
+      <input id="eventFood" type="number">
+    </div>
+
+    <div class="field">
+      <label>Décoration</label>
+      <input id="eventDecor" type="number">
+    </div>
+
+    <div class="field">
+      <label>Autres</label>
+      <input id="eventOther" type="number">
+    </div>
 
   </div>
 
+  <button class="submit" onclick="calculateEvent()">
+    Calculer mon budget →
+  </button>
+
   <div id="eventResult"></div>
 
-  `;
+</div>
+
+`;
 }
 
-function generateEvent(){
 
-  const name=value("eventName")||"événement";
-  const guests=number("eventGuests")||1;
-  const budget=number("eventBudget")||0;
+function calculateEvent(){
 
-  const perPerson=guests ? budget/guests : 0;
-
-  const items=[
-    "Définir le lieu",
-    "Établir la liste des invités",
-    "Prévoir nourriture et boissons",
-    "Préparer décoration et matériel",
-    "Organiser musique / animation",
-    "Prévoir nettoyage après l'événement"
+  const ids=[
+    "eventVenue",
+    "eventFood",
+    "eventDecor",
+    "eventOther"
   ];
+
+  const total=ids.reduce(
+    (s,id)=>s+Number(document.getElementById(id).value||0),
+    0
+  );
+
+  const guests=Number(
+    document.getElementById("eventGuests").value||0
+  );
 
   document.getElementById("eventResult").innerHTML=`
 
     <div class="result">
 
-      <h3>${escapeHTML(name)}</h3>
+      <h3>Budget estimé</h3>
 
-      <ul class="result-list">
+      <p style="font-size:30px;font-weight:900">
+        ${total.toFixed(2)} €
+      </p>
 
-        <li>${guests} invité(s)</li>
-
-        <li>
-          Budget total :
-          ${formatEuro(budget)}
-        </li>
-
-        <li>
-          Budget par personne :
-          ${formatEuro(perPerson)}
-        </li>
-
-        ${items.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
-
-      </ul>
+      ${
+        guests
+        ? `<p>${(total/guests).toFixed(2)} € par invité.</p>`
+        : ""
+      }
 
     </div>
 
   `;
 }
 
-/* =========================
-   DOCUMENT CHECKLIST
-========================= */
 
-function documentChecklistForm(){
+/* =====================================================
+   SMART SEARCH
+===================================================== */
 
-  return `
+function smartSearch(){
 
-  <div class="form-card">
+  const input=document.getElementById("homeSearch");
 
-    <div class="field">
-      <label>Démarche</label>
-      <input id="docCheckSubject" placeholder="Ex : changement d'adresse">
-    </div>
+  const query=(input.value||"").toLowerCase().trim();
 
-    <button class="primary" onclick="generateDocumentChecklist()">
-      📋 Générer
-    </button>
+  if(!query) return;
 
-  </div>
+  const rules=[
 
-  <div id="docCheckResult"></div>
+    {
+      words:["voyage","vacances","avion","partir","week-end"],
+      tool:"travel"
+    },
 
-  `;
-}
+    {
+      words:["achat","acheter","annonce","produit","occasion","vendeur"],
+      tool:"purchase"
+    },
 
-function generateDocumentChecklist(){
+    {
+      words:["contrat","document","courrier","facture","papier"],
+      tool:"document"
+    },
 
-  const subject=value("docCheckSubject")||"votre démarche";
+    {
+      words:["budget","argent","dépense","revenu"],
+      tool:"budget"
+    },
 
-  const items=[
-    "Identifier l'organisme concerné",
-    "Vérifier les documents nécessaires",
-    "Préparer les justificatifs",
-    "Vérifier les délais",
-    "Effectuer la démarche",
-    "Conserver une preuve de la démarche",
-    "Noter la date de suivi ou de réponse attendue"
+    {
+      words:["voiture","auto","véhicule","clio","voiture"],
+      tool:"car"
+    },
+
+    {
+      words:["loyer","appartement","logement"],
+      tool:"rent"
+    },
+
+    {
+      words:["déménagement","déménager","cartons"],
+      tool:"move"
+    },
+
+    {
+      words:["travail","emploi","job","offre"],
+      tool:"job"
+    },
+
+    {
+      words:["entretien","recruteur","interview"],
+      tool:"interview"
+    },
+
+    {
+      words:["révision","réviser","étude","études","examen"],
+      tool:"study"
+    },
+
+    {
+      words:["mariage","anniversaire","fête","événement"],
+      tool:"event"
+    },
+
+    {
+      words:["remise","promotion","réduction"],
+      tool:"discount"
+    },
+
+    {
+      words:["comparaison","comparer","versus"],
+      tool:"compare"
+    },
+
+    {
+      words:["checklist","liste","organiser","organisation"],
+      tool:"checklist"
+    }
+
   ];
 
-  document.getElementById("docCheckResult").innerHTML=`
+  let selected=null;
 
-    <div class="result">
+  for(const rule of rules){
 
-      <h3>${escapeHTML(subject)}</h3>
-
-      <ul class="result-list">
-        ${items.map(x=>`<li>${escapeHTML(x)}</li>`).join("")}
-      </ul>
-
-    </div>
-
-  `;
-}
-
-/* =========================
-   HELPERS
-========================= */
-
-function value(id){
-
-  const element=document.getElementById(id);
-
-  return element ? element.value.trim() : "";
-}
-
-function number(id){
-
-  const n=parseFloat(value(id));
-
-  return Number.isFinite(n) ? n : 0;
-}
-
-function formatEuro(number){
-
-  return new Intl.NumberFormat(
-    "fr-FR",
-    {
-      style:"currency",
-      currency:"EUR",
-      maximumFractionDigits:0
+    if(rule.words.some(word=>query.includes(word))){
+      selected=rule.tool;
+      break;
     }
-  ).format(number||0);
+
+  }
+
+  if(selected){
+    openTool(selected);
+  }else{
+    openTool("checklist");
+  }
+
 }
 
-function escapeHTML(str){
 
-  return String(str)
+/* =====================================================
+   THEME
+===================================================== */
+
+function toggleTheme(){
+
+  const current=
+    document.documentElement.getAttribute("data-theme");
+
+  const next=current==="dark" ? "light" : "dark";
+
+  if(next==="dark"){
+    document.documentElement.setAttribute(
+      "data-theme",
+      "dark"
+    );
+  }else{
+    document.documentElement.removeAttribute("data-theme");
+  }
+
+  localStorage.setItem(STORAGE_THEME,next);
+}
+
+
+(function(){
+
+  const theme=localStorage.getItem(STORAGE_THEME);
+
+  if(theme==="dark"){
+    document.documentElement.setAttribute(
+      "data-theme",
+      "dark"
+    );
+  }
+
+})();
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value)
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -3832,14 +3475,12 @@ function escapeHTML(str){
     .replaceAll("'","&#039;");
 }
 
-/* =========================
-   INITIALISATION
-========================= */
 
-loadTheme();
-renderPopular();
+/* =====================================================
+   INIT
+===================================================== */
+
 renderAllTools();
-renderProjects();
 
 </script>
 
