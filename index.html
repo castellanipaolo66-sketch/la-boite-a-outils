@@ -2,219 +2,201 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>La Boîte à Outils</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#f5f6f8;
+color:#111827
 }
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f6f7f9;
-  color: #111827;
+header{
+padding:20px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#fff;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:5
 }
-
-header {
-  padding: 22px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.logo{font-size:20px;font-weight:800}
+.badge{
+font-size:12px;
+padding:7px 11px;
+border:1px solid #ddd;
+border-radius:20px;
+color:#666
 }
-
-.logo {
-  font-size: 20px;
-  font-weight: 800;
+main{max-width:1100px;margin:auto;padding:30px 6% 80px}
+.hero{text-align:center;padding:45px 0}
+.hero h1{
+font-size:clamp(38px,7vw,68px);
+line-height:1;
+letter-spacing:-3px;
+margin:0 0 20px
 }
-
-.badge {
-  font-size: 12px;
-  color: #6b7280;
-  background: white;
-  border: 1px solid #e5e7eb;
-  padding: 7px 10px;
-  border-radius: 20px;
+.hero p{color:#6b7280;font-size:18px}
+.search{
+max-width:700px;
+margin:30px auto;
+background:white;
+padding:7px;
+border-radius:16px;
+display:flex;
+box-shadow:0 10px 35px #0000000d;
+border:1px solid #e5e7eb
 }
-
-main {
-  max-width: 1100px;
-  margin: auto;
-  padding: 35px 6% 80px;
+.search input{
+flex:1;
+border:0;
+outline:0;
+padding:14px;
+font-size:16px
 }
-
-.hero {
-  text-align: center;
-  padding: 30px 0 45px;
+button{
+border:0;
+cursor:pointer;
+font:inherit
 }
-
-.hero h1 {
-  font-size: clamp(40px, 7vw, 68px);
-  line-height: 1;
-  letter-spacing: -3px;
-  margin-bottom: 20px;
+.primary{
+background:#111827;
+color:white;
+padding:13px 18px;
+border-radius:10px;
+font-weight:700
 }
-
-.hero p {
-  color: #6b7280;
-  font-size: 18px;
+.secondary{
+background:#eef0f3;
+padding:11px 15px;
+border-radius:10px
 }
-
-.search {
-  max-width: 700px;
-  margin: 30px auto;
-  display: flex;
-  background: white;
-  border: 1px solid #e5e7eb;
-  padding: 7px;
-  border-radius: 16px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.06);
+h2{margin-top:35px}
+.grid{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:12px
 }
-
-.search input {
-  flex: 1;
-  border: 0;
-  outline: none;
-  padding: 14px;
-  font-size: 16px;
+.card{
+background:white;
+border:1px solid #e5e7eb;
+border-radius:16px;
+padding:18px;
+transition:.2s
 }
-
-button {
-  cursor: pointer;
+.card:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 25px #0000000d
 }
-
-.search button,
-.primary {
-  background: #111827;
-  color: white;
-  border: none;
-  border-radius: 11px;
-  padding: 13px 18px;
-  font-weight: 700;
+.category{cursor:pointer}
+.category .emoji{font-size:28px}
+.category b{display:block;margin-top:10px}
+.tools{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px
 }
-
-h2 {
-  margin-top: 35px;
+.tool{cursor:pointer}
+.tool .emoji{font-size:27px}
+.tool h3{margin:9px 0 6px}
+.tool p{
+font-size:13px;
+color:#6b7280;
+line-height:1.4
 }
-
-.grid,
-.tools {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+.view{display:none}
+.view.active{display:block}
+.topbar{
+display:flex;
+gap:10px;
+align-items:center;
+margin-bottom:20px
 }
-
-.card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 18px;
-  transition: .2s;
+.form{
+background:white;
+padding:22px;
+border-radius:18px;
+border:1px solid #e5e7eb;
+margin-top:15px
 }
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+.field{margin:15px 0}
+label{
+display:block;
+font-weight:700;
+margin-bottom:7px
 }
-
-.category {
-  cursor: pointer;
+input,textarea,select{
+width:100%;
+padding:12px;
+border:1px solid #dfe3e8;
+border-radius:10px;
+font:inherit;
+background:white
 }
-
-.category span,
-.tool-icon {
-  font-size: 27px;
+textarea{min-height:130px;resize:vertical}
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px
 }
-
-.category b {
-  display: block;
-  margin-top: 10px;
+.result{
+margin-top:18px;
+background:#f8fafc;
+border-radius:14px;
+padding:18px;
+line-height:1.6
 }
-
-.tool {
-  cursor: pointer;
+.score{
+font-size:42px;
+font-weight:900
 }
-
-.tool h3 {
-  font-size: 16px;
-  margin-bottom: 7px;
+.good{color:#15803d}
+.warn{color:#b45309}
+.bad{color:#b91c1c}
+.chips{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin:12px 0
 }
-
-.tool p {
-  color: #6b7280;
-  font-size: 13px;
-  line-height: 1.4;
+.chip{
+padding:7px 10px;
+background:#eef0f3;
+border-radius:20px;
+font-size:13px
 }
-
-.panel {
-  display: none;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 20px;
-  padding: 25px;
-  margin-top: 25px;
+.check{
+padding:10px 0;
+border-bottom:1px solid #e5e7eb
 }
-
-.panel.active {
-  display: block;
+.big{
+font-size:28px;
+font-weight:800
 }
-
-.back {
-  border: none;
-  background: #eef0f3;
-  padding: 10px 14px;
-  border-radius: 10px;
+.empty{
+text-align:center;
+padding:40px;
+color:#6b7280
 }
-
-.field {
-  margin: 17px 0;
+footer{
+text-align:center;
+padding:30px;
+color:#9ca3af;
+font-size:12px
 }
-
-.field label {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 7px;
+@media(max-width:800px){
+.grid{grid-template-columns:repeat(2,1fr)}
+.tools{grid-template-columns:1fr 1fr}
 }
-
-.field input,
-.field textarea {
-  width: 100%;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 12px;
-  font: inherit;
-}
-
-.result {
-  display: none;
-  margin-top: 20px;
-  padding: 18px;
-  background: #f8fafc;
-  border-radius: 13px;
-  line-height: 1.6;
-}
-
-.result.show {
-  display: block;
-}
-
-@media(max-width:800px) {
-  .grid,
-  .tools {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media(max-width:500px) {
-  .hero h1 {
-    letter-spacing: -2px;
-  }
-
-  .badge {
-    display: none;
-  }
+@media(max-width:520px){
+.hero h1{letter-spacing:-2px}
+.tools,.row{grid-template-columns:1fr}
+header{padding:15px 5%}
+main{padding:20px 5% 60px}
 }
 </style>
 </head>
@@ -222,507 +204,1025 @@ h2 {
 <body>
 
 <header>
-  <div class="logo">🧰 La Boîte à Outils</div>
-  <div class="badge">Prototype V0.2</div>
+<div class="logo">🧰 La Boîte à Outils</div>
+<div class="badge">V1 • Prototype</div>
 </header>
 
 <main>
 
-<section id="home">
+<!-- ACCUEIL -->
+<section id="home" class="view active">
 
-  <div class="hero">
+<div class="hero">
+<h1>Un problème du quotidien ?<br>Trouvez l'outil.</h1>
+<p>Comprendre, comparer, calculer et organiser simplement.</p>
 
-    <h1>
-      Un problème du quotidien ?
-      <br>
-      Trouvez l’outil.
-    </h1>
+<div class="search">
+<input id="globalSearch" placeholder="Ex : voiture, budget, voyage...">
+<button class="primary" onclick="search()">Chercher</button>
+</div>
+</div>
 
-    <p>
-      Des outils simples pour comprendre, comparer,
-      calculer et organiser.
-    </p>
+<h2>Explorer par besoin</h2>
 
-    <div class="search">
+<div class="grid">
 
-      <input
-        id="search"
-        placeholder="Ex. voiture, déménagement, achat..."
-      >
+<div class="card category" onclick="show('cars')">
+<div class="emoji">🚗</div><b>Ma voiture</b>
+</div>
 
-      <button onclick="searchTool()">
-        Chercher
-      </button>
+<div class="card category" onclick="show('homeTools')">
+<div class="emoji">🏠</div><b>Mon logement</b>
+</div>
 
-    </div>
+<div class="card category" onclick="show('money')">
+<div class="emoji">💰</div><b>Mon argent</b>
+</div>
 
-  </div>
+<div class="card category" onclick="show('work')">
+<div class="emoji">💼</div><b>Mon travail</b>
+</div>
 
+<div class="card category" onclick="show('study')">
+<div class="emoji">📚</div><b>Mes études</b>
+</div>
 
-  <h2>Explorer par besoin</h2>
+<div class="card category" onclick="show('travel')">
+<div class="emoji">✈️</div><b>Mes voyages</b>
+</div>
 
-  <div class="grid">
+<div class="card category" onclick="show('shopping')">
+<div class="emoji">🛒</div><b>Mes achats</b>
+</div>
 
-    <div class="card category" onclick="openCars()">
-      <span>🚗</span>
-      <b>Ma voiture</b>
-    </div>
+<div class="card category" onclick="show('documents')">
+<div class="emoji">📄</div><b>Mes documents</b>
+</div>
 
-    <div class="card category">
-      <span>🏠</span>
-      <b>Mon logement</b>
-    </div>
+<div class="card category" onclick="show('events')">
+<div class="emoji">🎉</div><b>Mes événements</b>
+</div>
 
-    <div class="card category">
-      <span>💰</span>
-      <b>Mon argent</b>
-    </div>
+<div class="card category" onclick="show('organization')">
+<div class="emoji">🧠</div><b>Mon organisation</b>
+</div>
 
-    <div class="card category">
-      <span>💼</span>
-      <b>Mon travail</b>
-    </div>
+</div>
 
-    <div class="card category">
-      <span>📚</span>
-      <b>Mes études</b>
-    </div>
+<h2>Les outils populaires</h2>
 
-    <div class="card category">
-      <span>✈️</span>
-      <b>Mes voyages</b>
-    </div>
+<div class="tools">
 
-    <div class="card category">
-      <span>🛒</span>
-      <b>Mes achats</b>
-    </div>
+<div class="card tool" onclick="show('cars')">
+<div class="emoji">🚗</div>
+<h3>Analyser une voiture</h3>
+<p>Évalue une annonce avant de contacter le vendeur.</p>
+</div>
 
-    <div class="card category">
-      <span>📄</span>
-      <b>Mes documents</b>
-    </div>
+<div class="card tool" onclick="show('shopping')">
+<div class="emoji">🛒</div>
+<h3>Analyser un achat</h3>
+<p>Voir rapidement si un achat semble intéressant.</p>
+</div>
 
-    <div class="card category">
-      <span>🎉</span>
-      <b>Mes événements</b>
-    </div>
+<div class="card tool" onclick="show('organization')">
+<div class="emoji">✅</div>
+<h3>Créer une checklist</h3>
+<p>Transformer un projet en liste d'actions.</p>
+</div>
 
-    <div class="card category">
-      <span>🧠</span>
-      <b>Mon organisation</b>
-    </div>
-
-  </div>
-
-
-  <h2>Outils populaires</h2>
-
-  <div class="tools">
-
-    <div class="card tool">
-      <div class="tool-icon">📄</div>
-      <h3>Comprendre un document</h3>
-      <p>
-        Comprendre rapidement un document important.
-      </p>
-    </div>
-
-    <div class="card tool">
-      <div class="tool-icon">🛒</div>
-      <h3>Analyser un achat</h3>
-      <p>
-        Identifier les points forts et les risques.
-      </p>
-    </div>
-
-    <div class="card tool">
-      <div class="tool-icon">✅</div>
-      <h3>Créer une checklist</h3>
-      <p>
-        Transformer un projet en liste d'actions.
-      </p>
-    </div>
-
-    <div class="card tool">
-      <div class="tool-icon">💰</div>
-      <h3>Calculer le coût réel</h3>
-      <p>
-        Estimer le coût réel d'un projet.
-      </p>
-    </div>
-
-    <div class="card tool">
-      <div class="tool-icon">⚖️</div>
-      <h3>Comparer deux options</h3>
-      <p>
-        Comparer deux choix simplement.
-      </p>
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- CATEGORIE VOITURE -->
+<!-- VOITURE -->
+<section id="cars" class="view">
 
-<section id="cars" class="panel">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>🚗 Ma voiture</h2>
+</div>
 
-  <button class="back" onclick="backHome()">
-    ← Retour
-  </button>
+<div class="tools">
 
-  <h2>🚗 Ma voiture</h2>
+<div class="card tool" onclick="tool('carAnalyze')">
+<div class="emoji">🔎</div>
+<h3>Analyser une annonce</h3>
+<p>Détecter les informations manquantes et les points à vérifier.</p>
+</div>
 
-  <p>
-    Des outils pour acheter, comparer et mieux gérer
-    sa voiture.
-  </p>
+<div class="card tool" onclick="tool('carCost')">
+<div class="emoji">💰</div>
+<h3>Coût réel</h3>
+<p>Calculer le coût annuel d'une voiture.</p>
+</div>
 
-  <div class="tools">
+<div class="card tool" onclick="tool('carCompare')">
+<div class="emoji">⚖️</div>
+<h3>Comparer deux voitures</h3>
+<p>Comparer prix, carburant et kilométrage.</p>
+</div>
 
-    <div class="card tool" onclick="openCarAnalyzer()">
+<div class="card tool" onclick="tool('carChecklist')">
+<div class="emoji">🛠️</div>
+<h3>Checklist achat</h3>
+<p>Les vérifications importantes avant achat.</p>
+</div>
 
-      <div class="tool-icon">🔎</div>
+</div>
 
-      <h3>Analyser une annonce</h3>
+<div id="carAnalyze" class="form" style="display:none">
+<h2>🔎 Analyse d'annonce</h2>
 
-      <p>
-        Analyse une annonce avant de contacter le vendeur.
-      </p>
+<div class="field">
+<label>Marque / modèle</label>
+<input id="caModel" placeholder="Renault Clio V">
+</div>
 
-    </div>
+<div class="row">
+<div class="field">
+<label>Année</label>
+<input id="caYear" type="number" placeholder="2023">
+</div>
+<div class="field">
+<label>Kilométrage</label>
+<input id="caKm" type="number" placeholder="52000">
+</div>
+</div>
 
+<div class="field">
+<label>Prix (€)</label>
+<input id="caPrice" type="number" placeholder="12900">
+</div>
 
-    <div class="card tool">
+<div class="field">
+<label>Texte de l'annonce</label>
+<textarea id="caText" placeholder="Colle ici l'annonce..."></textarea>
+</div>
 
-      <div class="tool-icon">💰</div>
+<button class="primary" onclick="analyzeCar()">Analyser</button>
 
-      <h3>Coût réel</h3>
-
-      <p>
-        Combien cette voiture va vraiment me coûter ?
-      </p>
-
-    </div>
-
-
-    <div class="card tool">
-
-      <div class="tool-icon">⚖️</div>
-
-      <h3>Comparer deux voitures</h3>
-
-      <p>
-        Mets deux véhicules face à face.
-      </p>
-
-    </div>
-
-
-    <div class="card tool">
-
-      <div class="tool-icon">🛠️</div>
-
-      <h3>Checklist avant achat</h3>
-
-      <p>
-        Les vérifications à faire avant la visite.
-      </p>
-
-    </div>
+<div id="caResult"></div>
+</div>
 
 
-    <div class="card tool">
+<div id="carCost" class="form" style="display:none">
+<h2>💰 Coût réel de la voiture</h2>
 
-      <div class="tool-icon">📅</div>
+<div class="row">
+<div class="field">
+<label>Kilomètres / an</label>
+<input id="ccKm" type="number" placeholder="15000">
+</div>
+<div class="field">
+<label>Consommation L/100km</label>
+<input id="ccConso" type="number" step=".1" placeholder="5.5">
+</div>
+</div>
 
-      <h3>Entretien</h3>
+<div class="row">
+<div class="field">
+<label>Prix carburant €/L</label>
+<input id="ccFuel" type="number" step=".01" placeholder="1.70">
+</div>
+<div class="field">
+<label>Assurance €/mois</label>
+<input id="ccInsurance" type="number" placeholder="90">
+</div>
+</div>
 
-      <p>
-        Les entretiens à prévoir.
-      </p>
+<div class="row">
+<div class="field">
+<label>Entretien €/an</label>
+<input id="ccMaintenance" type="number" placeholder="700">
+</div>
+<div class="field">
+<label>Pneus / autres €/an</label>
+<input id="ccOther" type="number" placeholder="300">
+</div>
+</div>
 
-    </div>
+<button class="primary" onclick="carCost()">Calculer</button>
+<div id="ccResult"></div>
+</div>
 
-  </div>
+
+<div id="carCompare" class="form" style="display:none">
+<h2>⚖️ Comparer deux voitures</h2>
+
+<div class="row">
+<div>
+<h3>🚗 Voiture A</h3>
+<input id="aPrice" type="number" placeholder="Prix">
+<input id="aKm" type="number" placeholder="Kilométrage" style="margin-top:10px">
+<input id="aConso" type="number" step=".1" placeholder="Consommation" style="margin-top:10px">
+</div>
+
+<div>
+<h3>🚙 Voiture B</h3>
+<input id="bPrice" type="number" placeholder="Prix">
+<input id="bKm" type="number" placeholder="Kilométrage" style="margin-top:10px">
+<input id="bConso" type="number" step=".1" placeholder="Consommation" style="margin-top:10px">
+</div>
+</div>
+
+<br>
+<button class="primary" onclick="compareCars()">Comparer</button>
+<div id="compareResult"></div>
+</div>
+
+
+<div id="carChecklist" class="form" style="display:none">
+<h2>🛠️ Checklist avant achat</h2>
+<div id="carCheckList"></div>
+</div>
 
 </section>
 
 
-<!-- ANALYSE ANNONCE -->
+<!-- LOGEMENT -->
+<section id="homeTools" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>🏠 Mon logement</h2>
+</div>
 
-<section id="carAnalyzer" class="panel">
+<div class="tools">
+<div class="card tool" onclick="tool('move')">
+<div class="emoji">📦</div><h3>Déménagement</h3>
+<p>Calculer un budget et organiser les étapes.</p>
+</div>
 
-  <button class="back" onclick="openCars()">
-    ← Retour
-  </button>
+<div class="card tool" onclick="tool('rent')">
+<div class="emoji">🏠</div><h3>Budget logement</h3>
+<p>Voir le poids du logement dans le budget.</p>
+</div>
+</div>
 
-  <h2>🔎 Analyser une annonce</h2>
+<div id="move" class="form" style="display:none">
+<h2>📦 Budget déménagement</h2>
+<div class="row">
+<input id="moveTruck" type="number" placeholder="Location véhicule €">
+<input id="moveBoxes" type="number" placeholder="Cartons / matériel €">
+</div>
+<br>
+<input id="moveHelp" type="number" placeholder="Aide / déménageurs €">
+<br><br>
+<button class="primary" onclick="moveCalc()">Calculer</button>
+<div id="moveResult"></div>
+</div>
 
-  <p>
-    Donne-nous les informations disponibles sur la voiture.
-  </p>
-
-
-  <div class="field">
-
-    <label>Marque / modèle</label>
-
-    <input
-      id="carModel"
-      placeholder="Ex. Renault Clio V"
-    >
-
-  </div>
-
-
-  <div class="field">
-
-    <label>Année</label>
-
-    <input
-      id="carYear"
-      type="number"
-      placeholder="2023"
-    >
-
-  </div>
-
-
-  <div class="field">
-
-    <label>Kilométrage</label>
-
-    <input
-      id="carKm"
-      type="number"
-      placeholder="52000"
-    >
-
-  </div>
+<div id="rent" class="form" style="display:none">
+<h2>🏠 Budget logement</h2>
+<input id="rentPrice" type="number" placeholder="Loyer mensuel €">
+<br><br>
+<input id="rentIncome" type="number" placeholder="Revenus mensuels €">
+<br><br>
+<button class="primary" onclick="rentCalc()">Analyser</button>
+<div id="rentResult"></div>
+</div>
+</section>
 
 
-  <div class="field">
+<!-- ARGENT -->
+<section id="money" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>💰 Mon argent</h2>
+</div>
 
-    <label>Prix demandé (€)</label>
+<div class="form">
+<h2>Budget mensuel</h2>
 
-    <input
-      id="carPrice"
-      type="number"
-      placeholder="12900"
-    >
+<div class="row">
+<input id="income" type="number" placeholder="Revenus">
+<input id="fixed" type="number" placeholder="Charges fixes">
+</div>
 
-  </div>
+<br>
 
+<div class="row">
+<input id="food" type="number" placeholder="Alimentation">
+<input id="leisure" type="number" placeholder="Loisirs">
+</div>
 
-  <div class="field">
+<br>
 
-    <label>Description de l'annonce</label>
+<input id="saving" type="number" placeholder="Épargne souhaitée">
 
-    <textarea
-      id="carDescription"
-      rows="8"
-      placeholder="Colle ici le texte de l'annonce Leboncoin, La Centrale, AutoScout24..."
-    ></textarea>
+<br><br>
 
-  </div>
+<button class="primary" onclick="budget()">Analyser mon budget</button>
 
-
-  <button class="primary" onclick="analyzeCar()">
-    🔍 Analyser l'annonce
-  </button>
+<div id="budgetResult"></div>
+</div>
+</section>
 
 
-  <div id="carResult" class="result"></div>
+<!-- TRAVAIL -->
+<section id="work" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>💼 Mon travail</h2>
+</div>
 
+<div class="form">
+<h2>📋 Analyser une offre</h2>
+<textarea id="jobText" placeholder="Colle ici l'offre d'emploi..."></textarea>
+<br><br>
+<button class="primary" onclick="jobAnalyze()">Analyser</button>
+<div id="jobResult"></div>
+</div>
+
+<div class="form">
+<h2>🎤 Préparer un entretien</h2>
+<input id="jobTitle" placeholder="Poste visé">
+<br><br>
+<button class="primary" onclick="interview()">Générer mes questions</button>
+<div id="interviewResult"></div>
+</div>
+</section>
+
+
+<!-- ETUDES -->
+<section id="study" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>📚 Mes études</h2>
+</div>
+
+<div class="form">
+<h2>📅 Planning de révision</h2>
+
+<div class="row">
+<input id="studySubjects" placeholder="Matières">
+<input id="studyDays" type="number" placeholder="Nombre de jours">
+</div>
+
+<br>
+
+<input id="studyHours" type="number" step=".5" placeholder="Heures disponibles / jour">
+
+<br><br>
+
+<button class="primary" onclick="studyPlan()">Créer mon planning</button>
+
+<div id="studyResult"></div>
+</div>
+</section>
+
+
+<!-- VOYAGE -->
+<section id="travel" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>✈️ Mes voyages</h2>
+</div>
+
+<div class="form">
+<h2>💰 Budget voyage</h2>
+
+<div class="row">
+<input id="travelTransport" type="number" placeholder="Transport €">
+<input id="travelHotel" type="number" placeholder="Hébergement €">
+</div>
+
+<br>
+
+<div class="row">
+<input id="travelFood" type="number" placeholder="Repas €">
+<input id="travelActivities" type="number" placeholder="Activités €">
+</div>
+
+<br>
+
+<button class="primary" onclick="travelBudget()">Calculer</button>
+<div id="travelResult"></div>
+</div>
+
+<div class="form">
+<h2>🧳 Checklist valise</h2>
+<button class="primary" onclick="packing()">Créer ma checklist</button>
+<div id="packingResult"></div>
+</div>
+</section>
+
+
+<!-- ACHATS -->
+<section id="shopping" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>🛒 Mes achats</h2>
+</div>
+
+<div class="form">
+<h2>🏷️ Calculer une remise</h2>
+
+<div class="row">
+<input id="oldPrice" type="number" placeholder="Prix initial €">
+<input id="discount" type="number" placeholder="Remise %">
+</div>
+
+<br>
+
+<button class="primary" onclick="discountCalc()">Calculer</button>
+<div id="discountResult"></div>
+</div>
+
+<div class="form">
+<h2>⚖️ Comparer deux prix</h2>
+
+<div class="row">
+<input id="priceA" type="number" placeholder="Prix A">
+<input id="priceB" type="number" placeholder="Prix B">
+</div>
+
+<br>
+
+<button class="primary" onclick="priceCompare()">Comparer</button>
+<div id="priceResult"></div>
+</div>
+
+<div class="form">
+<h2>🔎 Analyser un achat</h2>
+
+<input id="buyName" placeholder="Produit">
+<br><br>
+
+<input id="buyPrice" type="number" placeholder="Prix €">
+<br><br>
+
+<textarea id="buyDescription" placeholder="Décris le produit ou colle l'annonce..."></textarea>
+<br><br>
+
+<button class="primary" onclick="buyAnalyze()">Analyser</button>
+
+<div id="buyResult"></div>
+</div>
+</section>
+
+
+<!-- DOCUMENTS -->
+<section id="documents" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>📄 Mes documents</h2>
+</div>
+
+<div class="form">
+<h2>📋 Vérifier un document</h2>
+
+<textarea id="docText" placeholder="Colle le texte du document ici..."></textarea>
+
+<br><br>
+
+<button class="primary" onclick="docAnalyze()">Analyser</button>
+
+<div id="docResult"></div>
+
+<p style="color:#777;font-size:12px">
+⚠️ Outil d'aide à la compréhension. Il ne remplace pas un professionnel du droit ou du domaine concerné.
+</p>
+</div>
+</section>
+
+
+<!-- EVENEMENTS -->
+<section id="events" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>🎉 Mes événements</h2>
+</div>
+
+<div class="form">
+<h2>💰 Budget événement</h2>
+
+<div class="row">
+<input id="eventGuests" type="number" placeholder="Nombre d'invités">
+<input id="eventFood" type="number" placeholder="Budget nourriture €">
+</div>
+
+<br>
+
+<div class="row">
+<input id="eventDrinks" type="number" placeholder="Boissons €">
+<input id="eventDecor" type="number" placeholder="Décoration €">
+</div>
+
+<br>
+
+<button class="primary" onclick="eventBudget()">Calculer</button>
+
+<div id="eventResult"></div>
+</div>
+</section>
+
+
+<!-- ORGANISATION -->
+<section id="organization" class="view">
+<div class="topbar">
+<button class="secondary" onclick="home()">← Accueil</button>
+<h2>🧠 Mon organisation</h2>
+</div>
+
+<div class="form">
+<h2>✅ Créer une checklist</h2>
+
+<input id="project" placeholder="Ex : préparer mon déménagement">
+
+<br><br>
+
+<button class="primary" onclick="createChecklist()">Créer</button>
+
+<div id="checkResult"></div>
+</div>
 </section>
 
 </main>
 
+<footer>
+La Boîte à Outils • Prototype V1<br>
+Les résultats sont indicatifs et doivent être vérifiés lorsque nécessaire.
+</footer>
+
 
 <script>
 
-function openCars() {
+function hideAll(){
+document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+}
 
-  document.getElementById("home").style.display = "none";
+function show(id){
+hideAll();
+document.getElementById(id).classList.add("active");
+window.scrollTo(0,0);
+}
 
-  document.getElementById("carAnalyzer")
-    .classList.remove("active");
+function home(){
+show("home");
+}
 
-  document.getElementById("cars")
-    .classList.add("active");
+function tool(id){
+document.querySelectorAll(".form").forEach(x=>x.style.display="none");
+document.getElementById(id).style.display="block";
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
 
-  window.scrollTo(0,0);
+function money(n){
+return Number(n||0).toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
+}
+
+function search(){
+
+let q=document.getElementById("globalSearch").value.toLowerCase();
+
+if(q.includes("voiture")||q.includes("auto")||q.includes("clio"))
+show("cars");
+else if(q.includes("argent")||q.includes("budget"))
+show("money");
+else if(q.includes("travail")||q.includes("emploi"))
+show("work");
+else if(q.includes("étude")||q.includes("révision"))
+show("study");
+else if(q.includes("voyage")||q.includes("vacance"))
+show("travel");
+else if(q.includes("achat")||q.includes("prix"))
+show("shopping");
+else if(q.includes("document")||q.includes("contrat"))
+show("documents");
+else if(q.includes("maison")||q.includes("logement")||q.includes("déménagement"))
+show("homeTools");
+else if(q.includes("organisation")||q.includes("checklist"))
+show("organization");
+else
+alert("Cette recherche sera encore améliorée avec la future IA 🤖");
 }
 
 
-function backHome() {
+function analyzeCar(){
 
-  document.getElementById("cars")
-    .classList.remove("active");
+let model=document.getElementById("caModel").value;
+let year=Number(document.getElementById("caYear").value);
+let km=Number(document.getElementById("caKm").value);
+let price=Number(document.getElementById("caPrice").value);
+let text=document.getElementById("caText").value;
 
-  document.getElementById("home")
-    .style.display = "block";
+let score=50;
+let good=[];
+let warn=[];
 
-  window.scrollTo(0,0);
+if(model){score+=10;good.push("Modèle renseigné")}
+else warn.push("Modèle non renseigné");
+
+if(year){score+=10;good.push("Année renseignée")}
+else warn.push("Année absente");
+
+if(km){
+score+=10;
+good.push("Kilométrage renseigné");
+if(km>180000){score-=15;warn.push("Kilométrage élevé")}
+}
+else warn.push("Kilométrage absent");
+
+if(price){score+=10;good.push("Prix renseigné")}
+else warn.push("Prix absent");
+
+if(text.length>100){
+score+=10;
+good.push("Description suffisamment détaillée");
+}else{
+warn.push("Description très courte");
+}
+
+score=Math.max(0,Math.min(100,score));
+
+let verdict=
+score>=80?"🟢 Annonce intéressante":
+score>=60?"🟠 À vérifier avant déplacement":
+"🔴 Beaucoup de points à vérifier";
+
+document.getElementById("caResult").innerHTML=`
+<div class="result">
+<div class="score">${score}/100</div>
+<h3>${verdict}</h3>
+
+<h3 class="good">🟢 Points positifs</h3>
+${good.length?good.map(x=>"• "+x).join("<br>"):"Aucun"}
+
+<h3 class="warn">🟠 Points à vérifier</h3>
+${warn.length?warn.map(x=>"• "+x).join("<br>"):"Aucun"}
+
+<h3>📋 Questions à poser au vendeur</h3>
+• Pourquoi vendez-vous le véhicule ?<br>
+• Combien de propriétaires ?<br>
+• Entretien réalisé où et avec quelles factures ?<br>
+• Accident ou réparation importante ?<br>
+• Contrôle technique disponible ?<br>
+• Quels frais sont à prévoir prochainement ?
+</div>`;
 }
 
 
-function openCarAnalyzer() {
+function carCost(){
 
-  document.getElementById("cars")
-    .classList.remove("active");
+let km=Number(document.getElementById("ccKm").value);
+let conso=Number(document.getElementById("ccConso").value);
+let fuel=Number(document.getElementById("ccFuel").value);
+let insurance=Number(document.getElementById("ccInsurance").value);
+let maintenance=Number(document.getElementById("ccMaintenance").value);
+let other=Number(document.getElementById("ccOther").value);
 
-  document.getElementById("carAnalyzer")
-    .classList.add("active");
+let fuelCost=km*conso/100*fuel;
+let total=fuelCost+insurance*12+maintenance+other;
 
-  window.scrollTo(0,0);
+document.getElementById("ccResult").innerHTML=`
+<div class="result">
+<h3>💰 Coût estimé</h3>
+<p>Carburant : <b>${money(fuelCost)}</b>/an</p>
+<p>Assurance : <b>${money(insurance*12)}</b>/an</p>
+<p>Entretien : <b>${money(maintenance)}</b>/an</p>
+<p>Autres frais : <b>${money(other)}</b>/an</p>
+<hr>
+<div class="big">${money(total)} / an</div>
+<p>Soit environ <b>${money(total/12)} / mois</b></p>
+</div>`;
 }
 
 
-function analyzeCar() {
+function compareCars(){
 
-  const model =
-    document.getElementById("carModel").value;
+let ap=Number(document.getElementById("aPrice").value);
+let ak=Number(document.getElementById("aKm").value);
+let ac=Number(document.getElementById("aConso").value);
 
-  const year =
-    Number(document.getElementById("carYear").value);
+let bp=Number(document.getElementById("bPrice").value);
+let bk=Number(document.getElementById("bKm").value);
+let bc=Number(document.getElementById("bConso").value);
 
-  const km =
-    Number(document.getElementById("carKm").value);
+let winner=[];
 
-  const price =
-    Number(document.getElementById("carPrice").value);
+if(ap<bp)winner.push("💰 Voiture A : prix inférieur");
+else if(bp<ap)winner.push("💰 Voiture B : prix inférieur");
 
-  const description =
-    document.getElementById("carDescription").value;
+if(ak<bk)winner.push("🛣️ Voiture A : moins de kilomètres");
+else if(bk<ak)winner.push("🛣️ Voiture B : moins de kilomètres");
 
+if(ac<bc)winner.push("⛽ Voiture A : consommation inférieure");
+else if(bc<ac)winner.push("⛽ Voiture B : consommation inférieure");
 
-  let positives = [];
-  let warnings = [];
-
-
-  if (model) {
-    positives.push("Modèle renseigné");
-  }
-
-  if (year) {
-    positives.push("Année renseignée");
-  }
-
-  if (km) {
-    positives.push("Kilométrage renseigné");
-  }
-
-  if (price) {
-    positives.push("Prix renseigné");
-  }
-
-
-  if (!description) {
-    warnings.push(
-      "La description de l'annonce est vide."
-    );
-  }
-
-
-  if (!price) {
-    warnings.push(
-      "Le prix n'est pas renseigné."
-    );
-  }
-
-
-  if (!km) {
-    warnings.push(
-      "Le kilométrage n'est pas renseigné."
-    );
-  }
-
-
-  let result = `
-    <h3>🔎 Première analyse</h3>
-
-    <p>
-      <b>Véhicule :</b>
-      ${model || "Non renseigné"}
-    </p>
-
-    <p>
-      <b>Prix :</b>
-      ${price ? price.toLocaleString("fr-FR") + " €" : "Non renseigné"}
-    </p>
-
-    <h4>🟢 Informations disponibles</h4>
-
-    ${
-      positives.length
-      ? positives.map(x => "• " + x).join("<br>")
-      : "Aucune information suffisante."
-    }
-
-    <h4>🟠 Points à vérifier</h4>
-
-    ${
-      warnings.length
-      ? warnings.map(x => "• " + x).join("<br>")
-      : "• Historique d'entretien<br>• Factures<br>• Contrôle technique<br>• État des pneus et freins"
-    }
-
-    <h4>📋 Checklist avant achat</h4>
-
-    ☐ Historique d'entretien<br>
-    ☐ Factures et justificatifs<br>
-    ☐ Contrôle technique<br>
-    ☐ Nombre de propriétaires<br>
-    ☐ État des pneus<br>
-    ☐ État des freins<br>
-    ☐ Essai routier<br>
-    ☐ Vérification des voyants
-
-    <p style="color:#6b7280">
-      ⚠️ Prototype : cette analyse est une démonstration.
-      La prochaine version utilisera une véritable IA.
-    </p>
-  `;
-
-
-  const box =
-    document.getElementById("carResult");
-
-  box.innerHTML = result;
-
-  box.classList.add("show");
+document.getElementById("compareResult").innerHTML=`
+<div class="result">
+<h3>Résultat</h3>
+${winner.map(x=>"• "+x).join("<br>")}
+<br><br>
+⚠️ Le meilleur choix ne dépend pas uniquement du prix ou du kilométrage.
+</div>`;
 }
 
 
-function searchTool() {
+function carChecklist(){
 
-  const search =
-    document.getElementById("search")
-    .value
-    .toLowerCase();
+let items=[
+"Vérifier identité du vendeur",
+"Demander historique d'entretien",
+"Demander les factures",
+"Vérifier le contrôle technique",
+"Vérifier les pneus",
+"Vérifier les freins",
+"Tester les équipements",
+"Vérifier les voyants",
+"Faire un essai routier",
+"Vérifier carte grise et numéro VIN",
+"Vérifier absence de fuite",
+"Ne jamais verser d'argent avant vérifications"
+];
+
+document.getElementById("carCheckList").innerHTML=
+items.map(x=>`<div class="check">☐ ${x}</div>`).join("");
+tool("carChecklist");
+}
 
 
-  if (
-    search.includes("voiture") ||
-    search.includes("auto") ||
-    search.includes("clio") ||
-    search.includes("véhicule")
-  ) {
+function moveCalc(){
 
-    openCars();
+let total=
+Number(document.getElementById("moveTruck").value)+
+Number(document.getElementById("moveBoxes").value)+
+Number(document.getElementById("moveHelp").value);
 
-  } else {
+document.getElementById("moveResult").innerHTML=`
+<div class="result">
+<div class="big">${money(total)}</div>
+Budget estimé pour le déménagement.
+</div>`;
+}
 
-    alert(
-      "Cette catégorie sera bientôt disponible 🚀"
-    );
 
-  }
+function rentCalc(){
 
+let rent=Number(document.getElementById("rentPrice").value);
+let income=Number(document.getElementById("rentIncome").value);
+let ratio=income?rent/income*100:0;
+
+document.getElementById("rentResult").innerHTML=`
+<div class="result">
+Le logement représente environ <b>${ratio.toFixed(1)}%</b> de vos revenus mensuels.
+<br><br>
+Plus ce ratio est élevé, plus votre budget peut être contraint.
+</div>`;
+}
+
+
+function budget(){
+
+let income=Number(document.getElementById("income").value);
+let fixed=Number(document.getElementById("fixed").value);
+let food=Number(document.getElementById("food").value);
+let leisure=Number(document.getElementById("leisure").value);
+let saving=Number(document.getElementById("saving").value);
+
+let remaining=income-fixed-food-leisure-saving;
+
+document.getElementById("budgetResult").innerHTML=`
+<div class="result">
+<h3>📊 Résultat</h3>
+Revenus : ${money(income)}<br>
+Charges : ${money(fixed)}<br>
+Alimentation : ${money(food)}<br>
+Loisirs : ${money(leisure)}<br>
+Épargne prévue : ${money(saving)}
+<hr>
+<div class="big">${money(remaining)}</div>
+Reste après ces dépenses.
+</div>`;
+}
+
+
+function jobAnalyze(){
+
+let text=document.getElementById("jobText").value;
+let words=text.trim()?text.trim().split(/\s+/).length:0;
+
+document.getElementById("jobResult").innerHTML=`
+<div class="result">
+<h3>📋 Première analyse</h3>
+Nombre approximatif de mots : <b>${words}</b>
+<br><br>
+À rechercher dans l'offre :
+<br>• Salaire
+<br>• Type de contrat
+<br>• Horaires
+<br>• Localisation
+<br>• Missions
+<br>• Expérience demandée
+<br>• Avantages
+<br><br>
+⚠️ La future version IA pourra analyser automatiquement ces éléments.
+</div>`;
+}
+
+
+function interview(){
+
+let title=document.getElementById("jobTitle").value||"le poste";
+
+let questions=[
+"Présentez-vous et expliquez votre parcours.",
+"Pourquoi souhaitez-vous ce poste ?",
+"Pourquoi notre entreprise ?",
+"Quelle est votre principale qualité ?",
+"Quel est votre principal axe d'amélioration ?",
+"Parlez-moi d'une situation difficile que vous avez gérée.",
+"Pourquoi devrions-nous vous choisir ?"
+];
+
+document.getElementById("interviewResult").innerHTML=`
+<div class="result">
+<h3>🎤 Questions pour ${title}</h3>
+${questions.map((x,i)=>(i+1)+". "+x+"<br>").join("")}
+</div>`;
+}
+
+
+function studyPlan(){
+
+let subjects=document.getElementById("studySubjects").value||"Mes matières";
+let days=Number(document.getElementById("studyDays").value)||1;
+let hours=Number(document.getElementById("studyHours").value)||1;
+
+document.getElementById("studyResult").innerHTML=`
+<div class="result">
+<h3>📚 Planning proposé</h3>
+Matières : <b>${subjects}</b><br>
+Durée : <b>${days} jours</b><br>
+Temps disponible : <b>${hours} h/jour</b>
+<hr>
+Jour 1 : compréhension du cours<br>
+Jour 2 : mémorisation active<br>
+Jour 3 : exercices / questions<br>
+Jour 4 : révision des erreurs<br>
+Jour 5 : entraînement sans support<br>
+<br>
+➡️ À adapter au nombre réel de jours disponibles.
+</div>`;
+}
+
+
+function travelBudget(){
+
+let total=
+Number(document.getElementById("travelTransport").value)+
+Number(document.getElementById("travelHotel").value)+
+Number(document.getElementById("travelFood").value)+
+Number(document.getElementById("travelActivities").value);
+
+document.getElementById("travelResult").innerHTML=`
+<div class="result">
+Budget total estimé :
+<div class="big">${money(total)}</div>
+</div>`;
+}
+
+
+function packing(){
+
+let items=[
+"☐ Papiers / carte d'identité",
+"☐ Téléphone + chargeur",
+"☐ Vêtements",
+"☐ Sous-vêtements",
+"☐ Chaussures",
+"☐ Trousse de toilette",
+"☐ Médicaments personnels si nécessaire",
+"☐ Lunettes / accessoires",
+"☐ Maillot de bain",
+"☐ Sac pour linge sale"
+];
+
+document.getElementById("packingResult").innerHTML=
+`<div class="result">${items.join("<br>")}</div>`;
+}
+
+
+function discountCalc(){
+
+let p=Number(document.getElementById("oldPrice").value);
+let d=Number(document.getElementById("discount").value);
+
+let final=p*(1-d/100);
+let save=p-final;
+
+document.getElementById("discountResult").innerHTML=`
+<div class="result">
+Prix final : <div class="big">${money(final)}</div>
+Économie : <b>${money(save)}</b>
+</div>`;
+}
+
+
+function priceCompare(){
+
+let a=Number(document.getElementById("priceA").value);
+let b=Number(document.getElementById("priceB").value);
+
+let result=a<b?"Le prix A est moins cher.":b<a?"Le prix B est moins cher.":"Les deux prix sont identiques.";
+
+document.getElementById("priceResult").innerHTML=
+`<div class="result">${result}</div>`;
+}
+
+
+function buyAnalyze(){
+
+let name=document.getElementById("buyName").value||"Produit";
+let price=Number(document.getElementById("buyPrice").value);
+let description=document.getElementById("buyDescription").value;
+
+let points=[];
+
+if(price)points.push("Prix renseigné");
+if(description.length>100)points.push("Description détaillée");
+else points.push("Description courte : demande davantage d'informations");
+
+document.getElementById("buyResult").innerHTML=`
+<div class="result">
+<h3>🔎 ${name}</h3>
+Prix : <b>${price?money(price):"Non renseigné"}</b>
+<br><br>
+${points.map(x=>"• "+x).join("<br>")}
+<br><br>
+<h4>Avant d'acheter</h4>
+• Vérifier le vendeur<br>
+• Vérifier les avis<br>
+• Comparer plusieurs offres<br>
+• Vérifier les conditions de retour<br>
+• Ne pas se fier uniquement aux photos
+</div>`;
+}
+
+
+function docAnalyze(){
+
+let text=document.getElementById("docText").value;
+
+let items=[
+"Identité des parties",
+"Date du document",
+"Durée / échéance",
+"Montants",
+"Conditions de résiliation",
+"Obligations",
+"Frais supplémentaires",
+"Signature"
+];
+
+document.getElementById("docResult").innerHTML=`
+<div class="result">
+<h3>📄 Points à vérifier</h3>
+${items.map(x=>"☐ "+x).join("<br>")}
+<br><br>
+Le document contient environ <b>${text.trim()?text.trim().split(/\s+/).length:0}</b> mots.
+</div>`;
+}
+
+
+function eventBudget(){
+
+let guests=Number(document.getElementById("eventGuests").value);
+let food=Number(document.getElementById("eventFood").value);
+let drinks=Number(document.getElementById("eventDrinks").value);
+let decor=Number(document.getElementById("eventDecor").value);
+
+let total=food+drinks+decor;
+
+document.getElementById("eventResult").innerHTML=`
+<div class="result">
+Budget total : <div class="big">${money(total)}</div>
+Soit environ <b>${guests?money(total/guests):"—"}</b> par invité.
+</div>`;
+}
+
+
+function createChecklist(){
+
+let project=document.getElementById("project").value||"mon projet";
+
+let common=[
+"Définir l'objectif",
+"Faire la liste des besoins",
+"Fixer un budget",
+"Définir une date",
+"Préparer les documents nécessaires",
+"Réaliser les démarches",
+"Vérifier que tout est terminé"
+];
+
+document.getElementById("checkResult").innerHTML=`
+<div class="result">
+<h3>✅ Checklist : ${project}</h3>
+${common.map(x=>`<div class="check">☐ ${x}</div>`).join("")}
+</div>`;
 }
 
 </script>
